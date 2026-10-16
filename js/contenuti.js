@@ -122,6 +122,18 @@ window.SITO = {
     { nome: 'Gallerie ed eventi', chi: 'una galleria o un organizzatore di eventi', en: { nome: 'Galleries & events', chi: 'a gallery or event organiser' } }
   ],
 
+  /* ---------- POKER D'AUTORE (camera Pittura e arte) ----------
+     Le carte del mazzo: ogni carta mostra un nudo d'arte di Ciro.
+     Metti la foto in foto/carte/ e scrivi qui il percorso.
+     Formato consigliato: JPG verticale 2:3, lato lungo ~1200 px.
+     foto vuota '' = la carta mostra "Coming soon". */
+  carte: [
+    { foto: '', titolo: '' }, { foto: '', titolo: '' }, { foto: '', titolo: '' },
+    { foto: '', titolo: '' }, { foto: '', titolo: '' }, { foto: '', titolo: '' },
+    { foto: '', titolo: '' }, { foto: '', titolo: '' }, { foto: '', titolo: '' },
+    { foto: '', titolo: '' }, { foto: '', titolo: '' }, { foto: '', titolo: '' }
+  ],
+
   /* ---------- JUKE-BOX: 8 dischi = 8 situazioni ---------- */
   situazioni: [
     { titolo: 'Dolce Vita', colore: '#F2A33A',

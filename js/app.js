@@ -812,6 +812,47 @@
   }
   $('#svuota').addEventListener('click', function () { carrello = []; salvaCarrello(); disegnaCarrello(); });
 
+  /* ================= III · POKER D'AUTORE ================= */
+  var tavolo = $('#tavolo'), mazzo = $('#mazzo'), manoCarte = [], distribuendo = false, giri = 0;
+  var SEMI = [{ s: '♥', r: true }, { s: '♦', r: true }, { s: '♣', r: false }, { s: '♠', r: false }];
+  var VALORI = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+  for (var mz = 0; mz < 6; mz++) mazzo.appendChild(el('span', { class: 'carta-dorso', style: 'transform:translate(' + (-mz * .6) + 'px,' + (-mz * .8) + 'px)' }));
+  function mescola(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+  function disegnaPoker() { $('#distribuisci').textContent = t(giri ? 'poker_ancora' : 'poker_btn'); }
+  function distribuisci() {
+    if (distribuendo) return; distribuendo = true; giri++;
+    manoCarte.forEach(function (c) { c.classList.add('via'); });
+    var vecchie = manoCarte; manoCarte = [];
+    setTimeout(function () { vecchie.forEach(function (c) { c.remove(); }); }, 500);
+    mazzo.classList.remove('mescola'); void mazzo.offsetWidth; mazzo.classList.add('mescola');
+    var mazzoCarte = [];
+    SEMI.forEach(function (s) { VALORI.forEach(function (v) { mazzoCarte.push({ v: v, s: s }); }); });
+    mescola(mazzoCarte);
+    var foto = mescola((SITO.carte || []).map(function (c, k) { return k; }));
+    var W = tavolo.clientWidth, H = tavolo.clientHeight, N = 5;
+    var cw = Math.min(96, (W - 40) / 5.6), ch = cw * 1.5;
+    var mx = 18, my = H / 2 - ch / 2;
+    setTimeout(function () {
+      for (var i = 0; i < N; i++) (function (i) {
+        var dati = mazzoCarte[i], f = (SITO.carte || [])[foto[i % Math.max(1, foto.length)]] || {};
+        var x = W / 2 - cw / 2 + (i - (N - 1) / 2) * (cw * .92 + 6), y = H / 2 - ch / 2 + Math.abs(i - 2) * 6, rot = (i - 2) * 5;
+        var carta = el('button', { type: 'button', class: 'carta', 'aria-label': t('poker_aria', { carta: dati.v + dati.s.s }) });
+        carta.style.cssText = 'width:' + cw + 'px;height:' + ch + 'px;left:' + mx + 'px;top:' + my + 'px';
+        var faccia = f.foto ? '<img src="' + esc(f.foto) + '" alt="' + esc(f.titolo || '') + '">' : '<span class="carta-soon">' + esc(t('poker_soon')) + '</span>';
+        carta.innerHTML = '<span class="carta-interno"><span class="carta-retro"></span><span class="carta-fronte' + (dati.s.r ? ' rossa' : '') + '">' +
+          '<b class="ang alto">' + dati.v + '<i>' + dati.s.s + '</i></b><span class="carta-foto">' + faccia + '</span><b class="ang basso">' + dati.v + '<i>' + dati.s.s + '</i></b></span></span>';
+        carta.addEventListener('click', function () { carta.classList.toggle('girata'); });
+        tavolo.appendChild(carta); manoCarte.push(carta);
+        setTimeout(function () {
+          carta.style.transform = 'translate(' + (x - mx) + 'px,' + (y - my) + 'px) rotate(' + rot + 'deg)';
+          setTimeout(function () { carta.classList.add('girata'); if (i === N - 1) distribuendo = false; }, 520 + i * 160);
+        }, ridotto ? 0 : 120 + i * 170);
+      })(i);
+      disegnaPoker();
+    }, ridotto ? 0 : 900);
+  }
+  $('#distribuisci').addEventListener('click', distribuisci);
+
   /* ================= APPLICA LA LINGUA ================= */
   function impostaLingua(l) {
     if (l !== 'it' && l !== 'en') return;
@@ -826,7 +867,7 @@
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.dataset.tAria)); });
     $$('[data-lingua]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lingua === lingua ? 'true' : 'false'); });
     aggiornaNav();
-    disegnaCalza(); disegnaPolaroid(); disegnaPennello();
+    disegnaCalza(); disegnaPolaroid(); disegnaPennello(); disegnaPoker();
     disegnaJb(); disegnaFoglio();
     disegnaExvoto();
     disegnaFiltri(); disegnaGalleria(); if (quadroAperto >= 0) mostraQuadro(quadroAperto);

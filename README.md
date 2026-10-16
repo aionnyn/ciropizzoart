@@ -12,7 +12,7 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box: moneta, dischi, 8 situazioni |
 | I | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza e appare il testo |
 | II | Ritratto d’autore (oro) | si preme lo scatto della macchina: flash, diaframma, esce una polaroid con un’opera della galleria |
-| III | Pittura e arte (verde) | si prende il pennello dalla tavolozza: una pennellata verde svela il titolo, poi altri colori |
+| III | Pittura e arte (verde) | pennellate dalla tavolozza, e il Poker d’autore: si mescola il mazzo e 5 carte con i nudi d’arte di Ciro vengono distribuite sul tavolo verde |
 | IV | Sacro e profano (nero) | si accende un cero e appare un ex-voto “Per grazia ricevuta” |
 | V | Galleria | i lavori in cornici dorate, da scorrere col dito |
 | VI | L’Oracolo di Eros | gioco con 3 domande sugli dèi greci del desiderio |
@@ -92,6 +92,10 @@ I prodotti sono in `js/contenuti.js` → `shop`. Per ora i prezzi sono nascosti:
 - `link_pagamento`: se Ciro crea un link di pagamento (Stripe, PayPal, SumUp…) e lo incolla qui, compare **"Compra subito"** per pagare online.
 
 Il carrello resta salvato sul telefono del visitatore. **Ordina su WhatsApp** manda a Ciro la lista completa con quantità e totale; pagamento e spedizione si concordano in chat.
+
+## Poker d’autore
+
+Le carte sono in `js/contenuti.js` → `carte` (12 caselle). Metti le foto di nudo artistico di Ciro in `foto/carte/` (JPG verticale 2:3) e scrivi il percorso in `foto`. Finché `foto` è vuoto la carta mostra "Coming soon". Valori e semi delle carte escono a caso a ogni mescolata.
 
 ## Juke-box, ex-voto, oracolo
 

@@ -80,6 +80,12 @@ window.TESTI = {
     nome_verde: 'Camera del Verde',
     verde_titolo: 'Pittura e arte',
     frase_pittura: 'Il pensiero disegna, la vita dipinge.',
+    poker_titolo: 'Poker d’autore',
+    poker_testo: 'Mescola il mazzo: ogni carta che si gira è un nudo d’arte di Ciro.',
+    poker_btn: 'Mescola e distribuisci',
+    poker_ancora: 'Rimescola',
+    poker_soon: 'Coming soon',
+    poker_aria: 'Carta: {carta}',
     verde_testo: 'Il verde laccato della loggia. Tele dipinte, nudo d’arte, stampe fine-art in edizione limitata: la fotografia diventa pittura e la pittura diventa scena.',
 
     /* IV · juke-box */
@@ -294,6 +300,12 @@ window.TESTI = {
     nome_verde: 'The Green Room',
     verde_titolo: 'Painting and art',
     frase_pittura: 'Thought draws, life paints.',
+    poker_titolo: 'Poker of art',
+    poker_testo: 'Shuffle the deck: every card that turns is a fine-art nude by Ciro.',
+    poker_btn: 'Shuffle and deal',
+    poker_ancora: 'Shuffle again',
+    poker_soon: 'Coming soon',
+    poker_aria: 'Card: {carta}',
     verde_testo: 'The lacquered green of the loggia. Painted canvases, fine-art nudes, limited-edition prints: photography becomes painting and painting becomes a stage.',
 
     nome_jukebox: 'The Jukebox',
