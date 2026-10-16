@@ -117,6 +117,7 @@
     });
     var c = camere[stato.camera];
     if (c.dataset.id === 'galleria') setTimeout(flusso, 60);
+    if (c.dataset.id === 'verde') setTimeout(preparaTela, 400);
     scena.dataset.camera = c.dataset.id;
     setTimeout(aggiornaScorri, 1500);
     scena.style.setProperty('--sfondo', c.dataset.sfondo);
@@ -351,38 +352,55 @@
   $('#scatto').addEventListener('click', scatta);
   function disegnaPolaroid() { if (scatti) mostraFotoPolaroid(false); }
 
-  /* ================= III · PITTURA: tavolozza e pennellate ================= */
-  var COLORI = ['#2E8B57', '#C8102E', '#1F4FB8'], pennellate = 0, dipingendo = false;
-  var NS = 'http://www.w3.org/2000/svg';
-  function dipingi() {
-    if (dipingendo) return;
-    dipingendo = true;
-    var g = $('#pennellate'), col = COLORI[pennellate % COLORI.length];
-    var prima = pennellate === 0;
-    var y0 = prima ? 128 : 40 + Math.random() * 160, y1 = prima ? 112 : 40 + Math.random() * 160;
-    var p = document.createElementNS(NS, 'path');
-    var d = 'M30,' + y0 + ' C170,' + (y0 - 40) + ' 260,' + (y1 + 46) + ' 400,' + ((y0 + y1) / 2) + ' S540,' + (y1 - 20) + ' 572,' + y1;
-    p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', col);
-    p.setAttribute('stroke-width', prima ? 92 : 30 + Math.random() * 30); p.setAttribute('stroke-linecap', 'round');
-    p.setAttribute('opacity', prima ? 1 : .9);
-    g.appendChild(p);
-    var L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L;
-    var punta = $('#pennello-punta'), tela = $('#tela'), svg = $('svg', tela);
-    punta.style.background = col; punta.classList.add('attiva');
-    anima(ridotto ? 10 : 1100, function (e) {
-      p.style.strokeDashoffset = (L * (1 - e)).toFixed(1);
-      var pt = p.getPointAtLength(L * e), r = svg.getBoundingClientRect(), tr = tela.getBoundingClientRect();
-      punta.style.left = (r.left - tr.left + pt.x / 600 * r.width) + 'px';
-      punta.style.top = (r.top - tr.top + pt.y / 240 * r.height) + 'px';
-    }, function () {
-      punta.classList.remove('attiva'); dipingendo = false;
-      if (prima) { $('#tela-titolo').classList.add('dipinto'); $('#verde-testo').classList.add('aperto'); }
-      pennellate++; disegnaPennello();
-      if (g.childNodes.length > 9) g.removeChild(g.childNodes[1]); // la prima (verde) resta sempre
-    });
+  /* ================= III · PITTURA: si dipinge con il dito ================= */
+  var telaPit = $('#tela-canvas'), tctx = telaPit.getContext('2d'), coloreTela = '#C8102E', dipinto = 0, svelato = false, telaPronta = false;
+  function preparaTela() {
+    var r = telaPit.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    if (!r.width) return;
+    var era = telaPronta; telaPronta = true;
+    var img = era ? tctx.getImageData(0, 0, telaPit.width, telaPit.height) : null;
+    telaPit.width = r.width * dpr; telaPit.height = r.height * dpr;
+    tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (img) tctx.putImageData(img, 0, 0);
   }
-  function disegnaPennello() { $('#dipingi-lbl').textContent = t(pennellate ? 'dipingi_ancora' : 'dipingi'); $('#dipingi').setAttribute('aria-label', t(pennellate ? 'dipingi_ancora' : 'dipingi')); }
-  $('#dipingi').addEventListener('click', dipingi);
+  function pennellata(x0, y0, x1, y1, forza) {
+    var dx = x1 - x0, dy = y1 - y0, d = Math.hypot(dx, dy) || 1, nx = -dy / d, ny = dx / d;
+    var larg = 26 * (forza || 1);
+    tctx.lineCap = 'round'; tctx.strokeStyle = coloreTela;
+    for (var b = -6; b <= 6; b++) {   // le setole del pennello
+      var o = b / 6 * larg / 2, j = (Math.random() - .5) * 2;
+      tctx.globalAlpha = .18 + Math.random() * .22;
+      tctx.lineWidth = 2 + Math.random() * 3;
+      tctx.beginPath(); tctx.moveTo(x0 + nx * (o + j), y0 + ny * (o + j)); tctx.lineTo(x1 + nx * (o + j), y1 + ny * (o + j)); tctx.stroke();
+    }
+    tctx.globalAlpha = 1;
+    dipinto += d;
+    if (!svelato && dipinto > 200) {
+      svelato = true;
+      $('#tela-titolo').classList.add('dipinto'); $('#verde-testo').classList.add('aperto');
+    }
+    $('#tela-invito').classList.add('via');
+  }
+  (function () {
+    var giu = false, ux = 0, uy = 0;
+    function pos(e) { var r = telaPit.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    telaPit.addEventListener('pointerdown', function (e) { if (!telaPronta) preparaTela(); giu = true; telaPit.setPointerCapture(e.pointerId); var p = pos(e); ux = p[0]; uy = p[1]; pennellata(ux, uy, ux + .1, uy + .1); });
+    telaPit.addEventListener('pointermove', function (e) { if (!giu) return; var p = pos(e); pennellata(ux, uy, p[0], p[1]); ux = p[0]; uy = p[1]; });
+    telaPit.addEventListener('pointerup', function () { giu = false; });
+    telaPit.addEventListener('pointercancel', function () { giu = false; });
+  })();
+  $$('.pennelli .colore').forEach(function (b) {
+    b.addEventListener('click', function () {
+      coloreTela = b.dataset.colore;
+      $$('.pennelli .colore').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    });
+  });
+  $('#tela-pulisci').addEventListener('click', function () {
+    tctx.clearRect(0, 0, telaPit.width, telaPit.height);
+  });
+  window.addEventListener('resize', preparaTela);
+  function disegnaPennello() {}
+
 
   /* ================= IV · IL JUKE-BOX ================= */
   var SIT = SITO.situazioni || [];

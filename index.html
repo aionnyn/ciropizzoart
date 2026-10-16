@@ -261,48 +261,30 @@
   </section>
 
   <!-- III · VERDE — tavolozza, pennello e pennellata che svela -->
-  <section class="camera" data-id="verde" data-nome="nome_verde" data-num="III" data-sfondo="#1E3A2C" data-inchiostro="#EEE6D2" style="--accento:#D9B866">
+  <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="III" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
     <div class="contenuto centro">
       <span class="etichetta comp r1" data-t="nome_verde"></span>
-      <div class="tela comp r1" id="tela">
-        <svg viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <filter id="f-pennello" x="-5%" y="-30%" width="110%" height="160%">
-              <feTurbulence type="fractalNoise" baseFrequency=".035 .5" numOctaves="2" seed="4"/>
-              <feDisplacementMap in="SourceGraphic" scale="14"/>
-            </filter>
-          </defs>
-          <g id="pennellate" filter="url(#f-pennello)"></g>
-        </svg>
+      <!-- la tela: si dipinge con il dito -->
+      <div class="tela-viva comp r1" id="tela-viva">
+        <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
         <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
-        <span class="pennello-punta" id="pennello-punta" aria-hidden="true"></span>
+        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
       </div>
-      <div class="svelato" id="verde-testo">
-        <p class="motto frase-pittura" data-t="frase_pittura"></p>
-        <p class="testo" data-t="verde_testo"></p>
+      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
+        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
+        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
+        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
+        <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
       </div>
-      <!-- il poker d'autore: mazzo, mescolata, carte distribuite sul tavolo verde -->
+      <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>
+      <!-- il poker d'autore -->
       <div class="poker comp r3">
         <h3 class="sotto-titolo" data-t="poker_titolo"></h3>
-        <p class="testo tenue" data-t="poker_testo"></p>
         <div class="tavolo" id="tavolo">
           <div class="mazzo" id="mazzo" aria-hidden="true"></div>
         </div>
         <button type="button" class="btn-oro" id="distribuisci"></button>
       </div>
-      <button type="button" class="tavolozza comp r2" id="dipingi">
-        <svg viewBox="0 0 260 170" aria-hidden="true">
-          <path d="M128,8 C200,4 252,44 250,92 C248,128 214,140 196,128 C182,118 170,124 172,140 C174,160 150,168 120,164 C56,158 8,128 10,84 C12,40 62,10 128,8 Z" fill="#C9A87A" stroke="#6F5019" stroke-width="2"/>
-          <ellipse cx="206" cy="96" rx="15" ry="12" fill="#1E3A2C"/>
-          <circle cx="70" cy="66" r="18" fill="#C8102E"/><circle cx="128" cy="40" r="18" fill="#2E8B57"/><circle cx="182" cy="56" r="17" fill="#1F4FB8"/>
-          <g class="pennello-riposo">
-            <rect x="96" y="80" width="130" height="9" rx="4.5" fill="#3A230F" transform="rotate(-24 96 84)"/>
-            <rect x="80" y="86" width="22" height="11" rx="2" fill="#B9B3A6" transform="rotate(-24 96 84)"/>
-            <path d="M58,104 C66,94 76,90 84,92 L90,104 C80,108 70,110 58,104 Z" fill="#2E8B57"/>
-          </g>
-        </svg>
-        <span class="tavolozza-lbl" id="dipingi-lbl"></span>
-      </button>
     </div>
   </section>
 

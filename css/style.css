@@ -708,3 +708,24 @@ button.btn-social:hover{transform:translateY(-2px)}
 .ang i{font-style:normal;font-size:12px;margin-top:2px}
 .ang.alto{left:4px;top:5px}
 .ang.basso{right:4px;bottom:5px;transform:rotate(180deg)}
+
+/* =============================================================
+   III · PITTURA sul panno verde da poker
+   ============================================================= */
+.camera.feltro{background:radial-gradient(ellipse at 50% 35%,#2F7049 0%,#1F5236 55%,#123423 100%)}
+.camera.feltro::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:radial-gradient(rgba(0,0,0,.7) 1px,transparent 1.3px);background-size:4px 4px}
+.tela-viva{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;max-height:46vh;border-radius:6px;overflow:hidden;
+  background:#F1E8D4;background-image:repeating-linear-gradient(0deg,rgba(150,128,90,.08) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(150,128,90,.07) 0 1px,transparent 1px 3px);
+  box-shadow:0 0 0 10px #4A2A18,0 0 0 12px #C9A24B,0 26px 50px rgba(0,0,0,.45)}
+.tela-viva canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.tela-viva .tela-titolo{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%) scale(.92);text-align:center;pointer-events:none;color:#1E140C;text-shadow:0 0 18px rgba(241,232,212,.9),0 0 4px rgba(241,232,212,.9)}
+.tela-viva .tela-titolo.dipinto{transform:translateY(-50%)}
+.tela-invito{position:absolute;left:0;right:0;bottom:14px;text-align:center;pointer-events:none;font-family:var(--serif);font-style:italic;font-size:19px;color:#6E5A3E;transition:opacity .5s ease}
+.tela-invito.via{opacity:0;animation:none}
+.pennelli{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px}
+.pennelli .colore{width:46px;height:46px;border-radius:50%;border:3px solid #F1E8D4;background:var(--c);cursor:pointer;box-shadow:0 6px 14px rgba(0,0,0,.35);transition:transform .2s ease}
+.pennelli .colore[aria-pressed="true"]{transform:scale(1.15);box-shadow:0 0 0 3px #E3C377,0 6px 14px rgba(0,0,0,.35)}
+.pennelli .pulisci{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(243,235,218,.5);background:transparent;color:#F3EBDA;font-size:11px;letter-spacing:.24em;text-transform:uppercase;cursor:pointer}
+.frase-pittura.svelato{margin:4px 0 0}
+.camera.feltro .poker{margin-top:24px}
+.camera.feltro .tavolo{background:radial-gradient(ellipse at 50% 40%,#3A8256 0%,#276140 55%,#174029 100%)}
