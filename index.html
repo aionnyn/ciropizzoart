@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ciro Pizzo Art — Fotografia · Pittura · Boudoir</title>
+<meta name="description" content="Ciro Pizzo Art: fotografia, pittura, ritratto e boudoir in uno studio scavato nel tufo a Cava de’ Tirreni. Il tempo passa, una foto resta. — Photography, painting, portrait and boudoir. Time passes, a photograph remains.">
+<meta property="og:title" content="Ciro Pizzo Art">
+<meta property="og:description" content="Il tempo passa, una foto resta. · Time passes, a photograph remains.">
+<meta property="og:image" content="foto/studio/grotta.jpg">
+<meta name="theme-color" content="#0B0807">
+<link rel="alternate" hreflang="it" href="?lang=it">
+<link rel="alternate" hreflang="en" href="?lang=en">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Ciro Pizzo Art",
+ "description":"Fotografia, pittura, ritratto e boudoir. Il tempo passa, una foto resta.",
+ "address":{"@type":"PostalAddress","streetAddress":"Via Enrico De Marinis 14","addressLocality":"Cava de' Tirreni","addressRegion":"SA","addressCountry":"IT"},
+ "telephone":"+39 348 033 6791","email":"ciro_pizzo@libero.it","sameAs":["https://instagram.com/ciropizzo_photos"],
+ "areaServed":["Cava de' Tirreni","Salerno","Costiera Amalfitana","Napoli","Campania"],
+ "knowsAbout":["Fotografia boudoir","Ritratto","Pittura","Fotografia di moda","Fine art"]}
+</script>
+
+</head>
+<body>
+<div id="scena" class="scena">
+
+  <!-- luci sfocate (bokeh) in profondità -->
+  <canvas class="bokeh" id="bokeh" aria-hidden="true"></canvas>
+
+  <!-- fondale della Grotta: cielo, roccia e mare (resta fermo mentre si scorre) -->
+  <div class="fondale-grotta" aria-hidden="true">
+    <div class="cielo" ></div>
+    <img class="sfondo-foto" src="foto/studio/grotta.jpg" alt="" loading="lazy">
+    <div class="riflessi" ></div>
+    <svg class="mare" viewBox="0 0 1440 220" preserveAspectRatio="none" >
+      <g class="onda o1"><path d="M0,120 C180,90 360,150 540,120 S900,90 1080,120 S1440,150 1440,120 L1440,220 L0,220 Z M1440,120 C1620,90 1800,150 1980,120 S2340,90 2520,120 S2880,150 2880,120 L2880,220 L1440,220 Z"/></g>
+      <g class="onda o2"><path d="M0,150 C200,125 400,175 600,150 S1000,125 1200,150 S1440,170 1440,150 L1440,220 L0,220 Z M1440,150 C1640,125 1840,175 2040,150 S2440,125 2640,150 S2880,170 2880,150 L2880,220 L1440,220 Z"/></g>
+      <g class="onda o3"><path d="M0,182 C240,165 480,198 720,182 S1200,165 1440,182 L1440,220 L0,220 Z M1440,182 C1680,165 1920,198 2160,182 S2640,165 2880,182 L2880,220 L1440,220 Z"/></g>
+    </svg>
+  </div>
+
+  <!-- =========================================================
+       LE CAMERE — l'ordine qui è l'ordine del percorso.
+       I testi con data-t vengono da js/testi.js (IT / EN).
+       ========================================================= -->
+
+  <!-- · BENVENUTO -->
+  <section class="camera arcata" data-id="benvenuto" data-nome="nome_benvenuto" data-num="·" data-sfondo="#120D0B" data-inchiostro="#F3EBDA" style="--accento:#C9A24B">
+    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="contenuto centro">
+      <span class="numero comp r1">·</span>
+      <span class="etichetta comp r1" data-t="nome_benvenuto"></span>
+      <h2 class="titolo comp r2">Ciro Pizzo <em class="marchio-em">Art</em></h2>
+      <p class="testo comp r3" data-t="benv_testo"></p>
+    </div>
+  </section>
+
+  <!-- ∞ · LO STUDIO — dove il tempo si ferma -->
+  <section class="camera studio" data-id="studio" data-nome="nome_studio" data-num="∞" data-sfondo="#1C1410" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto centro studio-colonna">
+      <div class="comp r1">
+        <span class="etichetta" data-t="studio_etichetta"></span>
+        <h2 class="titolo medio" data-t="studio_titolo"></h2>
+      </div>
+      <p class="testo comp r2" data-t="studio_testo"></p>
+
+      <div class="orologio comp r3" id="orologio" role="img" data-t-aria="orologio">
+        <span class="lancetta ore" id="lancetta-ore"></span>
+        <span class="lancetta minuti" id="lancetta-min"></span>
+        <span class="lancetta secondi" id="lancetta-sec"></span>
+        <span class="perno-orologio"></span>
+      </div>
+      <button type="button" class="btn-oro comp r3" id="ferma-tempo" aria-pressed="false"></button>
+      <div class="tempo-fermo-msg" id="tempo-msg" aria-live="polite">
+        <p class="motto" id="tempo-ora"></p>
+        <span class="mini-maiusc" data-t="fermo_sotto"></span>
+      </div>
+
+      <div class="capitoli">
+        <article class="capitolo">
+          <figure class="arco-foto"><img src="foto/studio/stile.jpg" alt="" loading="lazy"></figure>
+          <div class="capitolo-testo"><h3 data-t="cap_stile_t"></h3><p data-t="cap_stile"></p></div>
+        </article>
+        <article class="capitolo inverso">
+          <figure class="arco-foto"><img src="foto/studio/mistero.jpg" alt="" loading="lazy"></figure>
+          <div class="capitolo-testo"><h3 data-t="cap_mistero_t"></h3><p data-t="cap_mistero"></p></div>
+        </article>
+        <article class="capitolo">
+          <figure class="arco-foto"><img src="foto/studio/arte.jpg" alt="" loading="lazy"></figure>
+          <div class="capitolo-testo"><h3 data-t="cap_arte_t"></h3><p data-t="cap_arte"></p></div>
+        </article>
+      </div>
+      <!-- il juke-box dello studio -->
+  <div class="jukebox-zona">
+    <div class="comp r1">
+      <span class="etichetta" data-t="jb_etichetta"></span>
+      <h2 class="titolo medio" data-t="nome_jukebox"></h2>
+      <p class="sottotitolo" data-t="jb_sotto"></p>
+    </div>
+    <div class="jukebox comp r2">
+      <div class="jb-testata">
+        <div class="jb-barra"></div>
+        <div class="jb-pannello">
+          <div class="jb-display">
+            <span class="jb-mini">SELECTION PLAYING</span>
+            <div class="jb-cifre" id="jb-cifre"><span>–</span><span>–</span><span>–</span></div>
+            <span class="jb-msg lampeggia" id="jb-msg" aria-live="polite"></span>
+          </div>
+          <div class="jb-tastiera" id="jb-tastiera"></div>
+          <div class="jb-monete">
+            <div class="jb-fessura-riga"><span class="jb-monete-lbl" data-t="jb_monete"></span><span class="jb-fessura" id="jb-fessura" aria-hidden="true"></span></div>
+            <span class="jb-mini" id="jb-credito"></span>
+            <button type="button" class="moneta" id="jb-moneta" data-t-aria="jb_moneta_aria">100<small data-t="jb_lire"></small></button>
+          </div>
+        </div>
+        <div class="jb-barra"></div>
+      </div>
+      <div class="jb-griglia"><span class="jb-targa">CIRO PIZZO</span></div>
+      <div class="jb-vetrina"><div class="jb-dischi" id="jb-dischi"></div></div>
+      <div class="jb-fronte" id="jb-fronte"></div>
+    </div>
+    <div class="jb-progresso comp r3">
+      <div class="pallini" id="jb-pallini"></div>
+      <span class="mini-maiusc"><span data-t="jb_sbloccate"></span> <b id="jb-conta">0</b> / <span id="jb-totale">8</span></span>
+    </div>
+  </div>
+      <button type="button" class="btn-rosso" data-azione="prenota" data-t="studio_cta"></button>
+    </div>
+  </section>
+
+  <!-- I · BOUDOIR — la calza che si tira su -->
+  <section class="camera" data-id="boudoir" data-nome="nome_boudoir" data-num="I" data-sfondo="#7A1222" data-inchiostro="#F6E7D8" style="--accento:#E3B866">
+    <div class="contenuto centro">
+      <div class="comp r1">
+        <span class="etichetta" data-t="boud_etichetta"></span>
+        <h2 class="titolo grande">Boudoir</h2>
+        <p class="sfumature" data-t="boud_sotto"></p>
+      </div>
+      <div class="calza-scena comp r2" id="calza" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-t-aria="calza_aria">
+        <svg viewBox="52 4 400 440" aria-hidden="true">
+          <defs>
+            <linearGradient id="g-pelle" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#FBE9DE"/><stop offset=".5" stop-color="#F1D3C1"/><stop offset="1" stop-color="#D6A68E"/></linearGradient>
+            <linearGradient id="g-pelle2" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#F3DACB"/><stop offset=".55" stop-color="#E6BEA8"/><stop offset="1" stop-color="#C38E77"/></linearGradient>
+            <pattern id="p-rete" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(48)"><path d="M0,0 H9 M0,0 V9" stroke="#0A0405" stroke-width="1.3" fill="none"/></pattern>
+            <pattern id="p-rete2" width="8.5" height="8.5" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><path d="M0,0 H8.5 M0,0 V8.5" stroke="#0A0405" stroke-width="1.25" fill="none"/></pattern>
+            <clipPath id="clip-g1"><path d="M60.0,182.0 C65.8,173.0 84.3,152.3 95.0,138.0 C105.7,123.7 114.8,104.8 124.0,96.0 C133.2,87.2 137.3,87.7 150.0,85.0 C162.7,82.3 181.7,82.3 200.0,80.0 C218.3,77.7 238.3,75.2 260.0,71.0 C281.7,66.8 310.3,60.2 330.0,55.0 C348.9,50.6 359.9,47.0 369.1,43.6 C378.4,40.2 384.3,36.3 390.5,33.6 C396.7,30.9 402.2,27.4 406.3,27.2 C410.3,26.9 414.1,29.5 414.9,32.2 C415.5,34.9 413.1,40.5 410.5,43.6 C407.9,46.6 403.4,48.1 399.1,50.7 C394.8,53.3 389.9,55.7 384.8,59.3 C379.8,62.9 373.4,67.6 369.1,72.1 C364.9,76.6 362.2,82.5 359.1,86.4 C356.0,90.3 353.9,94.7 350.6,95.7 C347.1,105.3 341.0,111.0 336.0,109.0 C331.0,107.0 329.7,101.2 322.0,101.0 C314.3,100.8 302.0,105.2 290.0,108.0 C278.0,110.8 262.5,114.3 250.0,118.0 C237.5,121.7 225.8,126.3 215.0,130.0 C204.2,133.7 193.2,136.3 185.0,140.0 C176.8,143.7 170.5,145.0 166.0,152.0 C161.5,159.0 160.7,171.5 158.0,182.0 C155.3,192.5 158.0,211.5 150.0,215.0 C142.0,218.5 125.0,206.8 110.0,203.0 C95.0,199.2 68.3,195.5 60.0,192.0 C51.7,188.5 54.2,191.0 60.0,182.0 Z"/></clipPath>
+            <clipPath id="clip-g2"><path d="M60.0,212.0 C68.3,202.7 93.3,197.3 110.0,190.0 C126.7,182.7 145.0,175.3 160.0,168.0 C175.0,160.7 189.0,151.0 200.0,146.0 C211.0,141.0 218.7,137.8 226.0,138.0 C233.3,138.2 239.0,141.7 244.0,147.0 C249.0,152.3 252.3,159.8 256.0,170.0 C259.7,180.2 261.7,194.0 266.0,208.0 C270.3,222.0 276.3,239.0 282.0,254.0 C287.7,269.0 293.3,284.3 300.0,298.0 C306.7,311.7 314.7,324.8 322.0,336.0 C329.3,347.2 338.0,357.7 344.0,365.0 C350.0,372.3 352.3,375.2 358.0,380.0 C363.7,384.8 370.3,389.3 378.0,394.0 C385.7,398.7 396.3,404.2 404.0,408.0 C411.7,411.8 419.5,414.2 424.0,417.0 C428.5,419.8 431.0,422.7 431.0,425.0 C431.0,427.3 429.5,430.3 424.0,431.0 C418.5,431.7 407.7,430.7 398.0,429.0 C388.3,427.3 376.3,424.2 366.0,421.0 C355.7,417.8 344.7,413.5 336.0,410.0 C327.3,406.5 319.3,403.7 314.0,400.0 C308.7,396.3 306.7,393.7 304.0,388.0 C301.3,382.3 300.7,375.3 298.0,366.0 C295.3,356.7 293.0,343.0 288.0,332.0 C283.0,321.0 276.0,309.0 268.0,300.0 C260.0,291.0 250.5,283.8 240.0,278.0 C229.5,272.2 218.3,269.3 205.0,265.0 C191.7,260.7 175.8,255.2 160.0,252.0 C144.2,248.8 126.7,247.0 110.0,246.0 C93.3,245.0 68.3,251.7 60.0,246.0 C51.7,240.3 51.7,221.3 60.0,212.0 Z"/></clipPath>
+            <mask id="m-calza1" maskUnits="userSpaceOnUse" x="0" y="-40" width="500" height="520"><path id="calza-traccia1" d="M411.3,32.2 C386.3,45.0 364.9,57.8 342.0,74.0 C292.0,90.0 222.0,100.0 158.0,110.0 C138.0,128.0 118.0,160.0 96.0,200.0" fill="none" stroke="#fff" stroke-width="120"/></mask>
+            <filter id="f-morbido" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+            <filter id="f-sfuma-luce" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9"/></filter>
+            <linearGradient id="g-sfuma" gradientUnits="userSpaceOnUse" x1="52" x2="452"><stop offset=".02" stop-color="#000"/><stop offset=".22" stop-color="#fff"/></linearGradient>
+            <mask id="m-sfuma" maskUnits="userSpaceOnUse" x="0" y="-40" width="500" height="520"><rect x="0" y="-40" width="500" height="520" fill="url(#g-sfuma)"/></mask>
+            <linearGradient id="g-unghia" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0455E"/><stop offset=".5" stop-color="#C80F2E"/><stop offset="1" stop-color="#7E0A1C"/></linearGradient>
+            <linearGradient id="g-mano" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3D6C4"/><stop offset="1" stop-color="#E2B8A1"/></linearGradient>
+            <linearGradient id="g-pelle-v" x1="0" y1="0" x2=".35" y2="1"><stop offset="0" stop-color="#FBE9DE"/><stop offset=".5" stop-color="#F1D3C1"/><stop offset="1" stop-color="#D6A68E"/></linearGradient>
+            <pattern id="p-rete-v" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0,0 H6 M0,0 V6" stroke="#0A0405" stroke-width=".9" fill="none"/></pattern>
+            <clipPath id="clip-g2v"><path d="M-10.0,150.0 C60.0,128.0 140.0,108.0 188.0,100.0 C214.0,95.0 238.0,104.0 241.0,126.0 C247.0,160.0 262.0,200.0 275.0,236.0 C279.0,247.0 282.0,255.0 285.5,262.0 C297.3,270.4 315.8,282.2 332.6,291.4 C339.3,294.8 341.8,301.5 335.1,304.0 C325.8,305.7 314.9,302.3 304.8,299.0 C296.4,296.4 288.9,293.1 282.0,297.0 C272.0,295.0 265.0,287.0 267.0,277.0 C267.0,268.0 263.0,258.0 260.0,250.0 C250.0,228.0 212.0,206.0 210.0,176.0 C208.0,163.0 202.0,156.0 195.0,160.0 C150.0,178.0 88.0,206.0 -10.0,218.0 Z"/></clipPath>
+            <mask id="m-calza2v" maskUnits="userSpaceOnUse" x="-200" y="-100" width="700" height="500"><path id="calza-traccia" d="M324.2,294.8 C304.0,286.4 289.7,275.4 278.0,262.0 C262.0,226.0 240.0,182.0 226.0,138.0 C220.0,116.0 206.0,110.0 194.0,116.0 C140.0,142.0 70.0,172.0 -12.0,186.0" fill="none" stroke="#fff" stroke-width="100"/></mask>
+          </defs>
+          <g mask="url(#m-sfuma)">
+            <ellipse cx="300" cy="438" rx="160" ry="9" fill="#000" opacity=".3" filter="url(#f-morbido)"/>
+            <!-- gamba sollevata -->
+            <path d="M60.0,182.0 C65.8,173.0 84.3,152.3 95.0,138.0 C105.7,123.7 114.8,104.8 124.0,96.0 C133.2,87.2 137.3,87.7 150.0,85.0 C162.7,82.3 181.7,82.3 200.0,80.0 C218.3,77.7 238.3,75.2 260.0,71.0 C281.7,66.8 310.3,60.2 330.0,55.0 C348.9,50.6 359.9,47.0 369.1,43.6 C378.4,40.2 384.3,36.3 390.5,33.6 C396.7,30.9 402.2,27.4 406.3,27.2 C410.3,26.9 414.1,29.5 414.9,32.2 C415.5,34.9 413.1,40.5 410.5,43.6 C407.9,46.6 403.4,48.1 399.1,50.7 C394.8,53.3 389.9,55.7 384.8,59.3 C379.8,62.9 373.4,67.6 369.1,72.1 C364.9,76.6 362.2,82.5 359.1,86.4 C356.0,90.3 353.9,94.7 350.6,95.7 C347.1,105.3 341.0,111.0 336.0,109.0 C331.0,107.0 329.7,101.2 322.0,101.0 C314.3,100.8 302.0,105.2 290.0,108.0 C278.0,110.8 262.5,114.3 250.0,118.0 C237.5,121.7 225.8,126.3 215.0,130.0 C204.2,133.7 193.2,136.3 185.0,140.0 C176.8,143.7 170.5,145.0 166.0,152.0 C161.5,159.0 160.7,171.5 158.0,182.0 C155.3,192.5 158.0,211.5 150.0,215.0 C142.0,218.5 125.0,206.8 110.0,203.0 C95.0,199.2 68.3,195.5 60.0,192.0 C51.7,188.5 54.2,191.0 60.0,182.0 Z" fill="url(#g-pelle2)"/>
+            <g clip-path="url(#clip-g1)">
+              <ellipse cx="250" cy="80" rx="120" ry="9" fill="#FFF7F0" opacity=".55" filter="url(#f-sfuma-luce)" transform="rotate(-9 250 80)"/>
+              <ellipse cx="270" cy="108" rx="60" ry="12" fill="#6E3A2C" opacity=".35" filter="url(#f-sfuma-luce)" transform="rotate(-12 270 108)"/>
+              <ellipse cx="392" cy="48" rx="26" ry="6" fill="#FFF7F0" opacity=".5" filter="url(#f-sfuma-luce)" transform="rotate(-30 392 48)"/>
+              <ellipse cx="356" cy="104" rx="12" ry="8" fill="#6E3A2C" opacity=".3" filter="url(#f-sfuma-luce)"/>
+              <ellipse cx="110" cy="160" rx="30" ry="50" fill="#FFF7F0" opacity=".35" filter="url(#f-sfuma-luce)" transform="rotate(35 110 160)"/>
+              <g mask="url(#m-calza1)"><rect x="0" y="-40" width="500" height="520" fill="#1A0809" opacity=".18"/><rect x="0" y="-40" width="500" height="520" fill="url(#p-rete2)"/></g>
+              <path id="calza-balza1" d="M411.3,32.2 C386.3,45.0 364.9,57.8 342.0,74.0 C292.0,90.0 222.0,100.0 158.0,110.0 C138.0,128.0 118.0,160.0 96.0,200.0" fill="none" stroke="#0A0405" stroke-width="120"/>
+            </g>
+            <!-- ombra della gamba piegata su quella sollevata -->
+            <g transform="translate(236,140) scale(1.3) translate(-230,-108)"><path d="M-10,150 C60,128 140,108 188,100" fill="none" stroke="#3A1810" stroke-width="16" opacity=".35" filter="url(#f-morbido)" transform="translate(0,-6)"/></g>
+            <g transform="translate(236,140) scale(1.3) translate(-230,-108)">
+            <!-- gamba davanti, piegata -->
+            <path d="M-10.0,150.0 C60.0,128.0 140.0,108.0 188.0,100.0 C214.0,95.0 238.0,104.0 241.0,126.0 C247.0,160.0 262.0,200.0 275.0,236.0 C279.0,247.0 282.0,255.0 285.5,262.0 C297.3,270.4 315.8,282.2 332.6,291.4 C339.3,294.8 341.8,301.5 335.1,304.0 C325.8,305.7 314.9,302.3 304.8,299.0 C296.4,296.4 288.9,293.1 282.0,297.0 C272.0,295.0 265.0,287.0 267.0,277.0 C267.0,268.0 263.0,258.0 260.0,250.0 C250.0,228.0 212.0,206.0 210.0,176.0 C208.0,163.0 202.0,156.0 195.0,160.0 C150.0,178.0 88.0,206.0 -10.0,218.0 Z" fill="url(#g-pelle-v)"/>
+            <g clip-path="url(#clip-g2v)">
+              <ellipse cx="110" cy="146" rx="120" ry="20" fill="#FFF6EE" opacity=".45" filter="url(#f-sfuma-luce)" transform="rotate(-16 110 146)"/>
+              <ellipse cx="216" cy="112" rx="18" ry="14" fill="#FFF6EE" opacity=".45" filter="url(#f-sfuma-luce)"/>
+              <ellipse cx="256" cy="190" rx="10" ry="56" fill="#FFF6EE" opacity=".45" filter="url(#f-sfuma-luce)" transform="rotate(-24 256 190)"/>
+              <ellipse cx="90" cy="206" rx="130" ry="22" fill="#5E2A1E" opacity=".3" filter="url(#f-sfuma-luce)" transform="rotate(-14 90 206)"/>
+              <ellipse cx="228" cy="208" rx="14" ry="36" fill="#5E2A1E" opacity=".34" filter="url(#f-sfuma-luce)" transform="rotate(-30 228 208)"/>
+              <ellipse cx="300" cy="290" rx="26" ry="5" fill="#FFF6EE" opacity=".4" filter="url(#f-sfuma-luce)" transform="rotate(30 300 290)"/>
+              <ellipse cx="290" cy="300" rx="16" ry="4" fill="#5E2A1E" opacity=".35" filter="url(#f-sfuma-luce)" transform="rotate(22 290 300)"/>
+              <g mask="url(#m-calza2v)"><rect x="-40" y="-20" width="480" height="360" fill="#160709" opacity=".2"/><rect x="-40" y="-20" width="480" height="360" fill="url(#p-rete-v)"/></g>
+              <path id="calza-pizzo" d="M324.2,294.8 C304.0,286.4 289.7,275.4 278.0,262.0 C262.0,226.0 240.0,182.0 226.0,138.0 C220.0,116.0 206.0,110.0 194.0,116.0 C140.0,142.0 70.0,172.0 -12.0,186.0" fill="none" stroke="#0A0405" stroke-width="100"/>
+            </g>
+            </g>
+          </g>
+          <g transform="translate(236,140) scale(1.3) translate(-230,-108)">
+          <!-- la mano con le unghie rosse -->
+          <g id="calza-mano"><g transform="scale(.95)">
+            <path d="M-13,-24 C-15,-34 -16,-42 -17,-50 C-8,-54 4,-54 11,-50 C11,-42 11,-34 12,-24 Z" fill="url(#g-mano)" opacity=".9"/>
+            <path d="M-16,-8 C-19,-20 -16,-30 -6,-33 L8,-31 C15,-27 17,-18 15,-8 Z" fill="#E8BCA4"/>
+            <g fill="url(#g-mano)" stroke="#C08A72" stroke-width=".4">
+              <path d="M-15,-12 C-16,-4 -15,4 -13.5,9 C-12.5,11.5 -10,11.5 -9.6,9 C-9,3 -9.4,-5 -10,-12 Z"/>
+              <path d="M-9,-13 C-9.6,-4 -8.8,6 -7.4,12 C-6.4,14.6 -3.6,14.6 -3.2,12 C-2.6,5 -3,-5 -3.6,-13 Z"/>
+              <path d="M-2.6,-13 C-3,-4 -2.4,6 -1,11.6 C0,14.2 2.8,14.2 3.2,11.6 C3.8,5 3.4,-5 2.8,-13 Z"/>
+              <path d="M3.6,-11 C3.2,-3 3.8,4 5,8.6 C5.8,10.8 8.2,10.8 8.6,8.6 C9,3 8.8,-4 8.2,-11 Z"/>
+            </g>
+            <g fill="url(#g-unghia)">
+              <path d="M-14,5 C-14.2,8 -13.4,10.8 -11.7,11.2 C-10,10.8 -9.8,8 -10.2,5 Z"/>
+              <path d="M-8,8 C-8.2,11 -7.3,14 -5.3,14.4 C-3.4,14 -3.2,11 -3.6,8 Z"/>
+              <path d="M-1.6,7.6 C-1.8,10.6 -0.9,13.6 1.1,14 C3,13.6 3.2,10.6 2.8,7.6 Z"/>
+              <path d="M4.2,5 C4,7.6 4.8,10.2 6.8,10.6 C8.4,10.2 8.6,7.6 8.3,5 Z"/>
+            </g>
+            <g fill="#fff" opacity=".75"><ellipse cx="-12.6" cy="7.4" rx=".6" ry="1.6"/><ellipse cx="-6.6" cy="10.4" rx=".6" ry="1.8"/><ellipse cx="-0.2" cy="10" rx=".6" ry="1.8"/><ellipse cx="5.6" cy="7.2" rx=".55" ry="1.5"/></g>
+          </g></g>
+          </g>
+        </svg>
+      </div>
+      <span class="suggerimento lampeggia" id="calza-hint"></span>
+      <button type="button" class="btn-oro" id="calza-btn"></button>
+      <div class="svelato" id="calza-testo">
+        <p class="testo" data-t="boud_testo"></p>
+        <div class="promesse"><span data-t="prom1"></span><span data-t="prom2"></span><span data-t="prom3"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- II · ORO — la macchina fotografica che scatta -->
+  <section class="camera arcata" data-id="oro" data-nome="nome_oro" data-num="II" data-sfondo="#C9A24B" data-inchiostro="#1E140C" style="--accento:#3A230F">
+    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="contenuto centro">
+      <div class="comp r1">
+        <span class="etichetta" data-t="nome_oro"></span>
+        <h2 class="titolo medio" data-t="oro_titolo"></h2>
+        <p class="firma-ritratto">Ciro Pizzo <em>photographer</em></p>
+      </div>
+      <div class="macchina comp r2">
+        <div class="macchina-tetto">
+          <span class="macchina-mirino" aria-hidden="true"></span>
+          <span class="macchina-flash" id="flash" aria-hidden="true"></span>
+          <button type="button" class="scatto" id="scatto" data-t-aria="scatta"><span></span></button>
+          <span class="fumetto-scatto" id="fumetto-scatto" aria-hidden="true" data-t="scatta_qui"></span>
+        </div>
+        <div class="macchina-corpo">
+          <span class="macchina-marchio" aria-hidden="true">CIRO PIZZO</span>
+          <span class="macchina-obiettivo" aria-hidden="true">
+            <svg class="diaframma" id="diaframma-macchina" viewBox="-100 -100 200 200"><path class="lame" fill-rule="evenodd"/><path class="spigoli"/></svg>
+            <span class="riflesso"></span>
+          </span>
+          <span class="macchina-dati" aria-hidden="true">1/125 · f/2.8</span>
+        </div>
+        <figure class="polaroid" id="polaroid" hidden>
+          <button type="button" class="polaroid-chiudi" id="polaroid-chiudi" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <span class="polaroid-foto"><img id="polaroid-img" alt=""></span>
+          <button type="button" class="polaroid-freccia sx" id="polaroid-prec" data-t-aria="quadro_prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="polaroid-freccia dx" id="polaroid-succ" data-t-aria="quadro_succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <figcaption id="polaroid-cap"></figcaption>
+        </figure>
+      </div>
+      <span class="suggerimento lampeggia" id="oro-hint" data-t="oro_hint"></span>
+      <p class="testo comp r3" data-t="oro_testo"></p>
+    </div>
+  </section>
+
+  <!-- III · VERDE — tavolozza, pennello e pennellata che svela -->
+  <section class="camera" data-id="verde" data-nome="nome_verde" data-num="III" data-sfondo="#1E3A2C" data-inchiostro="#EEE6D2" style="--accento:#D9B866">
+    <div class="contenuto centro">
+      <span class="etichetta comp r1" data-t="nome_verde"></span>
+      <div class="tela comp r1" id="tela">
+        <svg viewBox="0 0 600 240" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="f-pennello" x="-5%" y="-30%" width="110%" height="160%">
+              <feTurbulence type="fractalNoise" baseFrequency=".035 .5" numOctaves="2" seed="4"/>
+              <feDisplacementMap in="SourceGraphic" scale="14"/>
+            </filter>
+          </defs>
+          <g id="pennellate" filter="url(#f-pennello)"></g>
+        </svg>
+        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
+        <span class="pennello-punta" id="pennello-punta" aria-hidden="true"></span>
+      </div>
+      <div class="svelato" id="verde-testo">
+        <p class="motto frase-pittura" data-t="frase_pittura"></p>
+        <p class="testo" data-t="verde_testo"></p>
+      </div>
+      <button type="button" class="tavolozza comp r2" id="dipingi">
+        <svg viewBox="0 0 260 170" aria-hidden="true">
+          <path d="M128,8 C200,4 252,44 250,92 C248,128 214,140 196,128 C182,118 170,124 172,140 C174,160 150,168 120,164 C56,158 8,128 10,84 C12,40 62,10 128,8 Z" fill="#C9A87A" stroke="#6F5019" stroke-width="2"/>
+          <ellipse cx="206" cy="96" rx="15" ry="12" fill="#1E3A2C"/>
+          <circle cx="70" cy="66" r="18" fill="#C8102E"/><circle cx="128" cy="40" r="18" fill="#2E8B57"/><circle cx="182" cy="56" r="17" fill="#1F4FB8"/>
+          <g class="pennello-riposo">
+            <rect x="96" y="80" width="130" height="9" rx="4.5" fill="#3A230F" transform="rotate(-24 96 84)"/>
+            <rect x="80" y="86" width="22" height="11" rx="2" fill="#B9B3A6" transform="rotate(-24 96 84)"/>
+            <path d="M58,104 C66,94 76,90 84,92 L90,104 C80,108 70,110 58,104 Z" fill="#2E8B57"/>
+          </g>
+        </svg>
+        <span class="tavolozza-lbl" id="dipingi-lbl"></span>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- V · SACRO E PROFANO — ex-voto -->
+  <section class="camera" data-id="sacro" data-nome="nome_sacro" data-num="IV" data-sfondo="#0E0A09" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto centro">
+      <div class="comp r1">
+        <span class="etichetta" data-t="sacro_etichetta"></span>
+        <h2 class="titolo medio" data-t="nome_sacro"></h2>
+        <p class="testo tenue" data-t="sacro_testo"></p>
+      </div>
+      <div class="nicchia comp r2" id="nicchia">
+        <span class="aureola" aria-hidden="true"></span>
+        <div class="cero" aria-hidden="true"><span class="fiamma"></span><span class="stoppino"></span><span class="cera"></span></div>
+      </div>
+      <button type="button" class="btn-oro comp r3" id="accendi"></button>
+      <div class="exvoto" id="exvoto" hidden>
+        <div class="pgr" data-t="pgr_esteso"></div>
+        <div class="grazia" id="grazia"></div>
+      </div>
+      <div class="ceri" id="ceri" hidden></div>
+    </div>
+  </section>
+
+  <!-- VI · GALLERIA -->
+  <section class="camera galleria" data-id="galleria" data-nome="nome_galleria" data-num="V" data-sfondo="#3A1018" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="gal-testa comp r1">
+      <span class="etichetta" data-t="gal_etichetta"></span>
+      <h2 class="titolo medio" data-t="gal_titolo"></h2>
+      <span class="sottotitolo" data-t="gal_sotto"></span>
+    </div>
+    <div class="filtri comp r1" id="filtri" role="group" data-t-aria="gal_filtri"></div>
+    <div class="parete comp r2" id="parete"></div>
+  </section>
+
+  <!-- VII · L'ORACOLO DI EROS -->
+  <section class="camera oracolo" data-id="oracolo" data-nome="nome_oracolo" data-num="VI" data-sfondo="#C4683A" data-inchiostro="#1A0F0A" style="--accento:#1A0F0A">
+    <div class="contenuto centro">
+      <div class="greca comp r1" aria-hidden="true"></div>
+      <div id="oracolo"></div>
+      <div class="greca comp r1" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- VIII · PACCHETTI E REGALI — busta di ceralacca -->
+  <section class="camera" data-id="regalo" data-nome="nome_regalo" data-num="VII" data-sfondo="#3D0C17" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto centro largo">
+      <div class="comp r1">
+        <span class="etichetta" data-t="regalo_etichetta"></span>
+        <h2 class="titolo medio" data-t="regalo_titolo"></h2>
+        <p class="testo tenue" data-t="regalo_testo"></p>
+      </div>
+      <div class="pacchetti comp r2" id="pacchetti"></div>
+      <div class="buono-zona comp r3">
+        <h3 class="sotto-titolo" data-t="buono_titolo"></h3>
+        <p class="testo tenue" data-t="buono_testo"></p>
+        <div class="busta" id="busta">
+          <div class="buono" id="buono" aria-live="polite">
+            <span class="buono-ornamento" aria-hidden="true">✦</span>
+            <strong data-t="buono_card_t"></strong>
+            <span data-t="buono_card_s"></span>
+            <em data-t="motto"></em>
+          </div>
+          <div class="busta-fondo" aria-hidden="true"></div>
+          <div class="busta-lembo" aria-hidden="true"></div>
+          <button type="button" class="sigillo" id="sigillo" data-t-aria="apri_busta"><span>CP</span></button>
+        </div>
+        <span class="suggerimento lampeggia" id="busta-hint" data-t="apri_busta"></span>
+        <a class="btn-social wa" id="buono-wa" target="_blank" rel="noopener" hidden></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- IX · LA PRIMA VOLTA — come funziona e domande -->
+  <section class="camera" data-id="prima" data-nome="nome_prima" data-num="VIII" data-sfondo="#16100D" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto centro largo">
+      <div class="comp r1">
+        <span class="etichetta" data-t="prima_etichetta"></span>
+        <h2 class="titolo medio" data-t="prima_titolo"></h2>
+        <p class="testo tenue" data-t="prima_testo"></p>
+      </div>
+      <ol class="passi comp r2">
+        <li><b>1</b><h3 data-t="passo1_t"></h3><p data-t="passo1"></p></li>
+        <li><b>2</b><h3 data-t="passo2_t"></h3><p data-t="passo2"></p></li>
+        <li><b>3</b><h3 data-t="passo3_t"></h3><p data-t="passo3"></p></li>
+        <li><b>4</b><h3 data-t="passo4_t"></h3><p data-t="passo4"></p></li>
+      </ol>
+      <div class="faq comp r3">
+        <h3 class="sotto-titolo" data-t="faq_titolo"></h3>
+        <div id="faq"></div>
+      </div>
+      <a class="btn-social wa" id="prima-wa" target="_blank" rel="noopener"></a>
+    </div>
+  </section>
+
+  <!-- XI · SHOP — calendari, libro, stampe, quadri, buoni -->
+  <section class="camera" data-id="shop" data-nome="nome_shop" data-num="IX" data-sfondo="#140A0C" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto centro largo">
+      <div class="comp r1">
+        <span class="etichetta" data-t="shop_etichetta"></span>
+        <h2 class="titolo medio" data-t="shop_titolo"></h2>
+        <p class="testo tenue" data-t="shop_testo"></p>
+      </div>
+      <div class="prodotti comp r2" id="prodotti"></div>
+      <div class="carrello comp r3" id="carrello">
+        <h3 class="sotto-titolo" data-t="carrello"></h3>
+        <ul class="carrello-righe" id="carrello-righe"></ul>
+        <p class="carrello-vuoto" id="carrello-vuoto" data-t="carrello_vuoto"></p>
+        <div class="carrello-totale" id="carrello-totale"></div>
+        <div class="bottoni">
+          <a class="btn-social wa" id="ordina" target="_blank" rel="noopener"></a>
+          <button type="button" class="btn-linea" id="svuota" data-t="svuota"></button>
+        </div>
+        <p class="nota" data-t="spedizione"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIII · LA GROTTA — contatti -->
+  <section class="camera arcata grotta" data-id="grotta" data-nome="nome_grotta" data-num="X" data-sfondo="#081420" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="contenuto centro">
+      <span class="numero comp r1">X</span>
+      <span class="etichetta comp r1" data-t="nome_grotta"></span>
+      <h2 class="titolo comp r2" data-t="grotta_titolo"></h2>
+      <p class="testo comp r3" data-t="grotta_testo"></p>
+      <h3 class="sotto-titolo comp r4" data-t="contatti_titolo"></h3>
+      <div class="contatti comp r4" id="contatti"></div>
+      <div class="collab comp r4">
+        <h3 class="sotto-titolo" data-t="collab_titolo"></h3>
+        <p class="testo tenue" data-t="collab_testo"></p>
+        <div class="filtri" id="collab"></div>
+      </div>
+      <p class="motto comp r4" data-t="motto"></p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       LA PARETE DI TUFO con l'imboccatura
+       ========================================================= -->
+  <div class="parete-tufo" id="tufo">
+    <div class="firma scura">
+      <div class="firma-nome">Ciro Pizzo</div>
+      <div class="firma-photo">art</div>
+      <div class="firma-sotto" data-t="firma_sotto"></div>
+    </div>
+    <!-- l'obiettivo: il diaframma si apre e si entra -->
+    <button type="button" class="obiettivo" id="obiettivo" data-azione="entra" data-t-aria="entra">
+      <svg class="obiettivo-anello" viewBox="0 0 300 300" aria-hidden="true">
+        <defs><path id="giro" d="M150,150 m-128,0 a128,128 0 1,1 256,0 a128,128 0 1,1 -256,0"/></defs>
+        <text><textPath href="#giro" startOffset="0">CIRO PIZZO · 50 mm 1:1.4 · 2D · 3D · 4D · 5D · ∞ ·</textPath></text>
+      </svg>
+      <span class="obiettivo-vetro" aria-hidden="true">
+        <svg class="tela-obiettivo" viewBox="-78 -78 356 356" aria-hidden="true">
+          <defs>
+            <filter id="tl-tela"><feTurbulence type="fractalNoise" baseFrequency=".9 .08" numOctaves="2" seed="5"/><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .47  0 0 0 0 .36  0 0 0 .28 0"/></filter>
+            <filter id="tl-pennello" x="-5%" y="-5%" width="110%" height="110%">
+              <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="7" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3"/>
+            </filter>
+            <filter id="tl-swash" x="-10%" y="-40%" width="120%" height="180%">
+              <feTurbulence type="fractalNoise" baseFrequency=".012 .22" numOctaves="3" seed="3" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="9"/>
+            </filter>
+            <filter id="tl-sfuma"><feGaussianBlur stdDeviation="3"/></filter>
+            <clipPath id="tl-gamba"><path d="M-12,58 C20,50 56,56 86,72 C94,76 100,82 104,88 C116,106 134,126 150,140 C158,146 164,150 170,154 C180,160 190,170 198,182 C200,186 196,190 190,188 C180,184 170,178 160,172 C154,170 150,170 146,166 C142,160 140,156 136,154 C120,158 98,142 90,124 C86,118 82,114 78,112 C56,104 24,104 -12,108 Z"/></clipPath>
+            <linearGradient id="tl-pelle" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D2BA"/><stop offset=".5" stop-color="#E4AC8F"/><stop offset="1" stop-color="#B06C55"/></linearGradient>
+            <linearGradient id="tl-velo" x1="0" y1="0" x2=".3" y2="1"><stop offset="0" stop-color="#2A0E12" stop-opacity=".72"/><stop offset=".4" stop-color="#12050A" stop-opacity=".84"/><stop offset="1" stop-color="#050203" stop-opacity=".94"/></linearGradient>
+            <pattern id="tl-pizzo" width="6" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-62)">
+              <rect width="6" height="6" fill="#0A0405"/><circle cx="3" cy="6" r="2.9" fill="#0A0405"/><circle cx="3" cy="3" r=".9" fill="#E4AC8F"/>
+            </pattern>
+          </defs>
+          <!-- la parete dello studio e la luce che cade sul quadro -->
+          <radialGradient id="tl-parete" cx=".5" cy=".42" r=".7"><stop offset="0" stop-color="#4A1520"/><stop offset=".6" stop-color="#1E080C"/><stop offset="1" stop-color="#0A0304"/></radialGradient>
+          <linearGradient id="tl-oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6F5019"/><stop offset=".2" stop-color="#F3D98F"/><stop offset=".45" stop-color="#A8792A"/><stop offset=".65" stop-color="#F8E6A8"/><stop offset=".85" stop-color="#8A6424"/><stop offset="1" stop-color="#D9B866"/></linearGradient>
+          <rect x="-78" y="-78" width="356" height="356" fill="url(#tl-parete)"/>
+          <ellipse cx="100" cy="-40" rx="150" ry="90" fill="#F3D9A8" opacity=".08"/>
+          <rect x="-14" y="6" width="232" height="232" fill="#000" opacity=".45" filter="url(#tl-sfuma)"/>
+          <!-- la tela -->
+          <clipPath id="tl-quadro"><rect width="200" height="200"/></clipPath>
+          <g clip-path="url(#tl-quadro)">
+            <defs>
+              <radialGradient id="tq-sfondo" cx=".35" cy=".55" r=".85"><stop offset="0" stop-color="#B8202A"/><stop offset=".55" stop-color="#7E0F18"/><stop offset="1" stop-color="#3A0408"/></radialGradient>
+              <filter id="tq-bokeh" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5"/></filter>
+              <pattern id="tq-rete" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0,0 H6 M0,0 V6" stroke="#9C1E2A" stroke-width=".55" fill="none" opacity=".75"/></pattern>
+              <linearGradient id="tq-gamba" x1="0" x2="1"><stop offset="0" stop-color="#140306"/><stop offset=".55" stop-color="#2A0A0E"/><stop offset="1" stop-color="#0A0203"/></linearGradient>
+              <linearGradient id="tq-raso" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A0B12"/><stop offset=".45" stop-color="#120305"/><stop offset=".7" stop-color="#5E1820"/><stop offset="1" stop-color="#0A0203"/></linearGradient>
+              <clipPath id="tq-clip-gamba"><path d="M50,-4 C53,38 59,78 62,110 C63,122 62,132 59,142 C55,156 46,168 39,177 C34,183 30,188 35,192 C40,195 52,191 60,186 C72,170 88,150 104,138 C110,135 118,135 124,130 C130,124 128,114 120,108 C116,100 114,60 110,-4 Z"/></clipPath>
+            </defs>
+            <!-- fondo rosso, come la luce dello studio -->
+            <rect width="200" height="200" fill="url(#tq-sfondo)"/>
+            <path d="M0,150 C60,140 140,170 200,150 L200,200 L0,200 Z" fill="#5E0A12" opacity=".5"/>
+            <g filter="url(#tq-bokeh)" fill="#FF4A3A">
+              <circle cx="178" cy="12" r="9" opacity=".7"/><circle cx="192" cy="30" r="6" opacity=".55"/><circle cx="166" cy="30" r="5" opacity=".45"/><circle cx="186" cy="50" r="5" opacity=".4"/><circle cx="196" cy="6" r="7" opacity=".6"/>
+            </g>
+            <!-- la gamba in calza a rete -->
+            <path d="M50,-4 C53,38 59,78 62,110 C63,122 62,132 59,142 C55,156 46,168 39,177 C34,183 30,188 35,192 C40,195 52,191 60,186 C72,170 88,150 104,138 C110,135 118,135 124,130 C130,124 128,114 120,108 C116,100 114,60 110,-4 Z" fill="url(#tq-gamba)"/>
+            <g clip-path="url(#tq-clip-gamba)">
+              <rect width="200" height="200" fill="url(#tq-rete)"/>
+              <path d="M98,-4 C102,40 106,80 110,104" fill="none" stroke="#C03030" stroke-width="3" opacity=".35" stroke-linecap="round"/>
+              <path d="M56,10 C58,50 62,90 62,116" fill="none" stroke="#FF6A50" stroke-width="1.2" opacity=".35"/>
+            </g>
+            <!-- il sandalo: plateau, cinturino, tacco a spillo con il contorno d'oro -->
+            <g stroke="#E3B866" stroke-width="1.1" stroke-linejoin="round">
+              <path d="M28,186 C30,180 40,178 52,180 L74,184 C80,186 80,194 74,196 L36,198 C28,198 25,192 28,186 Z" fill="url(#tq-raso)"/>
+              <path d="M60,184 C76,166 92,148 110,138 C118,134 126,134 130,128 L134,130 C130,140 120,142 112,146 C96,156 82,172 72,186 Z" fill="url(#tq-raso)"/>
+              <path d="M118,104 C126,108 132,118 130,128 L124,132 C126,122 122,112 114,108 Z" fill="url(#tq-raso)"/>
+              <path d="M124,130 L132,128 C138,156 146,180 154,198 L150,199 C140,180 130,156 124,130 Z" fill="url(#tq-raso)"/>
+              <path d="M56,112 C76,108 98,104 118,100 L119,105 C98,109 77,113 57,117 Z" fill="#1A0508"/>
+              <path d="M36,172 C44,170 54,172 62,176 L60,180 C52,177 44,176 37,177 Z" fill="#1A0508"/>
+            </g>
+            <circle cx="117" cy="102.5" r="1.6" fill="#F3D98F"/>
+            <!-- riflessi sul raso -->
+            <path d="M84,164 C94,152 104,144 114,140" fill="none" stroke="#FFB0A0" stroke-width="1" opacity=".5"/>
+            <path d="M130,140 C136,160 142,178 149,194" fill="none" stroke="#FFD9A0" stroke-width=".6" opacity=".5"/>
+          </g>
+          <!-- cornice dorata -->
+          <rect x="-9" y="-9" width="218" height="218" fill="none" stroke="url(#tl-oro)" stroke-width="14"/>
+          <rect x="-1.5" y="-1.5" width="203" height="203" fill="none" stroke="#2E1F0B" stroke-width="3"/>
+          <rect x="-16" y="-16" width="232" height="232" fill="none" stroke="#4A3410" stroke-width="1"/>
+          <!-- la targhetta -->
+          <rect x="70" y="222" width="60" height="12" rx="2" fill="url(#tl-oro)"/>
+          <text x="100" y="230.5" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="7" font-style="italic" fill="#2A1A0E">Ciro Pizzo</text>
+        </svg>
+        <svg class="diaframma" id="diaframma-obiettivo" viewBox="-100 -100 200 200" aria-hidden="true">
+          <path class="lame" fill-rule="evenodd"/><path class="spigoli"/>
+        </svg>
+        <span class="riflesso"></span>
+      </span>
+    </button>
+    <button type="button" class="btn-scuro" data-azione="entra" data-t="entra"></button>
+  </div>
+
+  <!-- il viaggio dentro l'obiettivo: 2D → 5D -->
+  <div class="tunnel" id="tunnel" aria-hidden="true"></div>
+
+  <!-- il diaframma che chiude e riapre tra una camera e l'altra -->
+  <svg class="iride" id="iride" aria-hidden="true"><path class="lame" fill-rule="evenodd"/><path class="spigoli"/></svg>
+
+  <!-- grana della pellicola -->
+  <div class="grana" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       IL SIPARIO
+       ========================================================= -->
+  <div class="tenda sx" aria-hidden="true"></div>
+  <div class="tenda dx" aria-hidden="true"></div>
+  <div class="mantovana" aria-hidden="true"></div>
+  <div class="ingresso" id="ingresso">
+    <div class="firma chiara">
+      <div class="firma-nome">Ciro Pizzo</div>
+      <div class="firma-photo grande">art</div>
+      <div class="firma-sotto" data-t="firma_sotto"></div>
+    </div>
+    <button type="button" class="btn-scuro oro" data-azione="apri" data-t="apri_sipario"></button>
+  </div>
+
+  <!-- =========================================================
+       NAVIGAZIONE
+       ========================================================= -->
+  <div class="lingue" role="group" data-t-aria="lingua">
+    <button type="button" data-lingua="it" lang="it">IT</button><span aria-hidden="true">|</span><button type="button" data-lingua="en" lang="en">EN</button>
+  </div>
+  <a class="wa-fluttuante" id="wa-fluttuante" target="_blank" rel="noopener" data-t-aria="wa_fluttuante"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.4 18.6z"/><path d="M9.2 8.6c.3 2.6 2.4 4.9 5 5.4l1-1.2 1.9.9c-.2 1-1.1 1.6-2.1 1.5-3.6-.4-6.5-3.3-6.9-6.9-.1-1 .5-1.9 1.5-2.1l.9 1.9z"/></svg></a>
+  <header class="testata" id="testata">
+    <span class="logo">Ciro Pizzo <em>art</em></span>
+    <div class="testata-destra">
+      <button type="button" class="carrello-btn" data-azione="vai-shop" id="carrello-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><b id="carrello-n" hidden>0</b></button>
+      <button type="button" class="btn-linea" data-azione="esci" data-t="esci"></button>
+    </div>
+  </header>
+  <button type="button" class="scorri-giu" id="scorri-giu" data-azione="scorri-giu" hidden><span data-t="scorri"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  <nav class="navigazione" id="navigazione">
+    <button type="button" class="tondo" data-azione="prec" data-t-aria="prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="punti" id="punti"></div>
+    <span class="conta" id="conta"><em id="conta-nome"></em><small id="conta-num"></small></span>
+    <button type="button" class="tondo" data-azione="succ" data-t-aria="succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </nav>
+
+  <!-- Situazione sbloccata (juke-box) -->
+  <div class="foglio" id="foglio" hidden>
+    <div class="foglio-carta pop" role="dialog" aria-labelledby="foglio-titolo">
+      <div class="foglio-riga">
+        <span class="mini-maiusc" id="foglio-codice"></span>
+        <button type="button" class="tondo piccolo" data-azione="chiudi-foglio" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <h3 id="foglio-titolo"></h3>
+      <p id="foglio-testo"></p>
+      <div class="foglio-info"><span id="foglio-luce"></span><span id="foglio-camera"></span></div>
+      <div class="premio" id="foglio-premio" hidden></div>
+      <div class="bottoni">
+        <a class="btn-rosso" id="foglio-wa" target="_blank" rel="noopener" data-t="jb_prenota"></a>
+        <button type="button" class="btn-linea" data-azione="chiudi-foglio" data-t="jb_altro"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contatto: numero o email da copiare (quando i link diretti non sono disponibili) -->
+  <div class="foglio" id="contatto" hidden>
+    <div class="foglio-carta pop" role="dialog" aria-labelledby="contatto-titolo">
+      <div class="foglio-riga">
+        <h3 id="contatto-titolo"></h3>
+        <button type="button" class="tondo piccolo" data-azione="chiudi-contatto" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <p class="valore-copia" id="contatto-valore"></p>
+      <div class="bottoni">
+        <button type="button" class="btn-rosso" id="contatto-copia"></button>
+        <a class="btn-linea" id="contatto-apri" href="#"></a>
+      </div>
+      <span class="mini-maiusc" id="contatto-ok" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <!-- Quadro da vicino (galleria) -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true">
+    <button type="button" class="tondo chiudi" data-azione="chiudi-quadro" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="cornice grande pop" id="lb-cornice"><div class="cornice-labbro"><img id="lb-img" alt=""></div></div>
+    <div class="lb-didascalia"><div id="lb-titolo"></div><small id="lb-info"></small></div>
+    <a class="btn-social wa" id="lb-wa" target="_blank" rel="noopener" hidden></a>
+    <div class="bottoni">
+      <button type="button" class="tondo" data-azione="quadro-prec" data-t-aria="quadro_prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="tondo" data-azione="quadro-succ" data-t-aria="quadro_succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script src="js/testi.js"></script>
+<script src="js/contenuti.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
