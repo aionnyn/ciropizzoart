@@ -21,6 +21,8 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | IX | Shop | calendari, libro fotografico, stampe, dipinti, buoni: carrello e ordine su WhatsApp |
 | X | La Grotta | "Bellezza, magia e armonia" alle porte della Costiera Amalfitana: roccia, mare e cielo; contatti a icone e collaborazioni |
 
+In alto c’è il tasto **Menu**: apre una tendina con tutte le pagine, i contatti (WhatsApp, chiamata, email, Instagram) e la lingua.
+
 È un sito statico (HTML + CSS + JavaScript): niente da installare e niente database.
 
 ---

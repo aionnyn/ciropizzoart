@@ -207,8 +207,38 @@
     'chiudi-contatto': function () { chiudiContatto(); },
     'chiudi-quadro': function () { chiudiQuadro(); },
     'quadro-succ': function () { mostraQuadro(quadroAperto + 1); },
-    'quadro-prec': function () { mostraQuadro(quadroAperto - 1); }
+    'quadro-prec': function () { mostraQuadro(quadroAperto - 1); },
+    menu: function () { menuAperto ? chiudiMenu() : apriMenu(); }
   };
+  /* ---- menu a tendina: tutte le pagine, contatti e lingua in un posto ---- */
+  var menuAperto = false;
+  function disegnaMenu() {
+    var C = SITO.contatti || {}, ig = (C.instagram || '').replace(/^@/, '');
+    var voci = camere.map(function (c, k) {
+      var nome = t(c.dataset.nome).replace(/^[IVX]+ · /, '');
+      return '<button type="button" class="menu-voce" data-menu-camera="' + k + '"' + (k === stato.camera && stato.fase === 2 ? ' aria-current="true"' : '') + '><b>' + esc(c.dataset.num) + '</b><span>' + esc(nome) + '</span></button>';
+    }).join('');
+    $('#menu').innerHTML =
+      '<p class="menu-tit">' + esc(t('menu_camere')) + '</p><div class="menu-lista">' + voci + '</div>' +
+      '<p class="menu-tit">' + esc(t('menu_contatti')) + '</p><div class="menu-contatti">' +
+        '<a class="menu-chip" target="_blank" rel="noopener" href="' + esc(waLink(t('wa_testo'))) + '">WhatsApp</a>' +
+        '<button type="button" class="menu-chip" data-azione="contatto-tel">' + esc(t('menu_chiama')) + '</button>' +
+        '<button type="button" class="menu-chip" data-azione="contatto-mail">Email</button>' +
+        (ig ? '<a class="menu-chip" target="_blank" rel="noopener" href="https://instagram.com/' + encodeURIComponent(ig) + '">Instagram</a>' : '') +
+      '</div>' +
+      '<div class="menu-fondo"><span class="menu-lingue">' + esc(t('menu_lingua')) + ' <button type="button" data-lingua="it"' + (lingua === 'it' ? ' aria-pressed="true"' : '') + '>IT</button><button type="button" data-lingua="en"' + (lingua === 'en' ? ' aria-pressed="true"' : '') + '>EN</button></span>' +
+      '<button type="button" class="menu-esci" data-azione="esci">' + esc(t('menu_esci')) + '</button></div>';
+  }
+  function apriMenu() { disegnaMenu(); $('#menu').hidden = false; menuAperto = true; $('#menu-btn').setAttribute('aria-expanded', 'true'); }
+  function chiudiMenu() { $('#menu').hidden = true; menuAperto = false; $('#menu-btn').setAttribute('aria-expanded', 'false'); }
+  $('#menu').addEventListener('click', function (e) {
+    var v = e.target.closest('[data-menu-camera]');
+    if (v) { chiudiMenu(); vaiA(+v.dataset.menuCamera); return; }
+    if (e.target.closest('a,[data-azione]')) setTimeout(chiudiMenu, 0);
+    if (e.target.closest('[data-lingua]')) setTimeout(disegnaMenu, 0);
+  });
+  document.addEventListener('click', function (e) { if (menuAperto && !e.target.closest('#menu,#menu-btn')) chiudiMenu(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuAperto) chiudiMenu(); });
   scena.addEventListener('click', function (e) {
     var b = e.target.closest('[data-azione]');
     if (b && azioni[b.dataset.azione]) azioni[b.dataset.azione]();
@@ -848,12 +878,13 @@
     mescola(mazzoCarte);
     var foto = mescola((SITO.carte || []).map(function (c, k) { return k; }));
     var W = tavolo.clientWidth, H = tavolo.clientHeight, N = 5;
-    var cw = Math.min(96, (W - 40) / 5.6), ch = cw * 1.5;
-    var mx = 18, my = H / 2 - ch / 2;
+    var stretto = W < 560, cw = Math.min(124, (W - 30) / (stretto ? 4.6 : 5.6)), ch = cw * 1.5, passo = cw * (stretto ? .8 : .92) + 6;
+    var rT = tavolo.getBoundingClientRect(), rM = mazzo.getBoundingClientRect(), sc = rT.width / W || 1;
+    var mx = (rM.left - rT.left) / sc + (rM.width / sc - cw) / 2, my = (rM.top - rT.top) / sc + (rM.height / sc - ch) / 2, giu = stretto ? rM.height / sc * .45 : 0;
     setTimeout(function () {
       for (var i = 0; i < N; i++) (function (i) {
         var dati = mazzoCarte[i], f = (SITO.carte || [])[foto[i % Math.max(1, foto.length)]] || {};
-        var x = W / 2 - cw / 2 + (i - (N - 1) / 2) * (cw * .92 + 6), y = H / 2 - ch / 2 + Math.abs(i - 2) * 6, rot = (i - 2) * 5;
+        var x = W / 2 - cw / 2 + (i - (N - 1) / 2) * passo, y = H / 2 - ch / 2 + giu + Math.abs(i - 2) * 6, rot = (i - 2) * 5;
         var carta = el('button', { type: 'button', class: 'carta', 'aria-label': t('poker_aria', { carta: dati.v + dati.s.s }) });
         carta.style.cssText = 'width:' + cw + 'px;height:' + ch + 'px;left:' + mx + 'px;top:' + my + 'px';
         var faccia = f.foto ? '<img src="' + esc(f.foto) + '" alt="' + esc(f.titolo || '') + '">' : '<span class="carta-soon">' + esc(t('poker_soon')) + '</span>';
