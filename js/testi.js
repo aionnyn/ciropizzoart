@@ -49,7 +49,7 @@ window.TESTI = {
 
     /* I · boudoir */
     nome_boudoir: 'Boudoir',
-    boud_etichetta: 'I · Camera del Velluto',
+    boud_etichetta: 'III · Camera del Velluto',
     boud_sotto: 'Sfumature di Pizzo',
     vent_apri: 'Apri il ventaglio',
     vent_chiudi: 'Chiudi il ventaglio',
@@ -74,12 +74,12 @@ window.TESTI = {
     prom3: 'Nulla si pubblica senza il tuo sì',
 
     /* II · oro */
-    nome_oro: 'Camera dell’Oro',
+    nome_oro: 'I · Fotografia',
     oro_titolo: 'Ritratto d’autore',
     oro_testo: 'Cornici, stucchi, specchi antichi. Il ritratto come un quadro da museo: per te, per un brand, per un editoriale di moda.',
 
     /* III · verde */
-    nome_verde: 'Camera del Verde',
+    nome_verde: 'II · Pittura',
     verde_titolo: 'Pittura e arte',
     frase_pittura: 'Il pensiero disegna, la vita dipinge.',
     poker_titolo: 'Poker d’autore',
@@ -273,7 +273,7 @@ window.TESTI = {
     studio_cta: 'Come and see it',
 
     nome_boudoir: 'Boudoir',
-    boud_etichetta: 'I · The Velvet Room',
+    boud_etichetta: 'III · The Velvet Room',
     boud_sotto: 'Shades of Pizzo',
     vent_apri: 'Open the fan',
     vent_chiudi: 'Close the fan',
@@ -297,11 +297,11 @@ window.TESTI = {
     prom2: 'Your photos stay yours',
     prom3: 'Nothing is published without your yes',
 
-    nome_oro: 'The Golden Room',
+    nome_oro: 'I · Photography',
     oro_titolo: 'Fine portraiture',
     oro_testo: 'Frames, stucco, antique mirrors. The portrait as a museum painting: for you, for a brand, for a fashion editorial.',
 
-    nome_verde: 'The Green Room',
+    nome_verde: 'II · Painting',
     verde_titolo: 'Painting and art',
     frase_pittura: 'Thought draws, life paints.',
     poker_titolo: 'Poker of art',

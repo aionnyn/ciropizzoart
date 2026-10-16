@@ -132,8 +132,74 @@
     </div>
   </section>
 
-  <!-- I · BOUDOIR — la calza che si tira su -->
-  <section class="camera" data-id="boudoir" data-nome="nome_boudoir" data-num="I" data-sfondo="#7A1222" data-inchiostro="#F6E7D8" style="--accento:#E3B866">
+
+  <!-- I · FOTOGRAFIA — la macchina fotografica che scatta -->
+  <section class="camera arcata" data-id="oro" data-nome="nome_oro" data-num="I" data-sfondo="#C9A24B" data-inchiostro="#1E140C" style="--accento:#3A230F">
+    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="contenuto centro">
+      <div class="comp r1">
+        <span class="etichetta" data-t="nome_oro"></span>
+        <h2 class="titolo medio" data-t="oro_titolo"></h2>
+        <p class="firma-ritratto">Ciro Pizzo <em>photographer</em></p>
+      </div>
+      <div class="macchina comp r2">
+        <div class="macchina-tetto">
+          <span class="macchina-mirino" aria-hidden="true"></span>
+          <span class="macchina-flash" id="flash" aria-hidden="true"></span>
+          <button type="button" class="scatto" id="scatto" data-t-aria="scatta"><span></span></button>
+          <span class="fumetto-scatto" id="fumetto-scatto" aria-hidden="true" data-t="scatta_qui"></span>
+        </div>
+        <div class="macchina-corpo">
+          <span class="macchina-marchio" aria-hidden="true">CIRO PIZZO</span>
+          <span class="macchina-obiettivo" aria-hidden="true">
+            <svg class="diaframma" id="diaframma-macchina" viewBox="-100 -100 200 200"><path class="lame" fill-rule="evenodd"/><path class="spigoli"/></svg>
+            <span class="riflesso"></span>
+          </span>
+          <span class="macchina-dati" aria-hidden="true">1/125 · f/2.8</span>
+        </div>
+        <figure class="polaroid" id="polaroid" hidden>
+          <button type="button" class="polaroid-chiudi" id="polaroid-chiudi" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+          <span class="polaroid-foto"><img id="polaroid-img" alt=""></span>
+          <button type="button" class="polaroid-freccia sx" id="polaroid-prec" data-t-aria="quadro_prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="polaroid-freccia dx" id="polaroid-succ" data-t-aria="quadro_succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+          <figcaption id="polaroid-cap"></figcaption>
+        </figure>
+      </div>
+      <span class="suggerimento lampeggia" id="oro-hint" data-t="oro_hint"></span>
+      <p class="testo comp r3" data-t="oro_testo"></p>
+    </div>
+  </section>
+
+  <!-- II · PITTURA — tavolozza, pennello e pennellata che svela -->
+  <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="II" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
+    <div class="contenuto centro">
+      <span class="etichetta comp r1" data-t="nome_verde"></span>
+      <!-- la tela: si dipinge con il dito -->
+      <div class="tela-viva comp r1" id="tela-viva">
+        <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
+        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
+        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
+      </div>
+      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
+        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
+        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
+        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
+        <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
+      </div>
+      <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>
+      <!-- il poker d'autore -->
+      <div class="poker comp r3">
+        <h3 class="sotto-titolo" data-t="poker_titolo"></h3>
+        <div class="tavolo" id="tavolo">
+          <div class="mazzo" id="mazzo" aria-hidden="true"></div>
+        </div>
+        <button type="button" class="btn-oro" id="distribuisci"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- III · BOUDOIR — la calza che si tira su -->
+  <section class="camera" data-id="boudoir" data-nome="nome_boudoir" data-num="III" data-sfondo="#7A1222" data-inchiostro="#F6E7D8" style="--accento:#E3B866">
     <div class="contenuto centro">
       <div class="comp r1">
         <span class="etichetta" data-t="boud_etichetta"></span>
@@ -219,71 +285,6 @@
       <div class="svelato" id="calza-testo">
         <p class="testo" data-t="boud_testo"></p>
         <div class="promesse"><span data-t="prom1"></span><span data-t="prom2"></span><span data-t="prom3"></span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- II · ORO — la macchina fotografica che scatta -->
-  <section class="camera arcata" data-id="oro" data-nome="nome_oro" data-num="II" data-sfondo="#C9A24B" data-inchiostro="#1E140C" style="--accento:#3A230F">
-    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="contenuto centro">
-      <div class="comp r1">
-        <span class="etichetta" data-t="nome_oro"></span>
-        <h2 class="titolo medio" data-t="oro_titolo"></h2>
-        <p class="firma-ritratto">Ciro Pizzo <em>photographer</em></p>
-      </div>
-      <div class="macchina comp r2">
-        <div class="macchina-tetto">
-          <span class="macchina-mirino" aria-hidden="true"></span>
-          <span class="macchina-flash" id="flash" aria-hidden="true"></span>
-          <button type="button" class="scatto" id="scatto" data-t-aria="scatta"><span></span></button>
-          <span class="fumetto-scatto" id="fumetto-scatto" aria-hidden="true" data-t="scatta_qui"></span>
-        </div>
-        <div class="macchina-corpo">
-          <span class="macchina-marchio" aria-hidden="true">CIRO PIZZO</span>
-          <span class="macchina-obiettivo" aria-hidden="true">
-            <svg class="diaframma" id="diaframma-macchina" viewBox="-100 -100 200 200"><path class="lame" fill-rule="evenodd"/><path class="spigoli"/></svg>
-            <span class="riflesso"></span>
-          </span>
-          <span class="macchina-dati" aria-hidden="true">1/125 · f/2.8</span>
-        </div>
-        <figure class="polaroid" id="polaroid" hidden>
-          <button type="button" class="polaroid-chiudi" id="polaroid-chiudi" data-t-aria="chiudi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-          <span class="polaroid-foto"><img id="polaroid-img" alt=""></span>
-          <button type="button" class="polaroid-freccia sx" id="polaroid-prec" data-t-aria="quadro_prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="polaroid-freccia dx" id="polaroid-succ" data-t-aria="quadro_succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-          <figcaption id="polaroid-cap"></figcaption>
-        </figure>
-      </div>
-      <span class="suggerimento lampeggia" id="oro-hint" data-t="oro_hint"></span>
-      <p class="testo comp r3" data-t="oro_testo"></p>
-    </div>
-  </section>
-
-  <!-- III · VERDE — tavolozza, pennello e pennellata che svela -->
-  <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="III" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
-    <div class="contenuto centro">
-      <span class="etichetta comp r1" data-t="nome_verde"></span>
-      <!-- la tela: si dipinge con il dito -->
-      <div class="tela-viva comp r1" id="tela-viva">
-        <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
-        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
-        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
-      </div>
-      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
-        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
-        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
-        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
-        <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
-      </div>
-      <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>
-      <!-- il poker d'autore -->
-      <div class="poker comp r3">
-        <h3 class="sotto-titolo" data-t="poker_titolo"></h3>
-        <div class="tavolo" id="tavolo">
-          <div class="mazzo" id="mazzo" aria-hidden="true"></div>
-        </div>
-        <button type="button" class="btn-oro" id="distribuisci"></button>
       </div>
     </div>
   </section>

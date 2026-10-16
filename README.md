@@ -10,9 +10,9 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 |---|--------|--------------|
 | · | Benvenuto | presentazione |
 | ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box: moneta, dischi, 8 situazioni |
-| I | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza e appare il testo |
-| II | Ritratto d’autore (oro) | si preme lo scatto della macchina: flash, diaframma, esce una polaroid con un’opera della galleria |
-| III | Pittura e arte (panno verde da poker) | si dipinge con il dito sulla tela (rosso, verde, blu) e appare il titolo; poi il Poker d’autore con le carte dei nudi d’arte |
+| I | Fotografia · Ritratto d’autore (oro) | si preme lo scatto della macchina: flash, diaframma, esce una polaroid con un’opera della galleria |
+| II | Pittura e arte (panno verde da poker) | si dipinge con il dito sulla tela (rosso, verde, blu) e appare il titolo; poi il Poker d’autore con le carte dei nudi d’arte |
+| III | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza e appare il testo |
 | IV | Sacro e profano (nero) | si accende un cero e appare un ex-voto “Per grazia ricevuta” |
 | V | Galleria | i lavori in cornici dorate, da scorrere col dito |
 | VI | L’Oracolo di Eros | gioco con 3 domande sugli dèi greci del desiderio |
