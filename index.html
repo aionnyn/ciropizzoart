@@ -65,70 +65,40 @@
       <div class="comp r1">
         <span class="etichetta" data-t="studio_etichetta"></span>
         <h2 class="titolo medio" data-t="studio_titolo"></h2>
+        <p class="sottotitolo" data-t="mj_sotto"></p>
       </div>
-      <p class="testo comp r2" data-t="studio_testo"></p>
-
-      <div class="orologio comp r3" id="orologio" role="img" data-t-aria="orologio">
-        <span class="lancetta ore" id="lancetta-ore"></span>
-        <span class="lancetta minuti" id="lancetta-min"></span>
-        <span class="lancetta secondi" id="lancetta-sec"></span>
-        <span class="perno-orologio"></span>
-      </div>
-      <button type="button" class="btn-oro comp r3" id="ferma-tempo" aria-pressed="false"></button>
-      <div class="tempo-fermo-msg" id="tempo-msg" aria-live="polite">
-        <p class="motto" id="tempo-ora"></p>
-        <span class="mini-maiusc" data-t="fermo_sotto"></span>
-      </div>
-
-      <div class="capitoli">
-        <article class="capitolo">
-          <figure class="arco-foto"><img src="foto/studio/stile.jpg" alt="" loading="lazy"></figure>
-          <div class="capitolo-testo"><h3 data-t="cap_stile_t"></h3><p data-t="cap_stile"></p></div>
-        </article>
-        <article class="capitolo inverso">
-          <figure class="arco-foto"><img src="foto/studio/mistero.jpg" alt="" loading="lazy"></figure>
-          <div class="capitolo-testo"><h3 data-t="cap_mistero_t"></h3><p data-t="cap_mistero"></p></div>
-        </article>
-        <article class="capitolo">
-          <figure class="arco-foto"><img src="foto/studio/arte.jpg" alt="" loading="lazy"></figure>
-          <div class="capitolo-testo"><h3 data-t="cap_arte_t"></h3><p data-t="cap_arte"></p></div>
-        </article>
-      </div>
-      <!-- il juke-box dello studio -->
-  <div class="jukebox-zona">
-    <div class="comp r1">
-      <span class="etichetta" data-t="jb_etichetta"></span>
-      <h2 class="titolo medio" data-t="nome_jukebox"></h2>
-      <p class="sottotitolo" data-t="jb_sotto"></p>
-    </div>
-    <div class="jukebox comp r2">
-      <div class="jb-testata">
-        <div class="jb-barra"></div>
-        <div class="jb-pannello">
-          <div class="jb-display">
-            <span class="jb-mini">SELECTION PLAYING</span>
-            <div class="jb-cifre" id="jb-cifre"><span>–</span><span>–</span><span>–</span></div>
-            <span class="jb-msg lampeggia" id="jb-msg" aria-live="polite"></span>
+      <!-- il mega juke-box: ogni disco è una parte dello studio -->
+      <div class="megajb comp r2" id="megajb">
+        <div class="mj-testa">
+          <div class="mj-strisce" aria-hidden="true"></div>
+          <div class="mj-pannello">
+            <div class="mj-display">
+              <small>SELECTION PLAYING</small>
+              <div class="mj-cifre" id="mj-cifre" aria-live="polite"><span>–</span><span>–</span><span>–</span></div>
+              <span class="mj-msg" id="mj-msg"></span>
+            </div>
+            <div class="mj-tastiera" id="mj-tastiera" role="group" data-t-aria="mj_tastiera"></div>
+            <div class="mj-monete">
+              <small data-t="jb_monete"></small>
+              <span class="mj-fessura" id="mj-fessura" aria-hidden="true"></span>
+              <span class="mj-moneta" id="mj-moneta" aria-hidden="true">100</span>
+            </div>
           </div>
-          <div class="jb-tastiera" id="jb-tastiera"></div>
-          <div class="jb-monete">
-            <div class="jb-fessura-riga"><span class="jb-monete-lbl" data-t="jb_monete"></span><span class="jb-fessura" id="jb-fessura" aria-hidden="true"></span></div>
-            <span class="jb-mini" id="jb-credito"></span>
-            <button type="button" class="moneta" id="jb-moneta" data-t-aria="jb_moneta_aria">100<small data-t="jb_lire"></small></button>
+          <div class="mj-strisce" aria-hidden="true"></div>
+        </div>
+        <div class="mj-cupola">
+          <div class="mj-schermo" id="mj-schermo">
+            <img class="mj-foto" id="mj-foto-a" alt="">
+            <img class="mj-foto" id="mj-foto-b" alt="">
+            <div class="mj-vinile" id="mj-vinile" aria-hidden="true"><i></i></div>
+            <div class="mj-didascalia" id="mj-didascalia"><b id="mj-num"></b><strong id="mj-titolo"></strong><span id="mj-testo"></span></div>
           </div>
         </div>
-        <div class="jb-barra"></div>
+        <div class="mj-vetro"><div class="mj-titoli" id="mj-titoli"></div></div>
+        <div class="mj-fronte" id="mj-fronte"><span class="mj-marchio">Ciro Pizzo <em>art</em></span></div>
+        <div class="mj-base" aria-hidden="true"></div>
       </div>
-      <div class="jb-griglia"><span class="jb-targa">CIRO PIZZO</span></div>
-      <div class="jb-vetrina"><div class="jb-dischi" id="jb-dischi"></div></div>
-      <div class="jb-fronte" id="jb-fronte"></div>
-    </div>
-    <div class="jb-progresso comp r3">
-      <div class="pallini" id="jb-pallini"></div>
-      <span class="mini-maiusc"><span data-t="jb_sbloccate"></span> <b id="jb-conta">0</b> / <span id="jb-totale">8</span></span>
-    </div>
-  </div>
-      <button type="button" class="btn-rosso" data-azione="prenota" data-t="studio_cta"></button>
+      <button type="button" class="btn-rosso comp r3" data-azione="prenota" data-t="studio_cta"></button>
     </div>
   </section>
 

@@ -192,6 +192,23 @@ window.SITO = {
   /* ---------- L'ORACOLO DI EROS ----------
      Ogni risposta assegna un punto a una divinità: A, D, E, P.
      "camera" = la camera dove porta il risultato (non tradurre). */
+  /* ---------- LO STUDIO nel juke-box: un disco per ogni parte dello studio ----------
+     Numero = 101, 102, ... nell'ordine dell'elenco. foto = immagine (orizzontale va benissimo). */
+  studio: [
+    { foto: 'foto/studio/mistero.jpg',  titolo: 'Il sipario',  testo: 'Velluto rosso e oro: qui comincia ogni servizio, come a teatro.',
+      en: { titolo: 'The curtain', testo: 'Red velvet and gold: every session begins here, as in a theatre.' } },
+    { foto: 'foto/studio/stile.jpg',    titolo: 'Il salotto',  testo: 'Poltrone in pelle, cornici antiche, luce calda: dove ci si conosce davanti a un caffè.',
+      en: { titolo: 'The parlour', testo: 'Leather armchairs, antique frames, warm light: where we meet over a coffee.' } },
+    { foto: 'foto/galleria/set.jpg',    titolo: 'Il set',      testo: 'Il fondale, le luci, il silenzio: lo spazio dove nasce lo scatto.',
+      en: { titolo: 'The set', testo: 'The backdrop, the lights, the silence: the space where the shot is born.' } },
+    { foto: 'foto/galleria/loggia.jpg', titolo: 'La loggia',   testo: 'La balconata sospesa sopra lo studio, tra stucchi dorati e tende rosse.',
+      en: { titolo: 'The loggia', testo: 'The balcony suspended above the studio, among gilded stucco and red curtains.' } },
+    { foto: 'foto/studio/arte.jpg',     titolo: 'Il portale',  testo: 'Un portale di pietra antica incastonato nel tufo, acceso dal basso.',
+      en: { titolo: 'The portal', testo: 'An ancient stone portal set into the tufa, lit from below.' } },
+    { foto: 'foto/galleria/jukebox.jpg', titolo: 'La sala',    testo: 'Lo studio visto dall’alto: un salotto d’altri tempi sotto le volte di tufo.',
+      en: { titolo: 'The hall', testo: 'The studio from above: a parlour from another time beneath the tufa vaults.' } }
+  ],
+
   /* ---------- PENSIERI: il blog di Ciro ----------
      Ogni articolo: gruppo ('maestri' o 'spirito', decide il filtro), titolo, tema (la riga piccola sopra), minuti di lettura e testo
      (un paragrafo per riga dell'elenco). La versione inglese va in en: { ... }.

@@ -9,7 +9,7 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | # | Pagina | Cosa succede |
 |---|--------|--------------|
 | · | Benvenuto | presentazione |
-| ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box |
+| ∞ | Lo Studio | un mega juke-box: la moneta entra da sola, si tocca un titolo o si digita 101–106 e sullo schermo compare quella parte dello studio |
 | | **Le arti di Ciro** | |
 | I | Fotografia e ritratto | si preme lo scatto: flash, esce una polaroid |
 | II | Boudoir · Sfumature di Pizzo | la mano dalle unghie rosse tira su la calza |
@@ -111,7 +111,11 @@ Il carrello resta salvato sul telefono del visitatore. **Ordina su WhatsApp** ma
 
 Le carte sono in `js/contenuti.js` → `carte` (12 caselle). Metti le foto di nudo artistico di Ciro in `foto/carte/` (JPG verticale 2:3) e scrivi il percorso in `foto`. Finché `foto` è vuoto la carta mostra "Coming soon". Valori e semi delle carte escono a caso a ogni mescolata.
 
-## Juke-box, ex-voto, oracolo
+## Lo Studio nel juke-box
+
+I dischi sono in `js/contenuti.js` → `studio`: ogni riga è una parte dello studio con `foto`, `titolo` e `testo` (e la versione inglese in `en`). Il primo è il 101, il secondo il 102 e così via. Per cambiare una foto basta mettere il nuovo file e scrivere il percorso.
+
+## Ex-voto
 
 Sono tutti in `js/contenuti.js`: `situazioni` (8 dischi, dal 101 al 108), `premioJukebox`, `grazie` e `oracolo`.
 
