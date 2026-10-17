@@ -9,26 +9,31 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | # | Pagina | Cosa succede |
 |---|--------|--------------|
 | · | Benvenuto | presentazione |
-| ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box: moneta, dischi, 8 situazioni |
+| ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box |
 | | **Le arti di Ciro** | |
-| I | Fotografia e ritratto (oro) | si preme lo scatto della macchina: flash, esce una polaroid con un’opera della galleria |
-| II | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza |
-| III | Pittura (panno verde) | si dipinge con il dito sulla tela (rosso, verde, blu) e appare il titolo |
-| IV | Galleria | i lavori in cornici dorate, da scorrere col dito |
-| | **Giochi** | |
-| V | Poker d’autore | tavolo verde a schermo intero: si mescola, escono 5 carte grandi con i nudi d’arte; toccando una carta si ingrandisce |
-| VI | Sacro e profano (nero) | si accende un cero e appare un ex-voto “Per grazia ricevuta” |
-| VII | L’Oracolo di Eros | gioco con 3 domande sugli dèi greci del desiderio |
-| | **Prenota e acquista** | |
-| VIII | Pacchetti e regali | tre pacchetti (Velluto, Oro, Sipario) e il buono regalo |
-| IX | La prima volta | come funziona in 4 passi e domande frequenti |
-| X | Shop | calendari, libro fotografico, stampe, dipinti, buoni: carrello e ordine su WhatsApp |
+| I | Fotografia e ritratto | si preme lo scatto: flash, esce una polaroid |
+| II | Boudoir · Sfumature di Pizzo | la mano dalle unghie rosse tira su la calza |
+| III | Pittura | si dipinge con il dito sulla tela |
+| IV | Galleria | i lavori in cornici dorate |
+| | **Esperienze** | |
+| V | Poker d’autore | tavolo verde a schermo intero, 5 carte grandi con i nudi d’arte; toccando una carta si ingrandisce |
+| VI | Sacro e profano | si accende un cero e appare un ex-voto |
+| | **Il blog** | |
+| VII | Pensieri | articoli di Ciro (Jung, Gurdjieff, Saint-Germain, alchimia): si aprono a tutta pagina |
+| | **Prenota** | |
+| VIII | Pacchetti e regali | tre pacchetti e il buono regalo |
+| IX | La prima volta | come funziona e domande frequenti |
 | | **Contatti** | |
-| XI | La Grotta | "Bellezza, magia e armonia" alle porte della Costiera Amalfitana; contatti e collaborazioni |
+| X | Contatti (la Grotta) | mare, cielo e roccia; contatti e collaborazioni |
+| — | **Shop** (pagina a parte, senza numero) | si apre dal carrello in alto o dal Menu: calendari, libro, stampe, dipinti, buoni |
 
-Per cambiare l’ordine basta spostare le `<section>` in `index.html` e cambiare `data-num` (il numero romano) e `data-gruppo` (`inizio`, `arti`, `giochi`, `acquista`, `contatti`): i numeri nelle etichette e il menu si aggiornano da soli.
+Il tasto **Menu** apre una pagina intera con tutte le sezioni divise per gruppi, lo Shop, il tasto "Prenota una sessione", indirizzo, telefono, email, Instagram e la lingua.
 
-In alto c’è il tasto **Menu**: apre una tendina con tutte le pagine, i contatti (WhatsApp, chiamata, email, Instagram) e la lingua.
+## Pensieri (il blog)
+
+Gli articoli sono in `js/contenuti.js` → `pensieri`. Per aggiungerne uno copia un blocco `{ ... }` e cambia `tema` (la riga piccola sopra il titolo), `titolo`, `minuti` e `testo` (un paragrafo per riga). La traduzione inglese va in `en: { ... }`. Il primo dell’elenco compare per primo. ★ I quattro articoli attuali sono bozze da far rivedere a Ciro.
+
+Per cambiare l’ordine basta spostare le `<section>` in `index.html` e cambiare `data-num` (il numero romano) e `data-gruppo` (`inizio`, `arti`, `esperienze`, `pensieri`, `servizi`, `contatti`); con `data-fuori="1"` una pagina resta fuori dal percorso numerato, come lo Shop: i numeri nelle etichette e il menu si aggiornano da soli.
 
 È un sito statico (HTML + CSS + JavaScript): niente da installare e niente database.
 

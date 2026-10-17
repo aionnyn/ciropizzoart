@@ -292,7 +292,7 @@
   </section>
 
   <!-- POKER D'AUTORE — tavolo verde a schermo intero -->
-  <section class="camera feltro pagina-poker" data-id="poker" data-nome="nome_poker" data-num="V" data-gruppo="giochi" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
+  <section class="camera feltro pagina-poker" data-id="poker" data-nome="nome_poker" data-num="V" data-gruppo="esperienze" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
     <div class="contenuto centro poker">
       <span class="etichetta comp r1" data-t="poker_etichetta"></span>
       <h2 class="sotto-titolo comp r1" data-t="poker_titolo"></h2>
@@ -306,7 +306,7 @@
   </section>
 
   <!-- SACRO E PROFANO — ex-voto -->
-  <section class="camera" data-id="sacro" data-nome="nome_sacro" data-num="VI" data-gruppo="giochi" data-sfondo="#0E0A09" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <section class="camera" data-id="sacro" data-nome="nome_sacro" data-num="VI" data-gruppo="esperienze" data-sfondo="#0E0A09" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro">
       <div class="comp r1">
         <span class="etichetta" data-t="sacro_etichetta"></span>
@@ -326,17 +326,21 @@
     </div>
   </section>
 
-  <!-- L'ORACOLO DI EROS -->
-  <section class="camera oracolo" data-id="oracolo" data-nome="nome_oracolo" data-num="VII" data-gruppo="giochi" data-sfondo="#C4683A" data-inchiostro="#1A0F0A" style="--accento:#1A0F0A">
-    <div class="contenuto centro">
-      <div class="greca comp r1" aria-hidden="true"></div>
-      <div id="oracolo"></div>
-      <div class="greca comp r1" aria-hidden="true"></div>
+  <!-- PENSIERI — il blog di Ciro -->
+  <section class="camera pensieri" data-id="pensieri" data-nome="nome_pensieri" data-num="VII" data-gruppo="pensieri" data-sfondo="#100C0A" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="contenuto">
+      <div class="pensieri-testa comp r1">
+        <span class="etichetta" data-t="pens_etichetta"></span>
+        <h2 class="titolo grande" data-t="pens_titolo"></h2>
+        <p class="pens-sotto" data-t="pens_sotto"></p>
+        <span class="filetto" aria-hidden="true"></span>
+      </div>
+      <div class="pens-lista comp r2" id="pens-lista"></div>
     </div>
   </section>
 
   <!-- PACCHETTI E REGALI — busta di ceralacca -->
-  <section class="camera" data-id="regalo" data-nome="nome_regalo" data-num="VIII" data-gruppo="acquista" data-sfondo="#3D0C17" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <section class="camera" data-id="regalo" data-nome="nome_regalo" data-num="VIII" data-gruppo="servizi" data-sfondo="#3D0C17" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="regalo_etichetta"></span>
@@ -365,7 +369,7 @@
   </section>
 
   <!-- LA PRIMA VOLTA — come funziona e domande -->
-  <section class="camera" data-id="prima" data-nome="nome_prima" data-num="IX" data-gruppo="acquista" data-sfondo="#16100D" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <section class="camera" data-id="prima" data-nome="nome_prima" data-num="IX" data-gruppo="servizi" data-sfondo="#16100D" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="prima_etichetta"></span>
@@ -386,8 +390,28 @@
     </div>
   </section>
 
+
+  <!-- LA GROTTA — contatti -->
+  <section class="camera arcata grotta" data-id="grotta" data-nome="nome_grotta" data-num="X" data-gruppo="contatti" data-sfondo="#081420" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="contenuto centro">
+      <span class="numero comp r1">X</span>
+      <span class="etichetta comp r1" data-t="nome_grotta"></span>
+      <h2 class="titolo comp r2" data-t="grotta_titolo"></h2>
+      <p class="testo comp r3" data-t="grotta_testo"></p>
+      <h3 class="sotto-titolo comp r4" data-t="contatti_titolo"></h3>
+      <div class="contatti comp r4" id="contatti"></div>
+      <div class="collab comp r4">
+        <h3 class="sotto-titolo" data-t="collab_titolo"></h3>
+        <p class="testo tenue" data-t="collab_testo"></p>
+        <div class="filtri" id="collab"></div>
+      </div>
+      <p class="motto comp r4" data-t="motto"></p>
+    </div>
+  </section>
+
   <!-- SHOP — calendari, libro, stampe, quadri, buoni -->
-  <section class="camera" data-id="shop" data-nome="nome_shop" data-num="X" data-gruppo="acquista" data-sfondo="#140A0C" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <section class="camera" data-id="shop" data-nome="nome_shop" data-num="" data-gruppo="shop" data-fuori="1" data-sfondo="#140A0C" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="shop_etichetta"></span>
@@ -406,25 +430,6 @@
         </div>
         <p class="nota" data-t="spedizione"></p>
       </div>
-    </div>
-  </section>
-
-  <!-- LA GROTTA — contatti -->
-  <section class="camera arcata grotta" data-id="grotta" data-nome="nome_grotta" data-num="XI" data-gruppo="contatti" data-sfondo="#081420" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
-    <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="contenuto centro">
-      <span class="numero comp r1">X</span>
-      <span class="etichetta comp r1" data-t="nome_grotta"></span>
-      <h2 class="titolo comp r2" data-t="grotta_titolo"></h2>
-      <p class="testo comp r3" data-t="grotta_testo"></p>
-      <h3 class="sotto-titolo comp r4" data-t="contatti_titolo"></h3>
-      <div class="contatti comp r4" id="contatti"></div>
-      <div class="collab comp r4">
-        <h3 class="sotto-titolo" data-t="collab_titolo"></h3>
-        <p class="testo tenue" data-t="collab_testo"></p>
-        <div class="filtri" id="collab"></div>
-      </div>
-      <p class="motto comp r4" data-t="motto"></p>
     </div>
   </section>
 
@@ -564,7 +569,8 @@
       <button type="button" class="btn-linea" data-azione="esci" data-t="esci"></button>
     </div>
   </header>
-  <div class="menu-tendina" id="menu" hidden></div>
+  <div class="menu-tendina" id="menu" hidden role="dialog" aria-modal="true"></div>
+  <article class="lettura" id="lettura" hidden aria-live="polite"></article>
   <button type="button" class="scorri-giu" id="scorri-giu" data-azione="scorri-giu" hidden><span data-t="scorri"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   <nav class="navigazione" id="navigazione">
     <button type="button" class="tondo" data-azione="prec" data-t-aria="prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>

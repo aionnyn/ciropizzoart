@@ -730,35 +730,6 @@ button.btn-social:hover{transform:translateY(-2px)}
 .camera.feltro .poker{margin-top:24px}
 .camera.feltro .tavolo{background:radial-gradient(ellipse at 50% 40%,#3A8256 0%,#276140 55%,#174029 100%)}
 
-/* =============================================================
-   MENU A TENDINA
-   ============================================================= */
-.menu-btn{height:44px;display:inline-flex;align-items:center;gap:8px;padding:0 16px 0 12px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
-.menu-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
-.menu-btn[aria-expanded="true"]{background:rgba(217,184,102,.18)}
-.menu-tendina{position:absolute;z-index:38;top:70px;right:clamp(12px,4vw,56px);width:min(360px,calc(100% - 24px));max-height:calc(100% - 96px);overflow-y:auto;
-  padding:18px 16px 16px;border-radius:22px;background:rgba(18,11,10,.97);border:1px solid rgba(217,184,102,.55);color:#F3EBDA;
-  box-shadow:0 24px 60px rgba(0,0,0,.55);animation:menuGiu .28s cubic-bezier(.2,.8,.2,1)}
-.menu-tendina[hidden]{display:none}
-@keyframes menuGiu{from{opacity:0;transform:translateY(-10px)}}
-.menu-tit{margin:0 4px 8px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#D9B866}
-.menu-tit:not(:first-child){margin-top:18px}
-.menu-lista{display:flex;flex-direction:column;gap:2px}
-.menu-voce{display:flex;align-items:center;gap:12px;min-height:44px;padding:0 10px;border:none;border-radius:14px;background:transparent;color:inherit;cursor:pointer;text-align:left;font-family:var(--serif);font-size:18px}
-.menu-voce b{min-width:34px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;border:1px solid rgba(217,184,102,.5);color:#D9B866;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.08em}
-.menu-voce:hover,.menu-voce:focus-visible{background:rgba(217,184,102,.12)}
-.menu-voce[aria-current="true"]{background:rgba(200,16,46,.28)}
-.menu-voce[aria-current="true"] b{background:#D9B866;color:#140C0B;border-color:#D9B866}
-.menu-contatti{display:flex;flex-wrap:wrap;gap:8px}
-.menu-chip{min-height:40px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;border:1px solid rgba(243,235,218,.4);background:transparent;color:inherit;cursor:pointer;font-size:12px;letter-spacing:.12em;text-decoration:none}
-.menu-chip:first-child{border-color:#2E8B57;background:rgba(46,139,87,.25)}
-.menu-fondo{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid rgba(217,184,102,.25)}
-.menu-lingue{display:inline-flex;align-items:center;gap:4px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#D9B866}
-.menu-lingue button{min-width:40px;height:36px;border-radius:999px;border:1px solid transparent;background:transparent;color:#F3EBDA;opacity:.6;cursor:pointer;font-size:11px;letter-spacing:.16em}
-.menu-lingue button[aria-pressed="true"]{opacity:1;border-color:#D9B866}
-.menu-esci{min-height:36px;padding:0 4px;border:none;background:transparent;color:#F3EBDA;opacity:.75;cursor:pointer;font-size:11px;letter-spacing:.14em;text-decoration:underline;text-underline-offset:4px}
-@media (max-width:420px){.testata .btn-linea{display:none}.menu-btn{padding:0 12px}.logo{letter-spacing:.2em}}
-
 /* poker più grande */
 .poker{max-width:900px}
 .tavolo{height:clamp(320px,52vw,470px)}
@@ -821,3 +792,94 @@ button.btn-social:hover{transform:translateY(-2px)}
 .carta-grande .ang.alto{left:5%;top:2.5%}.carta-grande .ang.basso{right:5%;bottom:2.5%}
 .carta-grande .carta-soon{font-size:30px}
 .carta-zoom p{margin:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#E3C377}
+
+/* =============================================================
+   MENU — schermo intero, nero e oro
+   ============================================================= */
+.menu-btn{height:44px;display:inline-flex;align-items:center;gap:10px;padding:0 18px 0 14px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;font-size:11px;letter-spacing:.3em;text-transform:uppercase}
+.menu-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+.menu-tendina{position:absolute;inset:0;z-index:45;overflow-y:auto;color:#F3EBDA;
+  background:radial-gradient(ellipse at 80% 0%,rgba(122,18,34,.35),transparent 55%),radial-gradient(ellipse at 0% 100%,rgba(201,162,75,.12),transparent 50%),#0B0807;
+  animation:menuApri .5s cubic-bezier(.2,.8,.2,1)}
+.menu-tendina[hidden]{display:none}
+@keyframes menuApri{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
+.menu-cima{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,72px);background:linear-gradient(#0B0807 70%,transparent)}
+.menu-firma{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:#D9B866}
+.menu-firma em{font-family:var(--serif);font-size:22px;letter-spacing:.02em;text-transform:none;color:#F0D58C}
+.menu-x{width:48px;height:48px;border-radius:50%;border:1px solid rgba(217,184,102,.6);background:transparent;color:#F0D58C;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .4s ease}
+.menu-x:hover{transform:rotate(90deg)}
+.menu-x svg{width:20px;height:20px;stroke-width:1.2}
+.menu-corpo{display:grid;grid-template-columns:1fr;gap:36px;padding:8px clamp(20px,5vw,72px) 48px;max-width:1280px;margin:0 auto}
+@media (min-width:960px){.menu-corpo{grid-template-columns:1.6fr 1fr;gap:72px;padding-top:24px}}
+.menu-voci{display:grid;grid-template-columns:1fr;gap:26px 48px}
+@media (min-width:700px){.menu-voci{grid-template-columns:1fr 1fr}}
+.menu-gruppo{display:flex;flex-direction:column}
+.menu-tit{margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid rgba(217,184,102,.22);font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:#B8975A}
+.menu-voce{display:flex;align-items:baseline;gap:16px;min-height:48px;padding:6px 0;border:none;background:transparent;color:inherit;cursor:pointer;text-align:left;
+  font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.15;transition:color .3s ease,transform .4s cubic-bezier(.2,.8,.2,1)}
+.menu-voce b{min-width:38px;font-family:var(--serif);font-style:italic;font-weight:400;font-size:15px;color:#B8975A}
+.menu-voce span{background:linear-gradient(#D9B866,#D9B866) 0 100%/0 1px no-repeat;transition:background-size .5s ease}
+.menu-voce:hover,.menu-voce:focus-visible{color:#F0D58C;transform:translateX(6px)}
+.menu-voce:hover span,.menu-voce:focus-visible span{background-size:100% 1px}
+.menu-voce[aria-current="true"]{color:#F0D58C}
+.menu-voce[aria-current="true"] span{font-style:italic;background-size:100% 1px}
+.menu-lato{display:flex;flex-direction:column;gap:22px}
+.menu-shop{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:22px 26px;border-radius:22px;border:1px solid rgba(217,184,102,.45);background:linear-gradient(135deg,rgba(201,162,75,.14),rgba(122,18,34,.18));color:inherit;cursor:pointer;text-align:left;transition:border-color .3s ease}
+.menu-shop:hover{border-color:#F0D58C}
+.menu-shop .menu-tit{border:none;padding:0;margin:0}
+.menu-shop strong{font-family:var(--serif);font-weight:400;font-size:40px;line-height:1;color:#F0D58C}
+.menu-shop small{font-size:13px;letter-spacing:.06em;opacity:.75}
+.menu-prenota{display:flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;background:#C9A24B;color:#0B0807;text-decoration:none;font-size:12px;font-weight:400;letter-spacing:.32em;text-transform:uppercase;transition:background .3s ease}
+.menu-prenota:hover{background:#F0D58C;color:#0B0807}
+.menu-recapiti{display:flex;flex-direction:column;gap:8px}
+.menu-recapiti a,.menu-recapiti button{align-self:flex-start;padding:2px 0;border:none;background:transparent;color:#CFC3AC;cursor:pointer;text-decoration:none;font-size:15px;letter-spacing:.03em;text-align:left}
+.menu-recapiti a:hover,.menu-recapiti button:hover{color:#F0D58C}
+.menu-fondo{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid rgba(217,184,102,.22)}
+.menu-lingue{display:inline-flex;gap:4px}
+.menu-lingue button{min-width:44px;height:36px;border-radius:999px;border:1px solid transparent;background:transparent;color:#F3EBDA;opacity:.55;cursor:pointer;font-size:11px;letter-spacing:.2em}
+.menu-lingue button[aria-pressed="true"]{opacity:1;border-color:#B8975A}
+.menu-esci{min-height:36px;padding:0;border:none;background:transparent;color:#CFC3AC;cursor:pointer;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.menu-esci:hover{color:#F0D58C}
+.menu-motto{margin:4px 0 0;font-family:var(--serif);font-style:italic;font-size:20px;color:#B8975A}
+@media (max-width:420px){.testata .btn-linea{display:none}.menu-btn{padding:0 14px 0 12px}.logo{letter-spacing:.2em}}
+
+/* =============================================================
+   VII · PENSIERI — il blog
+   ============================================================= */
+.pensieri .contenuto{max-width:880px;align-items:stretch;gap:34px}
+.pensieri-testa{text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
+.pens-sotto{margin:6px auto 0;max-width:560px;font-family:var(--serif);font-style:italic;font-size:clamp(19px,2vw,23px);line-height:1.45;color:#CFC3AC}
+.filetto{display:block;width:90px;height:1px;margin:14px auto 0;background:linear-gradient(90deg,transparent,#C9A24B,transparent)}
+.pens-lista{display:flex;flex-direction:column;border-top:1px solid rgba(217,184,102,.25)}
+.pens-voce{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px;padding:26px 4px;border:none;border-bottom:1px solid rgba(217,184,102,.25);background:transparent;color:inherit;cursor:pointer;text-align:left;transition:background .4s ease}
+.pens-voce:hover{background:linear-gradient(90deg,transparent,rgba(201,162,75,.07),transparent)}
+.pens-n{font-family:var(--serif);font-style:italic;font-size:clamp(30px,4vw,44px);color:#8E7340;line-height:1}
+.pens-corpo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pens-corpo small{font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#B8975A}
+.pens-corpo strong{font-family:var(--serif);font-weight:400;font-size:clamp(25px,3vw,34px);line-height:1.1;color:#F3EBDA}
+.pens-corpo em{font-style:normal;font-size:15px;line-height:1.55;color:#A99D88;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pens-leggi{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#D9B866;white-space:nowrap}
+.pens-leggi i{font-style:normal;display:inline-block;transition:transform .3s ease}
+.pens-voce:hover .pens-leggi i{transform:translateX(5px)}
+@media (max-width:600px){.pens-voce{grid-template-columns:auto 1fr;gap:14px;padding:22px 0}.pens-leggi{grid-column:2}}
+.lettura{position:absolute;inset:0;z-index:44;overflow-y:auto;background:#F4EEE2;color:#1E1712;animation:menuGiu .45s ease}
+@keyframes menuGiu{from{opacity:0;transform:translateY(-10px)}}
+.lettura-foglio{max-width:660px;margin:0 auto;padding:96px 24px 140px}
+.lettura-torna{min-height:44px;padding:0;border:none;background:transparent;color:#7A1222;cursor:pointer;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:28px}
+.lettura small{display:block;font-size:10px;letter-spacing:.36em;text-transform:uppercase;color:#8E7340}
+.lettura h3{margin:14px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,64px);line-height:1.02;color:#120D0B}
+.lettura .filetto{margin:24px 0 30px;width:120px;background:linear-gradient(90deg,#C9A24B,transparent)}
+.lettura p{margin:0 0 1.2em;font-family:var(--serif);font-size:clamp(20px,2.1vw,23px);line-height:1.65}
+.lettura p:first-of-type::first-letter{float:left;font-size:4.2em;line-height:.8;padding:6px 10px 0 0;color:#7A1222}
+.lettura-firma{margin-top:36px !important;font-style:italic;font-size:26px !important;color:#7A1222}
+.lettura .btn-linea{color:#120D0B;border-color:#120D0B}
+
+/* =============================================================
+   RIFINITURE — più sobrio, più prezioso
+   ============================================================= */
+.logo{font-size:11px;letter-spacing:.4em}
+.logo em{font-size:21px;color:var(--oro-chiaro)}
+.etichetta{font-size:11px;letter-spacing:.42em}
+.centro .etichetta::after,.pensieri-testa .etichetta::after{content:"";display:block;width:36px;height:1px;margin:12px auto 0;background:currentColor;opacity:.55}
+.testo{font-size:18px;line-height:1.75;letter-spacing:.01em}
+.navigazione .conta em{font-family:var(--serif)}

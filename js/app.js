@@ -52,14 +52,22 @@
   var stato = { fase: 0, camera: 0 }; // 0 sipario chiuso · 1 parete · 2 dentro
 
   /* ================= PERCORSO ================= */
+  // il percorso numerato: lo Shop (data-fuori) è una pagina a parte
+  var percorso = camere.map(function (c, k) { return k; }).filter(function (k) { return !camere[k].dataset.fuori; });
+  function passo(d) {
+    var p = percorso.indexOf(stato.camera);
+    if (p < 0) return d > 0 ? percorso[0] : percorso[percorso.length - 1];
+    return percorso[(p + d + percorso.length) % percorso.length];
+  }
   function aggiornaNav() {
-    var c = camere[stato.camera], n = camere.length;
-    $$('#punti button').forEach(function (b, k) {
+    var c = camere[stato.camera], p = percorso.indexOf(stato.camera);
+    $$('#punti button').forEach(function (b) {
+      var k = +b.dataset.k;
       b.setAttribute('aria-current', k === stato.camera ? 'true' : 'false');
       b.setAttribute('aria-label', t(camere[k].dataset.nome));
     });
     $('#conta-nome').textContent = t(c.dataset.nome);
-    $('#conta-num').textContent = (stato.camera + 1) + ' / ' + n;
+    $('#conta-num').textContent = p < 0 ? 'Ciro Pizzo art' : (p + 1) + ' / ' + percorso.length;
     $('#navigazione').setAttribute('aria-label', lingua === 'it' ? 'Camere' : 'Rooms');
   }
   /* ---- il diaframma: chiude, cambia camera, riapre ---- */
@@ -123,7 +131,7 @@
     scena.style.setProperty('--sfondo', c.dataset.sfondo);
     scena.style.setProperty('--inchiostro', c.dataset.inchiostro);
     aggiornaNav();
-    chiudiFoglio(); chiudiQuadro(); $('#carta-zoom').hidden = true;
+    chiudiFoglio(); chiudiQuadro(); $('#carta-zoom').hidden = true; if ($('#lettura')) $('#lettura').hidden = true;
     if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + c.dataset.id);
   }
   // nelle camere lunghe la freccia avanti prima scende a vedere il resto
@@ -190,15 +198,15 @@
   }
 
   var punti = $('#punti');
-  camere.forEach(function (c, k) {
-    punti.appendChild(el('button', { type: 'button', onclick: function () { vaiA(k); } }, esc(c.dataset.num)));
+  percorso.forEach(function (k) {
+    punti.appendChild(el('button', { type: 'button', 'data-k': k, onclick: function () { vaiA(k); } }, esc(camere[k].dataset.num)));
   });
 
   var azioni = {
     apri: apri, entra: entra, esci: esci,
-    succ: function () { if (!scorriCamera()) vaiA(stato.camera + 1); },
+    succ: function () { if (!scorriCamera()) vaiA(passo(1)); },
     'scorri-giu': function () { scorriCamera(); },
-    prec: function () { vaiA(stato.camera - 1); },
+    prec: function () { vaiA(passo(-1)); },
     'chiudi-foglio': function () { chiudiFoglio(); },
     prenota: function () { vaiAId('grotta'); },
     'vai-shop': function () { if (stato.fase === 2) vaiAId('shop'); else { stato.camera = camere.findIndex(function (c) { return c.dataset.id === 'shop'; }); entra(); } },
@@ -214,35 +222,44 @@
   var menuAperto = false;
   function disegnaMenu() {
     var C = SITO.contatti || {}, ig = (C.instagram || '').replace(/^@/, '');
-    var voci = '', gruppo = '';
+    var voci = '', gruppo = '', shopK = -1;
     camere.forEach(function (c, k) {
+      if (c.dataset.fuori) { shopK = k; return; }
       if (c.dataset.gruppo !== gruppo) {
-        voci += (gruppo ? '</div>' : '') + '<p class="menu-tit">' + esc(t('gruppo_' + c.dataset.gruppo)) + '</p><div class="menu-lista">';
+        voci += (gruppo ? '</div>' : '') + '<div class="menu-gruppo"><p class="menu-tit">' + esc(t('gruppo_' + c.dataset.gruppo)) + '</p>';
         gruppo = c.dataset.gruppo;
       }
       voci += '<button type="button" class="menu-voce" data-menu-camera="' + k + '"' + (k === stato.camera && stato.fase === 2 ? ' aria-current="true"' : '') + '><b>' + esc(c.dataset.num) + '</b><span>' + esc(t(c.dataset.nome)) + '</span></button>';
     });
     voci += '</div>';
-    $('#menu').innerHTML = voci +
-      '<p class="menu-tit">' + esc(t('menu_contatti')) + '</p><div class="menu-contatti">' +
-        '<a class="menu-chip" target="_blank" rel="noopener" href="' + esc(waLink(t('wa_testo'))) + '">WhatsApp</a>' +
-        '<button type="button" class="menu-chip" data-azione="contatto-tel">' + esc(t('menu_chiama')) + '</button>' +
-        '<button type="button" class="menu-chip" data-azione="contatto-mail">Email</button>' +
-        (ig ? '<a class="menu-chip" target="_blank" rel="noopener" href="https://instagram.com/' + encodeURIComponent(ig) + '">Instagram</a>' : '') +
-      '</div>' +
-      '<div class="menu-fondo"><span class="menu-lingue">' + esc(t('menu_lingua')) + ' <button type="button" data-lingua="it"' + (lingua === 'it' ? ' aria-pressed="true"' : '') + '>IT</button><button type="button" data-lingua="en"' + (lingua === 'en' ? ' aria-pressed="true"' : '') + '>EN</button></span>' +
-      '<button type="button" class="menu-esci" data-azione="esci">' + esc(t('menu_esci')) + '</button></div>';
+    var tel = (C.telefono || '').replace(/[^+\d]/g, '');
+    $('#menu').innerHTML =
+      '<div class="menu-cima"><span class="menu-firma">Ciro Pizzo <em>art</em></span>' +
+        '<button type="button" class="menu-x" data-azione="menu" aria-label="' + esc(t('menu_chiudi')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>' +
+      '<div class="menu-corpo"><nav class="menu-voci">' + voci + '</nav>' +
+      '<aside class="menu-lato">' +
+        (shopK >= 0 ? '<button type="button" class="menu-shop" data-menu-camera="' + shopK + '"><span class="menu-tit">' + esc(t('gruppo_shop')) + '</span><strong>Shop</strong><small>' + esc(t('menu_shop_sotto')) + '</small></button>' : '') +
+        '<a class="menu-prenota" target="_blank" rel="noopener" href="' + esc(waLink(t('wa_testo'))) + '">' + esc(t('menu_prenota')) + '</a>' +
+        '<div class="menu-recapiti">' +
+          (C.indirizzo ? '<a target="_blank" rel="noopener" href="https://maps.google.com/?q=' + encodeURIComponent(C.indirizzo) + '">' + esc(C.indirizzo) + '</a>' : '') +
+          (C.telefono ? '<button type="button" data-azione="contatto-tel">' + esc(C.telefono) + '</button>' : '') +
+          (C.email ? '<button type="button" data-azione="contatto-mail">' + esc(C.email) + '</button>' : '') +
+          (ig ? '<a target="_blank" rel="noopener" href="https://instagram.com/' + encodeURIComponent(ig) + '">@' + esc(ig) + '</a>' : '') +
+        '</div>' +
+        '<div class="menu-fondo"><span class="menu-lingue"><button type="button" data-lingua="it"' + (lingua === 'it' ? ' aria-pressed="true"' : '') + '>IT</button><button type="button" data-lingua="en"' + (lingua === 'en' ? ' aria-pressed="true"' : '') + '>EN</button></span>' +
+        '<button type="button" class="menu-esci" data-azione="esci">' + esc(t('menu_esci')) + '</button></div>' +
+        '<p class="menu-motto">' + esc(t('menu_motto')) + '</p>' +
+      '</aside></div>';
   }
   function apriMenu() { disegnaMenu(); $('#menu').hidden = false; menuAperto = true; $('#menu-btn').setAttribute('aria-expanded', 'true'); }
   function chiudiMenu() { $('#menu').hidden = true; menuAperto = false; $('#menu-btn').setAttribute('aria-expanded', 'false'); }
   $('#menu').addEventListener('click', function (e) {
     var v = e.target.closest('[data-menu-camera]');
     if (v) { chiudiMenu(); vaiA(+v.dataset.menuCamera); return; }
-    if (e.target.closest('a,[data-azione]')) setTimeout(chiudiMenu, 0);
+    if (e.target.closest('a,[data-azione]') && !e.target.closest('[data-azione=menu]')) setTimeout(chiudiMenu, 0);
     if (e.target.closest('[data-lingua]')) setTimeout(disegnaMenu, 0);
   });
-  document.addEventListener('click', function (e) { if (menuAperto && !e.target.closest('#menu,#menu-btn')) chiudiMenu(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menuAperto) chiudiMenu(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (menuAperto) chiudiMenu(); else if ($('#lettura') && !$('#lettura').hidden) { $('#lettura').hidden = true; pensAperto = -1; } } });
   scena.addEventListener('click', function (e) {
     var b = e.target.closest('[data-azione]');
     if (b && azioni[b.dataset.azione]) azioni[b.dataset.azione]();
@@ -266,8 +283,8 @@
     if (e.key === 'Escape' && !$('#foglio').hidden) { chiudiFoglio(); return; }
     if (e.key === 'Escape' && !$('#contatto').hidden) { chiudiContatto(); return; }
     if (stato.fase === 2) {
-      if (e.key === 'ArrowRight') vaiA(stato.camera + 1);
-      else if (e.key === 'ArrowLeft') vaiA(stato.camera - 1);
+      if (e.key === 'ArrowRight') vaiA(passo(1));
+      else if (e.key === 'ArrowLeft') vaiA(passo(-1));
     }
   });
 
@@ -616,6 +633,7 @@
   var box = $('#oracolo');
   var orc = { q: -1, punti: {}, ultima: 'E' };
   function disegnaOracolo() {
+    if (!box) return;
     var OR = blocco(SITO.oracolo) || { domande: [], risultati: {} };
     box.innerHTML = '';
     if (orc.q < 0) {
@@ -923,6 +941,37 @@
   }
   $('#carta-zoom').addEventListener('click', function () { this.hidden = true; });
 
+  /* ================= VII · PENSIERI (il blog) ================= */
+  var pensAperto = -1;
+  function disegnaPensieri() {
+    var L = (SITO.pensieri || []).map(loc), box = $('#pens-lista');
+    if (!box) return;
+    box.innerHTML = '';
+    L.forEach(function (p, k) {
+      box.appendChild(el('button', { type: 'button', class: 'pens-voce', onclick: function () { apriPensiero(k); } },
+        '<span class="pens-n">' + String(k + 1).padStart(2, '0') + '</span>' +
+        '<span class="pens-corpo"><small>' + esc(p.tema || '') + '</small><strong>' + esc(p.titolo) + '</strong>' +
+        '<em>' + esc(((p.testo || [])[0] || '').slice(0, 130)) + '…</em></span>' +
+        '<span class="pens-leggi">' + esc(t('pens_leggi')) + ' <i aria-hidden="true">→</i></span>'));
+    });
+    if (pensAperto >= 0) apriPensiero(pensAperto);
+  }
+  function apriPensiero(k) {
+    var p = loc((SITO.pensieri || [])[k]); if (!p) return;
+    pensAperto = k;
+    var l = $('#lettura');
+    l.innerHTML = '<div class="lettura-foglio">' +
+      '<button type="button" class="lettura-torna" data-azione="chiudi-pensiero">← ' + esc(t('pens_torna')) + '</button>' +
+      '<small>' + esc(p.tema || '') + (p.minuti ? ' · ' + esc(t('pens_min', { n: p.minuti })) : '') + '</small>' +
+      '<h3>' + esc(p.titolo) + '</h3><span class="filetto" aria-hidden="true"></span>' +
+      (p.testo || []).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') +
+      '<p class="lettura-firma">Ciro Pizzo</p>' +
+      '<a class="btn-linea" target="_blank" rel="noopener" href="' + esc(waLink(t('wa_testo'))) + '">' + esc(t('pens_prenota')) + '</a></div>';
+    l.hidden = false; l.scrollTop = 0;
+  }
+  function chiudiPensiero() { pensAperto = -1; $('#lettura').hidden = true; }
+  azioni['chiudi-pensiero'] = chiudiPensiero;
+
   /* ================= APPLICA LA LINGUA ================= */
   function impostaLingua(l) {
     if (l !== 'it' && l !== 'en') return;
@@ -952,7 +1001,7 @@
     disegnaJb(); disegnaFoglio();
     disegnaExvoto();
     disegnaFiltri(); disegnaGalleria(); if (quadroAperto >= 0) mostraQuadro(quadroAperto);
-    disegnaOracolo();
+    disegnaOracolo(); disegnaPensieri();
     disegnaTunnel();
     disegnaContatti(); if (contattoTipo) apriContatto(contattoTipo);
     disegnaVendita();

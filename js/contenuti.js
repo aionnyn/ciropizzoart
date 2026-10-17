@@ -192,6 +192,89 @@ window.SITO = {
   /* ---------- L'ORACOLO DI EROS ----------
      Ogni risposta assegna un punto a una divinità: A, D, E, P.
      "camera" = la camera dove porta il risultato (non tradurre). */
+  /* ---------- PENSIERI: il blog di Ciro ----------
+     Ogni articolo: titolo, tema (la riga piccola sopra), minuti di lettura e testo
+     (un paragrafo per riga dell'elenco). La versione inglese va in en: { ... }.
+     Il primo dell'elenco è il più recente. ★ Bozze da rivedere con Ciro. */
+  pensieri: [
+    {
+      tema: 'Carl Gustav Jung · L’Ombra', minuti: 3,
+      titolo: 'L’Ombra davanti all’obiettivo',
+      testo: [
+        'Jung chiamava Ombra la parte di noi che non vogliamo vedere: desideri, fragilità, forze che teniamo al buio perché non somigliano all’immagine che mostriamo al mondo.',
+        'Per lui la maturità non consiste nel cancellare l’Ombra, ma nell’integrarla. Diventare interi, non perfetti.',
+        'In studio succede qualcosa di simile. Un ritratto vero non elimina l’ombra: la illumina quanto basta perché diventi forma. Il boudoir, quando è arte e non costume, è proprio questo: una donna che smette di nascondere una parte di sé e scopre che quella parte è bella.',
+        'Io non fotografo la maschera. Aspetto il momento in cui cade.'
+      ],
+      en: {
+        tema: 'Carl Gustav Jung · The Shadow', titolo: 'The Shadow in front of the lens',
+        testo: [
+          'Jung called the Shadow the part of ourselves we would rather not see: desires, fragilities, forces we keep in the dark because they do not resemble the image we show the world.',
+          'For him, maturity does not mean erasing the Shadow but integrating it. Becoming whole, not perfect.',
+          'Something similar happens in the studio. A true portrait does not remove the shadow: it lights it just enough for it to take shape. Boudoir, when it is art and not costume, is exactly this: a woman who stops hiding part of herself and discovers that part is beautiful.',
+          'I do not photograph the mask. I wait for the moment it falls.'
+        ]
+      }
+    },
+    {
+      tema: 'G. I. Gurdjieff · Il ricordo di sé', minuti: 2,
+      titolo: 'Ricordarsi di essere qui',
+      testo: [
+        'Gurdjieff sosteneva che l’essere umano passa quasi tutta la vita in una specie di sonno: agisce, parla, reagisce, ma raramente si accorge di esserci. Chiamava “ricordo di sé” quei rari istanti di presenza piena.',
+        'Davanti alla macchina fotografica quasi tutti, all’inizio, recitano. Sorridono come hanno visto fare, si mettono in posa come pensano si debba. È il sonno di cui parlava Gurdjieff.',
+        'Poi, a un certo punto, qualcosa cambia. Lo sguardo si ferma, il respiro rallenta, la persona si ricorda di essere lì. È un attimo, e il mio lavoro è non perderlo.',
+        'Un buon ritratto è un istante di veglia.'
+      ],
+      en: {
+        tema: 'G. I. Gurdjieff · Self-remembering', titolo: 'Remembering to be here',
+        testo: [
+          'Gurdjieff held that human beings spend almost their whole life in a kind of sleep: they act, speak and react, but rarely notice that they are there. He called those rare moments of full presence “self-remembering”.',
+          'In front of the camera almost everyone performs at first. They smile the way they have seen others smile, they pose the way they think they should. That is the sleep Gurdjieff spoke of.',
+          'Then, at some point, something shifts. The gaze settles, the breath slows, the person remembers being there. It lasts an instant, and my job is not to miss it.',
+          'A good portrait is a moment of wakefulness.'
+        ]
+      }
+    },
+    {
+      tema: 'Il Conte di Saint-Germain · Il tempo', minuti: 2,
+      titolo: 'L’uomo che non invecchiava',
+      testo: [
+        'Nel Settecento le corti d’Europa parlavano di un gentiluomo misterioso, il Conte di Saint-Germain: musicista, conoscitore di pietre preziose, alchimista. Si diceva che non invecchiasse mai, e che possedesse il segreto per fermare il tempo.',
+        'Nessuno ha mai trovato il suo elisir. Ma da quando esiste la fotografia, un modo per fermare il tempo lo abbiamo.',
+        'Un volto a trent’anni, la luce di un pomeriggio, una mano appoggiata sul velluto: tutto passa, tranne quella frazione di secondo che la luce ha scritto sulla pellicola o sul sensore.',
+        'Il tempo passa, una foto resta. È la sola immortalità che posso promettere, e la prendo molto sul serio.'
+      ],
+      en: {
+        tema: 'The Count of Saint-Germain · Time', titolo: 'The man who never aged',
+        testo: [
+          'In the eighteenth century the courts of Europe whispered about a mysterious gentleman, the Count of Saint-Germain: musician, connoisseur of precious stones, alchemist. It was said he never aged and held the secret of stopping time.',
+          'No one ever found his elixir. But since photography was invented, we do have a way to stop time.',
+          'A face at thirty, the light of an afternoon, a hand resting on velvet: everything passes, except the fraction of a second that light has written onto film or sensor.',
+          'Time passes, a photograph remains. It is the only immortality I can promise, and I take it very seriously.'
+        ]
+      }
+    },
+    {
+      tema: 'L’alchimista · Nigredo, albedo, rubedo', minuti: 3,
+      titolo: 'Dal nero all’oro',
+      testo: [
+        'Gli alchimisti descrivevano la Grande Opera in tre fasi: la nigredo, il nero della materia che si dissolve; l’albedo, il bianco della purificazione; la rubedo, il rosso della materia trasformata. Solo alla fine, l’oro.',
+        'Jung vi lesse una mappa dell’anima, prima ancora che della chimica: ogni trasformazione vera passa dal buio.',
+        'Nero, rosso e oro sono i colori di questo studio, e non per caso. Una tela comincia bianca, si sporca di nero, si accende di rosso. Un servizio fotografico comincia con l’imbarazzo e finisce, se va bene, con una persona che si riconosce più preziosa di quanto pensasse.',
+        'Non trasformo il piombo in oro. Aiuto a vedere l’oro che c’era già.'
+      ],
+      en: {
+        tema: 'The alchemist · Nigredo, albedo, rubedo', titolo: 'From black to gold',
+        testo: [
+          'The alchemists described the Great Work in three stages: nigredo, the black of matter dissolving; albedo, the white of purification; rubedo, the red of matter transformed. Only at the end, gold.',
+          'Jung read in it a map of the soul even before one of chemistry: every true transformation passes through darkness.',
+          'Black, red and gold are the colours of this studio, and not by chance. A canvas begins white, is stained with black, catches fire with red. A photo session begins with awkwardness and ends, when it goes well, with a person who finds herself more precious than she thought.',
+          'I do not turn lead into gold. I help you see the gold that was already there.'
+        ]
+      }
+    }
+  ],
+
   oracolo: {
     it: {
       domande: [
