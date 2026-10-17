@@ -55,7 +55,7 @@ window.TESTI = {
 
     /* I · boudoir */
     nome_boudoir: 'Boudoir',
-    boud_etichetta: 'III · Camera del Velluto',
+    boud_etichetta: 'Camera del Velluto',
     boud_sotto: 'Sfumature di Pizzo',
     vent_apri: 'Apri il ventaglio',
     vent_chiudi: 'Chiudi il ventaglio',
@@ -80,15 +80,23 @@ window.TESTI = {
     prom3: 'Nulla si pubblica senza il tuo sì',
 
     /* II · oro */
-    nome_oro: 'I · Fotografia',
+    nome_oro: 'Fotografia e ritratto',
     oro_titolo: 'Ritratto d’autore',
     oro_testo: 'Cornici, stucchi, specchi antichi. Il ritratto come un quadro da museo: per te, per un brand, per un editoriale di moda.',
 
     /* III · verde */
-    nome_verde: 'II · Pittura',
+    nome_verde: 'Pittura',
     verde_titolo: 'Pittura e arte',
     frase_pittura: 'Il pensiero disegna, la vita dipinge.',
+    nome_poker: 'Poker d’autore',
+    poker_etichetta: 'Il tavolo verde',
     poker_titolo: 'Poker d’autore',
+    poker_zoom: 'Tocca la carta per chiudere',
+    gruppo_inizio: 'Ingresso',
+    gruppo_arti: 'Le arti di Ciro',
+    gruppo_giochi: 'Giochi',
+    gruppo_acquista: 'Prenota e acquista',
+    gruppo_contatti: 'Contatti',
     poker_testo: 'Mescola il mazzo: ogni carta che si gira è un nudo d’arte di Ciro.',
     poker_btn: 'Mescola e distribuisci',
     poker_ancora: 'Rimescola',
@@ -123,7 +131,7 @@ window.TESTI = {
 
     /* V · sacro e profano */
     nome_sacro: 'Sacro e profano',
-    sacro_etichetta: 'IV · Camera del Nero',
+    sacro_etichetta: 'Camera del Nero',
     sacro_testo: 'Ritratti come icone: aureole d’oro su fondo nero, e uno sguardo che non chiede il permesso.',
     accendi: 'Accendi un cero',
     accendi_altro: 'Accendine un altro',
@@ -134,7 +142,7 @@ window.TESTI = {
 
     /* VI · galleria */
     nome_galleria: 'La Galleria',
-    gal_etichetta: 'V · La Galleria',
+    gal_etichetta: 'La Galleria',
     gal_titolo: 'Le opere',
     gal_sotto: 'Fotografie e dipinti · scorri la parete, tocca un’opera per avvicinarti',
     gal_tutto: 'Tutto',
@@ -145,7 +153,7 @@ window.TESTI = {
 
     /* VII · oracolo */
     nome_oracolo: 'L’Oracolo di Eros',
-    orc_etichetta: 'VI · Il gioco',
+    orc_etichetta: 'Il gioco',
     orc_titolo: 'L’Oracolo di Eros',
     orc_testo: 'Tre domande al simposio. Gli dèi greci del desiderio leggeranno chi sei — e quale scena ti aspetta nello studio.',
     orc_btn: 'Interroga l’oracolo',
@@ -159,7 +167,7 @@ window.TESTI = {
 
     /* VIII · regala una scena */
     nome_regalo: 'Pacchetti e regali',
-    regalo_etichetta: 'VII · Pacchetti e regali',
+    regalo_etichetta: 'Pacchetti e regali',
     regalo_titolo: 'Scegli la tua scena',
     regalo_testo: 'Tre modi di entrare nello studio. Ogni sessione si costruisce su misura: scrivi a Ciro e ti racconta tutto.',
     prezzo_richiesta: '€',
@@ -175,7 +183,7 @@ window.TESTI = {
 
     /* IX · la prima volta */
     nome_prima: 'La prima volta',
-    prima_etichetta: 'VIII · La prima volta',
+    prima_etichetta: 'La prima volta',
     prima_titolo: 'Non serve essere modelle',
     prima_testo: 'Molte donne entrano nello studio senza aver mai posato. È normale essere emozionate: ecco come funziona.',
     passo1_t: 'Ci scriviamo', passo1: 'Un messaggio su WhatsApp, senza impegno: racconti a Ciro cosa immagini.',
@@ -198,7 +206,7 @@ window.TESTI = {
 
     /* XI · shop */
     nome_shop: 'Shop',
-    shop_etichetta: 'IX · Shop',
+    shop_etichetta: 'Shop',
     shop_titolo: 'Porta a casa lo studio',
     shop_testo: 'Calendari, libri, stampe e dipinti di Ciro. Scegli, metti nel carrello e ordina su WhatsApp: pagamento e spedizione si concordano direttamente con lo studio.',
     aggiungi: 'Aggiungi',
@@ -285,7 +293,7 @@ window.TESTI = {
     studio_cta: 'Come and see it',
 
     nome_boudoir: 'Boudoir',
-    boud_etichetta: 'III · The Velvet Room',
+    boud_etichetta: 'The Velvet Room',
     boud_sotto: 'Shades of Pizzo',
     vent_apri: 'Open the fan',
     vent_chiudi: 'Close the fan',
@@ -309,14 +317,22 @@ window.TESTI = {
     prom2: 'Your photos stay yours',
     prom3: 'Nothing is published without your yes',
 
-    nome_oro: 'I · Photography',
+    nome_oro: 'Photography & portrait',
     oro_titolo: 'Fine portraiture',
     oro_testo: 'Frames, stucco, antique mirrors. The portrait as a museum painting: for you, for a brand, for a fashion editorial.',
 
-    nome_verde: 'II · Painting',
+    nome_verde: 'Painting',
     verde_titolo: 'Painting and art',
     frase_pittura: 'Thought draws, life paints.',
+    nome_poker: 'Poker of art',
+    poker_etichetta: 'The green table',
     poker_titolo: 'Poker of art',
+    poker_zoom: 'Tap the card to close',
+    gruppo_inizio: 'Entrance',
+    gruppo_arti: 'Ciro’s arts',
+    gruppo_giochi: 'Games',
+    gruppo_acquista: 'Book & buy',
+    gruppo_contatti: 'Contact',
     poker_testo: 'Shuffle the deck: every card that turns is a fine-art nude by Ciro.',
     poker_btn: 'Shuffle and deal',
     poker_ancora: 'Shuffle again',
@@ -349,7 +365,7 @@ window.TESTI = {
     jb_altro: 'Another record',
 
     nome_sacro: 'Sacred and profane',
-    sacro_etichetta: 'IV · The Black Room',
+    sacro_etichetta: 'The Black Room',
     sacro_testo: 'Portraits like icons: golden halos on a black ground, and a gaze that doesn’t ask permission.',
     accendi: 'Light a candle',
     accendi_altro: 'Light another one',
@@ -359,7 +375,7 @@ window.TESTI = {
     ceri_molti: 'candles lit',
 
     nome_galleria: 'The Gallery',
-    gal_etichetta: 'V · The Gallery',
+    gal_etichetta: 'The Gallery',
     gal_titolo: 'The works',
     gal_sotto: 'Photographs and paintings · scroll the wall, tap a work to come closer',
     gal_tutto: 'All',
@@ -369,7 +385,7 @@ window.TESTI = {
     quadro_succ: 'Next painting',
 
     nome_oracolo: 'The Oracle of Eros',
-    orc_etichetta: 'VI · The game',
+    orc_etichetta: 'The game',
     orc_titolo: 'The Oracle of Eros',
     orc_testo: 'Three questions at the symposium. The Greek gods of desire will read who you are — and which scene awaits you in the studio.',
     orc_btn: 'Ask the oracle',
@@ -382,7 +398,7 @@ window.TESTI = {
     orc_rigioca: 'Play again',
 
     nome_regalo: 'Packages & gifts',
-    regalo_etichetta: 'VII · Packages & gifts',
+    regalo_etichetta: 'Packages & gifts',
     regalo_titolo: 'Choose your scene',
     regalo_testo: 'Three ways into the studio. Every session is made to measure: write to Ciro and he’ll tell you everything.',
     prezzo_richiesta: '€',
@@ -397,7 +413,7 @@ window.TESTI = {
     wa_buono: 'Hi Ciro, I’d like to give a voucher for a scene in the studio.',
 
     nome_prima: 'Your first time',
-    prima_etichetta: 'VIII · Your first time',
+    prima_etichetta: 'Your first time',
     prima_titolo: 'You don’t need to be a model',
     prima_testo: 'Many women come to the studio without ever having posed. Feeling nervous is normal: here’s how it works.',
     passo1_t: 'We talk', passo1: 'A message on WhatsApp, no commitment: tell Ciro what you imagine.',
@@ -418,7 +434,7 @@ window.TESTI = {
     wa_fluttuante: 'Message Ciro on WhatsApp',
 
     nome_shop: 'Shop',
-    shop_etichetta: 'IX · Shop',
+    shop_etichetta: 'Shop',
     shop_titolo: 'Take the studio home',
     shop_testo: 'Calendars, books, prints and paintings by Ciro. Choose, add to your cart and order on WhatsApp: payment and shipping are arranged directly with the studio.',
     aggiungi: 'Add',

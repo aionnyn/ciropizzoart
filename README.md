@@ -6,20 +6,27 @@ Sito-esperienza di Ciro Pizzo: fotografia, pittura, ritratto, boudoir. Sacro e p
 
 Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camere una alla volta:
 
-| # | Camera | Cosa succede |
+| # | Pagina | Cosa succede |
 |---|--------|--------------|
 | · | Benvenuto | presentazione |
 | ∞ | Lo Studio | dove il tempo si ferma (orologio), stile, mistero, arte, e il juke-box: moneta, dischi, 8 situazioni |
-| I | Fotografia · Ritratto d’autore (oro) | si preme lo scatto della macchina: flash, diaframma, esce una polaroid con un’opera della galleria |
-| II | Pittura e arte (panno verde da poker) | si dipinge con il dito sulla tela (rosso, verde, blu) e appare il titolo; poi il Poker d’autore con le carte dei nudi d’arte |
-| III | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza e appare il testo |
-| IV | Sacro e profano (nero) | si accende un cero e appare un ex-voto “Per grazia ricevuta” |
-| V | Galleria | i lavori in cornici dorate, da scorrere col dito |
-| VI | L’Oracolo di Eros | gioco con 3 domande sugli dèi greci del desiderio |
-| VII | Pacchetti e regali | tre pacchetti (Velluto, Oro, Sipario) e il buono regalo nella busta di ceralacca |
-| VIII | La prima volta | come funziona in 4 passi e domande frequenti |
-| IX | Shop | calendari, libro fotografico, stampe, dipinti, buoni: carrello e ordine su WhatsApp |
-| X | La Grotta | "Bellezza, magia e armonia" alle porte della Costiera Amalfitana: roccia, mare e cielo; contatti a icone e collaborazioni |
+| | **Le arti di Ciro** | |
+| I | Fotografia e ritratto (oro) | si preme lo scatto della macchina: flash, esce una polaroid con un’opera della galleria |
+| II | Boudoir · Sfumature di Pizzo | gambe accavallate con calze a rete: la mano dalle unghie rosse tira su la calza |
+| III | Pittura (panno verde) | si dipinge con il dito sulla tela (rosso, verde, blu) e appare il titolo |
+| IV | Galleria | i lavori in cornici dorate, da scorrere col dito |
+| | **Giochi** | |
+| V | Poker d’autore | tavolo verde a schermo intero: si mescola, escono 5 carte grandi con i nudi d’arte; toccando una carta si ingrandisce |
+| VI | Sacro e profano (nero) | si accende un cero e appare un ex-voto “Per grazia ricevuta” |
+| VII | L’Oracolo di Eros | gioco con 3 domande sugli dèi greci del desiderio |
+| | **Prenota e acquista** | |
+| VIII | Pacchetti e regali | tre pacchetti (Velluto, Oro, Sipario) e il buono regalo |
+| IX | La prima volta | come funziona in 4 passi e domande frequenti |
+| X | Shop | calendari, libro fotografico, stampe, dipinti, buoni: carrello e ordine su WhatsApp |
+| | **Contatti** | |
+| XI | La Grotta | "Bellezza, magia e armonia" alle porte della Costiera Amalfitana; contatti e collaborazioni |
+
+Per cambiare l’ordine basta spostare le `<section>` in `index.html` e cambiare `data-num` (il numero romano) e `data-gruppo` (`inizio`, `arti`, `giochi`, `acquista`, `contatti`): i numeri nelle etichette e il menu si aggiornano da soli.
 
 In alto c’è il tasto **Menu**: apre una tendina con tutte le pagine, i contatti (WhatsApp, chiamata, email, Instagram) e la lingua.
 

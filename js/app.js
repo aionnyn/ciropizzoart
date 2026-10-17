@@ -123,7 +123,7 @@
     scena.style.setProperty('--sfondo', c.dataset.sfondo);
     scena.style.setProperty('--inchiostro', c.dataset.inchiostro);
     aggiornaNav();
-    chiudiFoglio(); chiudiQuadro();
+    chiudiFoglio(); chiudiQuadro(); $('#carta-zoom').hidden = true;
     if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + c.dataset.id);
   }
   // nelle camere lunghe la freccia avanti prima scende a vedere il resto
@@ -214,12 +214,16 @@
   var menuAperto = false;
   function disegnaMenu() {
     var C = SITO.contatti || {}, ig = (C.instagram || '').replace(/^@/, '');
-    var voci = camere.map(function (c, k) {
-      var nome = t(c.dataset.nome).replace(/^[IVX]+ · /, '');
-      return '<button type="button" class="menu-voce" data-menu-camera="' + k + '"' + (k === stato.camera && stato.fase === 2 ? ' aria-current="true"' : '') + '><b>' + esc(c.dataset.num) + '</b><span>' + esc(nome) + '</span></button>';
-    }).join('');
-    $('#menu').innerHTML =
-      '<p class="menu-tit">' + esc(t('menu_camere')) + '</p><div class="menu-lista">' + voci + '</div>' +
+    var voci = '', gruppo = '';
+    camere.forEach(function (c, k) {
+      if (c.dataset.gruppo !== gruppo) {
+        voci += (gruppo ? '</div>' : '') + '<p class="menu-tit">' + esc(t('gruppo_' + c.dataset.gruppo)) + '</p><div class="menu-lista">';
+        gruppo = c.dataset.gruppo;
+      }
+      voci += '<button type="button" class="menu-voce" data-menu-camera="' + k + '"' + (k === stato.camera && stato.fase === 2 ? ' aria-current="true"' : '') + '><b>' + esc(c.dataset.num) + '</b><span>' + esc(t(c.dataset.nome)) + '</span></button>';
+    });
+    voci += '</div>';
+    $('#menu').innerHTML = voci +
       '<p class="menu-tit">' + esc(t('menu_contatti')) + '</p><div class="menu-contatti">' +
         '<a class="menu-chip" target="_blank" rel="noopener" href="' + esc(waLink(t('wa_testo'))) + '">WhatsApp</a>' +
         '<button type="button" class="menu-chip" data-azione="contatto-tel">' + esc(t('menu_chiama')) + '</button>' +
@@ -616,7 +620,7 @@
     box.innerHTML = '';
     if (orc.q < 0) {
       var w = el('div', { class: 'pop colonna' },
-        '<span class="etichetta">' + esc(t('orc_etichetta')) + '</span><h2>' + esc(t('orc_titolo')) + '</h2>' +
+        '<span class="etichetta">' + esc(numero('oracolo') + t('orc_etichetta')) + '</span><h2>' + esc(t('orc_titolo')) + '</h2>' +
         '<p class="testo">' + esc(t('orc_testo')) + '</p>');
       w.appendChild(el('button', { type: 'button', class: 'btn-nero', onclick: function () { orc.q = 0; orc.punti = {}; disegnaOracolo(); } }, esc(t('orc_btn'))));
       box.appendChild(w); return;
@@ -878,19 +882,29 @@
     mescola(mazzoCarte);
     var foto = mescola((SITO.carte || []).map(function (c, k) { return k; }));
     var W = tavolo.clientWidth, H = tavolo.clientHeight, N = 5;
-    var stretto = W < 560, cw = Math.min(124, (W - 30) / (stretto ? 4.6 : 5.6)), ch = cw * 1.5, passo = cw * (stretto ? .8 : .92) + 6;
+    var stretto = W < 640, cw, ch, pos = [];
+    if (stretto) { // telefono: 3 carte sopra e 2 sotto, grandi
+      cw = Math.min((W - 36) / 3.15, (H - 40) / 3.15); ch = cw * 1.5;
+      var gy = (H - ch * 2 - 14) / 2 + 10;
+      for (var q = 0; q < 3; q++) pos.push({ x: W / 2 - cw / 2 + (q - 1) * (cw + 8), y: gy, r: (q - 1) * 3 });
+      for (q = 0; q < 2; q++) pos.push({ x: W / 2 - cw / 2 + (q - .5) * (cw + 8), y: gy + ch + 14, r: (q - .5) * 4 });
+    } else { // computer: ventaglio di 5 carte grandi
+      cw = Math.min(210, (W - 220) / 5.3, (H - 70) / 1.55); ch = cw * 1.5;
+      for (q = 0; q < N; q++) pos.push({ x: W / 2 - cw / 2 + (q - 2) * (cw + 12), y: H / 2 - ch / 2 + Math.abs(q - 2) * 8 + 10, r: (q - 2) * 4 });
+    }
     var rT = tavolo.getBoundingClientRect(), rM = mazzo.getBoundingClientRect(), sc = rT.width / W || 1;
-    var mx = (rM.left - rT.left) / sc + (rM.width / sc - cw) / 2, my = (rM.top - rT.top) / sc + (rM.height / sc - ch) / 2, giu = stretto ? rM.height / sc * .45 : 0;
+    var mx = (rM.left - rT.left) / sc + (rM.width / sc - cw) / 2, my = (rM.top - rT.top) / sc + (rM.height / sc - ch) / 2;
+    $('#tavolo-invito').hidden = true;
     setTimeout(function () {
       for (var i = 0; i < N; i++) (function (i) {
         var dati = mazzoCarte[i], f = (SITO.carte || [])[foto[i % Math.max(1, foto.length)]] || {};
-        var x = W / 2 - cw / 2 + (i - (N - 1) / 2) * passo, y = H / 2 - ch / 2 + giu + Math.abs(i - 2) * 6, rot = (i - 2) * 5;
+        var x = pos[i].x, y = pos[i].y, rot = pos[i].r;
         var carta = el('button', { type: 'button', class: 'carta', 'aria-label': t('poker_aria', { carta: dati.v + dati.s.s }) });
         carta.style.cssText = 'width:' + cw + 'px;height:' + ch + 'px;left:' + mx + 'px;top:' + my + 'px';
         var faccia = f.foto ? '<img src="' + esc(f.foto) + '" alt="' + esc(f.titolo || '') + '">' : '<span class="carta-soon">' + esc(t('poker_soon')) + '</span>';
         carta.innerHTML = '<span class="carta-interno"><span class="carta-retro"></span><span class="carta-fronte' + (dati.s.r ? ' rossa' : '') + '">' +
           '<b class="ang alto">' + dati.v + '<i>' + dati.s.s + '</i></b><span class="carta-foto">' + faccia + '</span><b class="ang basso">' + dati.v + '<i>' + dati.s.s + '</i></b></span></span>';
-        carta.addEventListener('click', function () { carta.classList.toggle('girata'); });
+        carta.addEventListener('click', function () { if (!carta.classList.contains('girata')) carta.classList.add('girata'); else ingrandisciCarta(carta); });
         tavolo.appendChild(carta); manoCarte.push(carta);
         setTimeout(function () {
           carta.style.transform = 'translate(' + (x - mx) + 'px,' + (y - my) + 'px) rotate(' + rot + 'deg)';
@@ -901,6 +915,13 @@
     }, ridotto ? 0 : 900);
   }
   $('#distribuisci').addEventListener('click', distribuisci);
+  // la carta girata si ingrandisce per vedere bene la foto
+  function ingrandisciCarta(carta) {
+    var z = $('#carta-zoom');
+    z.innerHTML = '<div class="carta-grande">' + carta.querySelector('.carta-fronte').outerHTML + '</div><p>' + esc(t('poker_zoom')) + '</p>';
+    z.hidden = false;
+  }
+  $('#carta-zoom').addEventListener('click', function () { this.hidden = true; });
 
   /* ================= APPLICA LA LINGUA ================= */
   function impostaLingua(l) {
@@ -909,13 +930,24 @@
     try { localStorage.setItem('cp-lingua', l); } catch (e) {}
     applica();
   }
+  /* il numero romano della camera davanti alla sua etichetta (l'ordine si cambia solo in index.html) */
+  function numero(id) {
+    var c = camere.find(function (x) { return x.dataset.id === id; });
+    return c && /^[IVX]+$/.test(c.dataset.num) ? c.dataset.num + ' · ' : '';
+  }
+  function numeraEtichette() {
+    camere.forEach(function (c) {
+      var e = c.querySelector('.etichetta[data-t]');
+      if (e && /^[IVX]+$/.test(c.dataset.num)) e.textContent = c.dataset.num + ' · ' + t(e.dataset.t);
+    });
+  }
   function applica() {
     document.documentElement.lang = lingua;
     document.title = 'Ciro Pizzo Art — ' + t('firma_sotto');
     $$('[data-t]').forEach(function (n) { n.textContent = t(n.dataset.t); });
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.dataset.tAria)); });
     $$('[data-lingua]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lingua === lingua ? 'true' : 'false'); });
-    aggiornaNav();
+    numeraEtichette(); aggiornaNav();
     disegnaCalza(); disegnaPolaroid(); disegnaPennello(); disegnaPoker();
     disegnaJb(); disegnaFoglio();
     disegnaExvoto();

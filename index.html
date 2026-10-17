@@ -49,7 +49,7 @@
        ========================================================= -->
 
   <!-- · BENVENUTO -->
-  <section class="camera arcata" data-id="benvenuto" data-nome="nome_benvenuto" data-num="·" data-sfondo="#120D0B" data-inchiostro="#F3EBDA" style="--accento:#C9A24B">
+  <section class="camera arcata" data-id="benvenuto" data-nome="nome_benvenuto" data-num="·" data-gruppo="inizio" data-sfondo="#120D0B" data-inchiostro="#F3EBDA" style="--accento:#C9A24B">
     <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="contenuto centro">
       <span class="numero comp r1">·</span>
@@ -60,7 +60,7 @@
   </section>
 
   <!-- ∞ · LO STUDIO — dove il tempo si ferma -->
-  <section class="camera studio" data-id="studio" data-nome="nome_studio" data-num="∞" data-sfondo="#1C1410" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <section class="camera studio" data-id="studio" data-nome="nome_studio" data-num="∞" data-gruppo="inizio" data-sfondo="#1C1410" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro studio-colonna">
       <div class="comp r1">
         <span class="etichetta" data-t="studio_etichetta"></span>
@@ -132,9 +132,8 @@
     </div>
   </section>
 
-
-  <!-- I · FOTOGRAFIA — la macchina fotografica che scatta -->
-  <section class="camera arcata" data-id="oro" data-nome="nome_oro" data-num="I" data-sfondo="#C9A24B" data-inchiostro="#1E140C" style="--accento:#3A230F">
+  <!-- FOTOGRAFIA — la macchina fotografica che scatta -->
+  <section class="camera arcata" data-id="oro" data-nome="nome_oro" data-num="I" data-gruppo="arti" data-sfondo="#C9A24B" data-inchiostro="#1E140C" style="--accento:#3A230F">
     <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="contenuto centro">
       <div class="comp r1">
@@ -170,36 +169,8 @@
     </div>
   </section>
 
-  <!-- II · PITTURA — tavolozza, pennello e pennellata che svela -->
-  <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="II" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
-    <div class="contenuto centro">
-      <span class="etichetta comp r1" data-t="nome_verde"></span>
-      <!-- la tela: si dipinge con il dito -->
-      <div class="tela-viva comp r1" id="tela-viva">
-        <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
-        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
-        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
-      </div>
-      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
-        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
-        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
-        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
-        <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
-      </div>
-      <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>
-      <!-- il poker d'autore -->
-      <div class="poker comp r3">
-        <h3 class="sotto-titolo" data-t="poker_titolo"></h3>
-        <div class="tavolo" id="tavolo">
-          <div class="mazzo" id="mazzo" aria-hidden="true"></div>
-        </div>
-        <button type="button" class="btn-oro" id="distribuisci"></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- III · BOUDOIR — la calza che si tira su -->
-  <section class="camera" data-id="boudoir" data-nome="nome_boudoir" data-num="III" data-sfondo="#7A1222" data-inchiostro="#F6E7D8" style="--accento:#E3B866">
+  <!-- BOUDOIR — la calza che si tira su -->
+  <section class="camera" data-id="boudoir" data-nome="nome_boudoir" data-num="II" data-gruppo="arti" data-sfondo="#7A1222" data-inchiostro="#F6E7D8" style="--accento:#E3B866">
     <div class="contenuto centro">
       <div class="comp r1">
         <span class="etichetta" data-t="boud_etichetta"></span>
@@ -289,9 +260,53 @@
     </div>
   </section>
 
+  <!-- PITTURA — tavolozza, pennello e pennellata che svela -->
+  <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="III" data-gruppo="arti" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
+    <div class="contenuto centro">
+      <span class="etichetta comp r1" data-t="nome_verde"></span>
+      <!-- la tela: si dipinge con il dito -->
+      <div class="tela-viva comp r1" id="tela-viva">
+        <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
+        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
+        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
+      </div>
+      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
+        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
+        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
+        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
+        <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
+      </div>
+      <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>
+    </div>
+  </section>
 
-  <!-- V · SACRO E PROFANO — ex-voto -->
-  <section class="camera" data-id="sacro" data-nome="nome_sacro" data-num="IV" data-sfondo="#0E0A09" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <!-- GALLERIA -->
+  <section class="camera galleria" data-id="galleria" data-nome="nome_galleria" data-num="IV" data-gruppo="arti" data-sfondo="#3A1018" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+    <div class="gal-testa comp r1">
+      <span class="etichetta" data-t="gal_etichetta"></span>
+      <h2 class="titolo medio" data-t="gal_titolo"></h2>
+      <span class="sottotitolo" data-t="gal_sotto"></span>
+    </div>
+    <div class="filtri comp r1" id="filtri" role="group" data-t-aria="gal_filtri"></div>
+    <div class="parete comp r2" id="parete"></div>
+  </section>
+
+  <!-- POKER D'AUTORE — tavolo verde a schermo intero -->
+  <section class="camera feltro pagina-poker" data-id="poker" data-nome="nome_poker" data-num="V" data-gruppo="giochi" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
+    <div class="contenuto centro poker">
+      <span class="etichetta comp r1" data-t="poker_etichetta"></span>
+      <h2 class="sotto-titolo comp r1" data-t="poker_titolo"></h2>
+      <div class="tavolo comp r2" id="tavolo">
+        <div class="mazzo" id="mazzo" aria-hidden="true"></div>
+        <p class="tavolo-invito" id="tavolo-invito" data-t="poker_testo"></p>
+      </div>
+      <button type="button" class="btn-oro comp r3" id="distribuisci"></button>
+    </div>
+    <div class="carta-zoom" id="carta-zoom" hidden></div>
+  </section>
+
+  <!-- SACRO E PROFANO — ex-voto -->
+  <section class="camera" data-id="sacro" data-nome="nome_sacro" data-num="VI" data-gruppo="giochi" data-sfondo="#0E0A09" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro">
       <div class="comp r1">
         <span class="etichetta" data-t="sacro_etichetta"></span>
@@ -311,19 +326,8 @@
     </div>
   </section>
 
-  <!-- VI · GALLERIA -->
-  <section class="camera galleria" data-id="galleria" data-nome="nome_galleria" data-num="V" data-sfondo="#3A1018" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
-    <div class="gal-testa comp r1">
-      <span class="etichetta" data-t="gal_etichetta"></span>
-      <h2 class="titolo medio" data-t="gal_titolo"></h2>
-      <span class="sottotitolo" data-t="gal_sotto"></span>
-    </div>
-    <div class="filtri comp r1" id="filtri" role="group" data-t-aria="gal_filtri"></div>
-    <div class="parete comp r2" id="parete"></div>
-  </section>
-
-  <!-- VII · L'ORACOLO DI EROS -->
-  <section class="camera oracolo" data-id="oracolo" data-nome="nome_oracolo" data-num="VI" data-sfondo="#C4683A" data-inchiostro="#1A0F0A" style="--accento:#1A0F0A">
+  <!-- L'ORACOLO DI EROS -->
+  <section class="camera oracolo" data-id="oracolo" data-nome="nome_oracolo" data-num="VII" data-gruppo="giochi" data-sfondo="#C4683A" data-inchiostro="#1A0F0A" style="--accento:#1A0F0A">
     <div class="contenuto centro">
       <div class="greca comp r1" aria-hidden="true"></div>
       <div id="oracolo"></div>
@@ -331,8 +335,8 @@
     </div>
   </section>
 
-  <!-- VIII · PACCHETTI E REGALI — busta di ceralacca -->
-  <section class="camera" data-id="regalo" data-nome="nome_regalo" data-num="VII" data-sfondo="#3D0C17" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <!-- PACCHETTI E REGALI — busta di ceralacca -->
+  <section class="camera" data-id="regalo" data-nome="nome_regalo" data-num="VIII" data-gruppo="acquista" data-sfondo="#3D0C17" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="regalo_etichetta"></span>
@@ -360,8 +364,8 @@
     </div>
   </section>
 
-  <!-- IX · LA PRIMA VOLTA — come funziona e domande -->
-  <section class="camera" data-id="prima" data-nome="nome_prima" data-num="VIII" data-sfondo="#16100D" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <!-- LA PRIMA VOLTA — come funziona e domande -->
+  <section class="camera" data-id="prima" data-nome="nome_prima" data-num="IX" data-gruppo="acquista" data-sfondo="#16100D" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="prima_etichetta"></span>
@@ -382,8 +386,8 @@
     </div>
   </section>
 
-  <!-- XI · SHOP — calendari, libro, stampe, quadri, buoni -->
-  <section class="camera" data-id="shop" data-nome="nome_shop" data-num="IX" data-sfondo="#140A0C" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <!-- SHOP — calendari, libro, stampe, quadri, buoni -->
+  <section class="camera" data-id="shop" data-nome="nome_shop" data-num="X" data-gruppo="acquista" data-sfondo="#140A0C" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="contenuto centro largo">
       <div class="comp r1">
         <span class="etichetta" data-t="shop_etichetta"></span>
@@ -405,8 +409,8 @@
     </div>
   </section>
 
-  <!-- VIII · LA GROTTA — contatti -->
-  <section class="camera arcata grotta" data-id="grotta" data-nome="nome_grotta" data-num="X" data-sfondo="#081420" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
+  <!-- LA GROTTA — contatti -->
+  <section class="camera arcata grotta" data-id="grotta" data-nome="nome_grotta" data-num="XI" data-gruppo="contatti" data-sfondo="#081420" data-inchiostro="#F3EBDA" style="--accento:#D9B866">
     <div class="archi" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="contenuto centro">
       <span class="numero comp r1">X</span>
@@ -423,6 +427,7 @@
       <p class="motto comp r4" data-t="motto"></p>
     </div>
   </section>
+
 
   <!-- =========================================================
        LA PARETE DI TUFO con l'imboccatura
