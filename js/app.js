@@ -125,7 +125,7 @@
     });
     var c = camere[stato.camera];
     if (c.dataset.id === 'galleria') setTimeout(flusso, 60);
-    if (c.dataset.id === 'verde') setTimeout(preparaTela, 400);
+    if (c.dataset.id === 'verde') setTimeout(function () { scrittaFatta = false; $('#rivela-scritta').setAttribute('width', 0); preparaTela(); }, 700);
     scena.dataset.camera = c.dataset.id;
     setTimeout(aggiornaScorri, 1500);
     scena.style.setProperty('--sfondo', c.dataset.sfondo);
@@ -414,53 +414,100 @@
   $('#scatto').addEventListener('click', scatta);
   function disegnaPolaroid() { if (scatti) mostraFotoPolaroid(false); }
 
-  /* ================= III · PITTURA: si dipinge con il dito ================= */
-  var telaPit = $('#tela-canvas'), tctx = telaPit.getContext('2d'), coloreTela = '#C8102E', dipinto = 0, svelato = false, telaPronta = false;
+  /* ================= III · PITTURA: il pennello scrive in vernice, poi si dipinge ================= */
+  var telaPit = $('#tela-canvas'), tctx = telaPit.getContext('2d'), coloreTela = '#B3162C', telaPronta = false;
+  var telaBox = $('#tela-viva'), pen = $('#pennello-vero'), scrittaFatta = false, scrivendo = false;
+  pen.style.color = coloreTela;
   function preparaTela() {
-    var r = telaPit.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r = { width: telaPit.clientWidth, height: telaPit.clientHeight }, dpr = Math.min(window.devicePixelRatio || 1, 2);
     if (!r.width) return;
     var era = telaPronta; telaPronta = true;
     var img = era ? tctx.getImageData(0, 0, telaPit.width, telaPit.height) : null;
     telaPit.width = r.width * dpr; telaPit.height = r.height * dpr;
     tctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     if (img) tctx.putImageData(img, 0, 0);
+    if (!era || !scrittaFatta) scriviTitolo();
   }
-  function pennellata(x0, y0, x1, y1, forza) {
+  // il pennello: la punta sta esattamente sul punto (x, y) della tela
+  function pennelloA(x, y, ang) {
+    pen.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + (ang == null ? -38 : ang) + 'deg)';
+  }
+  function pennelloRiposo() {
+    var r = telaBox.getBoundingClientRect();
+    pen.classList.add('riposo'); pennelloA(r.width * .78, r.height * .86, -24);
+  }
+  // il titolo si scrive da sinistra a destra, il pennello lo segue come se stendesse la vernice
+  function scriviTitolo() {
+    if (scrivendo) return;
+    var svg = $('#tela-scritta'), testo = $('#scritta-testo'), rivela = $('#rivela-scritta');
+    var fai = function () {
+      var bb; try { bb = testo.getBBox(); } catch (e) { return; }
+      if (!bb.width) return;
+      if (bb.width > 560 || testo.getAttribute('font-size') !== '96') { testo.setAttribute('font-size', '96'); bb = testo.getBBox(); if (bb.width > 560) { testo.setAttribute('font-size', String(Math.floor(96 * 560 / bb.width))); bb = testo.getBBox(); } }
+      scrivendo = true; scrittaFatta = false; pen.classList.remove('riposo');
+      var m = svg.getScreenCTM(), rT = telaBox.getBoundingClientRect(), sc = m ? m.a : 1, ox = m ? m.e - rT.left : 0, oy = m ? m.f - rT.top : 0;
+      var x0 = bb.x - 6, x1 = bb.x + bb.width + 6, base = bb.y + bb.height * .62, alt = bb.height * .32;
+      var durata = ridotto ? 10 : 3200;
+      anima(durata, function (t) {
+        var x = x0 + (x1 - x0) * t;
+        rivela.setAttribute('width', Math.max(0, x));
+        var y = base - Math.sin(t * Math.PI * 11) * alt * (0.6 + 0.4 * Math.sin(t * 7));
+        pennelloA(ox + x * sc, oy + y * sc, -38 + Math.sin(t * 20) * 6);
+      }, function () {
+        rivela.setAttribute('width', 600); scrivendo = false; scrittaFatta = true;
+        pennelloRiposo();
+        $('#verde-testo').classList.add('aperto');
+      });
+    };
+    if (document.fonts && document.fonts.load) document.fonts.load('96px "Pinyon Script"').then(fai, fai); else fai();
+  }
+  function pennellata(x0, y0, x1, y1) {
     var dx = x1 - x0, dy = y1 - y0, d = Math.hypot(dx, dy) || 1, nx = -dy / d, ny = dx / d;
-    var larg = 26 * (forza || 1);
-    tctx.lineCap = 'round'; tctx.strokeStyle = coloreTela;
-    for (var b = -6; b <= 6; b++) {   // le setole del pennello
-      var o = b / 6 * larg / 2, j = (Math.random() - .5) * 2;
-      tctx.globalAlpha = .18 + Math.random() * .22;
-      tctx.lineWidth = 2 + Math.random() * 3;
+    var larg = 18;
+    tctx.lineCap = 'round'; tctx.lineJoin = 'round'; tctx.strokeStyle = coloreTela;
+    tctx.globalAlpha = .85; tctx.lineWidth = larg * .7;   // corpo della vernice
+    tctx.beginPath(); tctx.moveTo(x0, y0); tctx.lineTo(x1, y1); tctx.stroke();
+    for (var b = -5; b <= 5; b++) {   // le setole
+      var o = b / 5 * larg / 2, j = (Math.random() - .5) * 1.5;
+      tctx.globalAlpha = .12 + Math.random() * .2; tctx.lineWidth = 1 + Math.random() * 2;
       tctx.beginPath(); tctx.moveTo(x0 + nx * (o + j), y0 + ny * (o + j)); tctx.lineTo(x1 + nx * (o + j), y1 + ny * (o + j)); tctx.stroke();
     }
+    tctx.globalAlpha = .25; tctx.strokeStyle = '#fff'; tctx.lineWidth = 1.2;   // riflesso lucido
+    tctx.beginPath(); tctx.moveTo(x0 - nx * larg * .18, y0 - ny * larg * .18); tctx.lineTo(x1 - nx * larg * .18, y1 - ny * larg * .18); tctx.stroke();
     tctx.globalAlpha = 1;
-    dipinto += d;
-    if (!svelato && dipinto > 200) {
-      svelato = true;
-      $('#tela-titolo').classList.add('dipinto'); $('#verde-testo').classList.add('aperto');
-    }
     $('#tela-invito').classList.add('via');
   }
   (function () {
     var giu = false, ux = 0, uy = 0;
-    function pos(e) { var r = telaPit.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-    telaPit.addEventListener('pointerdown', function (e) { if (!telaPronta) preparaTela(); giu = true; telaPit.setPointerCapture(e.pointerId); var p = pos(e); ux = p[0]; uy = p[1]; pennellata(ux, uy, ux + .1, uy + .1); });
-    telaPit.addEventListener('pointermove', function (e) { if (!giu) return; var p = pos(e); pennellata(ux, uy, p[0], p[1]); ux = p[0]; uy = p[1]; });
-    telaPit.addEventListener('pointerup', function () { giu = false; });
-    telaPit.addEventListener('pointercancel', function () { giu = false; });
+    function pos(e) { var r = telaPit.getBoundingClientRect(), k = telaPit.clientWidth / (r.width || 1); return [(e.clientX - r.left) * k, (e.clientY - r.top) * k]; }
+    telaPit.addEventListener('pointerdown', function (e) {
+      if (!telaPronta) preparaTela(); if (scrivendo) return;
+      giu = true; telaPit.setPointerCapture(e.pointerId); var p = pos(e); ux = p[0]; uy = p[1];
+      pen.classList.remove('riposo'); pen.classList.add('dipinge'); pennelloA(ux, uy); pennellata(ux, uy, ux + .1, uy + .1);
+    });
+    telaPit.addEventListener('pointermove', function (e) {
+      if (scrivendo) return;
+      var p = pos(e);
+      if (giu) { pennellata(ux, uy, p[0], p[1]); ux = p[0]; uy = p[1]; }
+      if (giu || e.pointerType === 'mouse') { pen.classList.remove('riposo'); pennelloA(p[0], p[1], -38 + Math.max(-12, Math.min(12, (p[0] - ux) * 2))); }
+    });
+    function su() { giu = false; pen.classList.remove('dipinge'); }
+    telaPit.addEventListener('pointerup', function (e) { su(); if (e.pointerType !== 'mouse') setTimeout(function () { if (!giu && !scrivendo) pennelloRiposo(); }, 900); });
+    telaPit.addEventListener('pointercancel', su);
+    telaPit.addEventListener('pointerleave', function () { if (!giu && !scrivendo) pennelloRiposo(); });
   })();
-  $$('.pennelli .colore').forEach(function (b) {
+  $$('.tavolozza-vera .macchia').forEach(function (b) {
     b.addEventListener('click', function () {
-      coloreTela = b.dataset.colore;
-      $$('.pennelli .colore').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      coloreTela = b.dataset.colore; pen.style.color = coloreTela;
+      $$('.tavolozza-vera .macchia').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      pen.classList.remove('intinge'); void pen.offsetWidth; pen.classList.add('intinge');
     });
   });
   $('#tela-pulisci').addEventListener('click', function () {
     tctx.clearRect(0, 0, telaPit.width, telaPit.height);
+    $('#rivela-scritta').setAttribute('width', 0); scrittaFatta = false; scriviTitolo();
   });
-  window.addEventListener('resize', preparaTela);
+  window.addEventListener('resize', function () { if (telaPronta) { preparaTela(); if (scrittaFatta) pennelloRiposo(); } });
   function disegnaPennello() {}
 
 

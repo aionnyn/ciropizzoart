@@ -13,7 +13,7 @@
 <link rel="alternate" hreflang="en" href="?lang=en">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","name":"Ciro Pizzo Art",
@@ -264,16 +264,50 @@
   <section class="camera feltro" data-id="verde" data-nome="nome_verde" data-num="III" data-gruppo="arti" data-sfondo="#1F5236" data-inchiostro="#F3EBDA" style="--accento:#E3C377">
     <div class="contenuto centro">
       <span class="etichetta comp r1" data-t="nome_verde"></span>
-      <!-- la tela: si dipinge con il dito -->
+      <!-- la tela liscia: il pennello scrive il titolo in vernice, poi si dipinge con il dito -->
       <div class="tela-viva comp r1" id="tela-viva">
         <canvas id="tela-canvas" aria-label="Tela da dipingere"></canvas>
-        <h2 class="titolo tela-titolo" id="tela-titolo" data-t="verde_titolo"></h2>
-        <span class="tela-invito lampeggia" id="tela-invito" data-t="dipingi_invito"></span>
+        <svg class="tela-scritta" id="tela-scritta" viewBox="0 0 600 220" aria-hidden="true">
+          <defs>
+            <linearGradient id="g-vernice" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D2283F"/><stop offset=".55" stop-color="#A3172B"/><stop offset="1" stop-color="#6E0E1C"/></linearGradient>
+            <filter id="f-vernice" x="-5%" y="-20%" width="110%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4" result="rumore"/>
+              <feDisplacementMap in="SourceGraphic" in2="rumore" scale="2.2" result="mosso"/>
+              <feGaussianBlur in="mosso" stdDeviation="1.4" result="sfoc"/>
+              <feSpecularLighting in="sfoc" surfaceScale="4" specularConstant=".9" specularExponent="28" lighting-color="#FFF4E6" result="luce"><fePointLight x="120" y="-160" z="260"/></feSpecularLighting>
+              <feComposite in="luce" in2="mosso" operator="in" result="lucido"/>
+              <feComposite in="mosso" in2="lucido" operator="arithmetic" k1="0" k2="1" k3=".75" k4="0"/>
+            </filter>
+            <clipPath id="clip-scritta"><rect id="rivela-scritta" x="0" y="0" width="0" height="220"/></clipPath>
+          </defs>
+          <g clip-path="url(#clip-scritta)">
+            <text id="scritta-testo" x="300" y="138" text-anchor="middle" font-family="'Pinyon Script', cursive" font-size="96" fill="url(#g-vernice)" filter="url(#f-vernice)" data-t="verde_titolo"></text>
+          </g>
+        </svg>
+        <div class="pennello-vero" id="pennello-vero" aria-hidden="true">
+          <svg viewBox="0 0 320 34">
+            <defs>
+              <linearGradient id="g-manico" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A1420"/><stop offset=".35" stop-color="#2A070D"/><stop offset="1" stop-color="#120305"/></linearGradient>
+              <linearGradient id="g-ghiera" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBE7A6"/><stop offset=".45" stop-color="#C9A24B"/><stop offset="1" stop-color="#6F5019"/></linearGradient>
+              <linearGradient id="g-setole" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="currentColor"/><stop offset=".55" stop-color="currentColor"/><stop offset="1" stop-color="#8A6B48"/></linearGradient>
+            </defs>
+            <path d="M0,17 C10,13 26,9 46,9.5 L46,24.5 C26,25 10,21 0,17 Z" fill="url(#g-setole)"/>
+            <path d="M2,17 C14,15 30,13 46,13" stroke="rgba(255,255,255,.35)" stroke-width="1" fill="none"/>
+            <rect x="46" y="8" width="40" height="18" rx="2" fill="url(#g-ghiera)"/>
+            <path d="M52,8 v18 M80,8 v18" stroke="rgba(0,0,0,.25)" stroke-width="1"/>
+            <path d="M86,8.5 C150,7 250,10 318,13 C320,15 320,19 318,21 C250,24 150,27 86,25.5 Z" fill="url(#g-manico)"/>
+            <path d="M92,11 C160,10 250,12.5 312,14.5" stroke="rgba(255,220,200,.35)" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="tela-invito" id="tela-invito" data-t="dipingi_invito"></span>
       </div>
-      <div class="pennelli comp r2" role="group" data-t-aria="dipingi">
-        <button type="button" class="colore" data-colore="#C8102E" aria-pressed="true" style="--c:#C8102E" aria-label="Rosso"></button>
-        <button type="button" class="colore" data-colore="#2E8B57" aria-pressed="false" style="--c:#2E8B57" aria-label="Verde"></button>
-        <button type="button" class="colore" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8" aria-label="Blu"></button>
+      <div class="tavolozza-vera comp r2" role="group" data-t-aria="dipingi">
+        <div class="tavola" aria-hidden="true"></div>
+        <button type="button" class="macchia" data-colore="#B3162C" aria-pressed="true" style="--c:#B3162C;--x:30%;--y:12%" aria-label="Rosso"></button>
+        <button type="button" class="macchia" data-colore="#C9A24B" aria-pressed="false" style="--c:#C9A24B;--x:48%;--y:8%" aria-label="Oro"></button>
+        <button type="button" class="macchia" data-colore="#2E7D4F" aria-pressed="false" style="--c:#2E7D4F;--x:66%;--y:14%" aria-label="Verde"></button>
+        <button type="button" class="macchia" data-colore="#1F4FB8" aria-pressed="false" style="--c:#1F4FB8;--x:78%;--y:34%" aria-label="Blu"></button>
+        <button type="button" class="macchia" data-colore="#141010" aria-pressed="false" style="--c:#141010;--x:20%;--y:34%" aria-label="Nero"></button>
         <button type="button" class="pulisci" id="tela-pulisci" data-t="pulisci"></button>
       </div>
       <p class="motto frase-pittura svelato" id="verde-testo" data-t="frase_pittura"></p>

@@ -13,7 +13,7 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | | **Le arti di Ciro** | |
 | I | Fotografia e ritratto | si preme lo scatto: flash, esce una polaroid |
 | II | Boudoir · Sfumature di Pizzo | la mano dalle unghie rosse tira su la calza |
-| III | Pittura | si dipinge con il dito sulla tela |
+| III | Pittura | un pennello scorre sulla tela liscia e scrive “Pittura e arte” in vernice; poi si sceglie il colore dalla tavolozza e si dipinge con il dito |
 | IV | Galleria | i lavori in cornici dorate |
 | | **Esperienze** | |
 | V | Poker d’autore | tavolo verde a schermo intero, 5 carte grandi con i nudi d’arte; toccando una carta si ingrandisce |

@@ -889,3 +889,32 @@ button.btn-social:hover{transform:translateY(-2px)}
 .logo{padding:6px 0;border:none;background:transparent;color:inherit;cursor:pointer;text-transform:uppercase;text-align:left}
 .logo:hover em{color:#fff}
 .menu-firma{padding:6px 0;border:none;background:transparent;cursor:pointer}
+
+/* =============================================================
+   III · PITTURA — tela liscia, pennello vero, tavolozza
+   ============================================================= */
+.camera[data-id="verde"] .tela-viva{max-width:640px;aspect-ratio:3/2;max-height:50vh;border-radius:3px;overflow:visible;
+  background:linear-gradient(160deg,#FFFDF8 0%,#F6F1E7 55%,#ECE4D5 100%);background-image:none;background-color:#F8F4EC;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.05),inset 0 0 60px rgba(150,120,80,.08),9px 10px 0 -1px #CDBFA4,9px 10px 0 0 rgba(0,0,0,.15),0 34px 60px rgba(0,0,0,.45)}
+.camera[data-id="verde"] .tela-viva canvas{border-radius:3px}
+.tela-scritta{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.pennello-vero{position:absolute;left:0;top:0;z-index:3;width:clamp(150px,30vw,240px);height:auto;margin-top:calc(clamp(150px,30vw,240px) * -17 / 320);
+  transform-origin:0 50%;pointer-events:none;color:#B3162C;filter:drop-shadow(6px 10px 8px rgba(0,0,0,.35));transition:transform .12s linear}
+.pennello-vero svg{display:block;width:100%;height:auto}
+.pennello-vero.riposo{transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.pennello-vero.dipinge{transition:none}
+.pennello-vero.intinge svg{animation:intinge .5s ease}
+@keyframes intinge{40%{transform:translateY(5px) scale(.97)}}
+.camera[data-id="verde"] .tela-invito{bottom:12px;color:#8A7A60;font-size:18px}
+.tavolozza-vera{position:relative;width:min(400px,88vw);aspect-ratio:2/1.05;margin-top:6px}
+.tavolozza-vera .tavola{position:absolute;inset:0;border-radius:58% 42% 48% 52%/62% 58% 42% 38%;
+  background:radial-gradient(ellipse at 30% 25%,#E2B887 0%,#C08A55 45%,#94602F 100%);
+  box-shadow:inset 0 3px 0 rgba(255,235,200,.35),inset 0 -6px 14px rgba(70,35,10,.35),0 18px 34px rgba(0,0,0,.4)}
+.tavolozza-vera .tavola::after{content:"";position:absolute;left:9%;bottom:14%;width:15%;aspect-ratio:1/1.25;border-radius:50%;background:radial-gradient(circle,#123423 55%,#0d2618 100%);box-shadow:inset 0 3px 6px rgba(0,0,0,.6),0 1px 0 rgba(255,230,190,.4)}
+.camera[data-id="verde"] .tavolozza-vera .tavola::after{background:#1F5236}
+.macchia{position:absolute;left:var(--x);top:var(--y);width:16%;aspect-ratio:1.15/1;padding:0;border:none;cursor:pointer;
+  border-radius:52% 48% 55% 45%/58% 46% 54% 42%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55) 0 8%,transparent 22%),var(--c);
+  box-shadow:inset 0 -4px 6px rgba(0,0,0,.28),0 2px 3px rgba(0,0,0,.25);transition:transform .25s ease}
+.macchia:nth-of-type(2n){border-radius:46% 54% 42% 58%/50% 60% 40% 50%}
+.macchia[aria-pressed="true"]{transform:scale(1.18);box-shadow:inset 0 -4px 6px rgba(0,0,0,.28),0 0 0 3px #FBF6EC,0 0 0 5px #C9A24B}
+.tavolozza-vera .pulisci{position:absolute;right:12%;bottom:16%;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(60,30,10,.4);background:rgba(255,248,235,.55);color:#3A230F;font-size:10px;letter-spacing:.22em;text-transform:uppercase;cursor:pointer}
