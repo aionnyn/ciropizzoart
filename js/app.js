@@ -464,7 +464,7 @@
       if (bb.width > 560 || testo.getAttribute('font-size') !== '96') { testo.setAttribute('font-size', '96'); bb = testo.getBBox(); if (bb.width > 560) { testo.setAttribute('font-size', String(Math.floor(96 * 560 / bb.width))); bb = testo.getBBox(); } }
       scrivendo = true; scrittaFatta = false; pen.classList.remove('riposo');
       var m = svg.getScreenCTM(), rT = telaBox.getBoundingClientRect(), sc = m ? m.a : 1, ox = m ? m.e - rT.left : 0, oy = m ? m.f - rT.top : 0;
-      var x0 = bb.x - 6, x1 = bb.x + bb.width + 6, base = bb.y + bb.height * .62, alt = bb.height * .32;
+      var x0 = bb.x - 6, x1 = Math.max(bb.x + bb.width + 6, 436), base = bb.y + bb.height * .62, alt = bb.height * .3;
       var durata = ridotto ? 10 : 3200;
       anima(durata, function (t) {
         var x = x0 + (x1 - x0) * t;
@@ -477,7 +477,7 @@
         $('#verde-testo').classList.add('aperto');
       });
     };
-    if (document.fonts && document.fonts.load) document.fonts.load('96px "Pinyon Script"').then(fai, fai); else fai();
+    if (document.fonts && document.fonts.load) document.fonts.load('italic 500 96px "Cormorant Garamond"').then(fai, fai); else fai();
   }
   function pennellata(x0, y0, x1, y1) {
     var dx = x1 - x0, dy = y1 - y0, d = Math.hypot(dx, dy) || 1, nx = -dy / d, ny = dx / d;

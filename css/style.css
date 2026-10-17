@@ -1038,3 +1038,4 @@ button.btn-social:hover{transform:translateY(-2px)}
 @keyframes sgGoccia{0%{opacity:0;transform:translateY(0)}15%{opacity:.9}100%{opacity:0;transform:translateY(520px)}}
 .soglia-velo{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#E9FBFF,#6FD8FF 45%,#0B3A66);opacity:0;pointer-events:none;transition:opacity .9s ease .3s}
 .soglia.entra .soglia-velo{opacity:1}
+#scritta-riga{stroke:#C9A24B}
