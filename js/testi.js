@@ -10,7 +10,7 @@ window.TESTI = {
   it: {
     /* generale */
     motto: 'Il tempo passa, una foto resta.',
-    firma_sotto: 'Fotografia · Pittura · Boudoir',
+    firma_sotto: 'Fotografia · Pittura · Pensieri',
     apri_sipario: 'Apri il sipario',
     entra: 'Entra nella cavità',
     esci: 'Esci',
@@ -244,7 +244,7 @@ window.TESTI = {
 
   en: {
     motto: 'Time passes, a photograph remains.',
-    firma_sotto: 'Photography · Painting · Boudoir',
+    firma_sotto: 'Photography · Painting · Thoughts',
     apri_sipario: 'Open the curtain',
     entra: 'Enter the cave',
     esci: 'Exit',

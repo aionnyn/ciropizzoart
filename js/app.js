@@ -989,5 +989,8 @@
   if (h && camere.some(function (c) { return c.dataset.id === h; })) {
     stato.camera = camere.findIndex(function (c) { return c.dataset.id === h; });
     scena.classList.add('aperto'); setTimeout(entra, 50);
+  } else {
+    // il sipario aspetta il clic; se nessuno lo apre, si apre da solo dopo 7 secondi
+    setTimeout(function () { if (stato.fase === 0) apri(); }, 7000);
   }
 })();

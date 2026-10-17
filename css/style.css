@@ -768,3 +768,24 @@ button.btn-social:hover{transform:translateY(-2px)}
   .tavolo{height:clamp(330px,96vw,420px);border-radius:46%/34%}
   .mazzo{left:50%;top:22px;transform:translateX(-50%)}
 }
+
+/* sipario: il tasto respira finché non si apre */
+.btn-sipario{animation:sipRespira 2.4s ease-in-out infinite}
+@keyframes sipRespira{50%{box-shadow:0 0 0 8px rgba(217,184,102,.14),0 0 30px rgba(217,184,102,.35)}}
+.firma-sotto{line-height:1.6}
+.ingresso .firma-nome{font-size:14px}
+.ingresso .firma-photo.grande{font-size:42px}
+/* sipario più grande su computer */
+@media (min-width:900px){
+  .ingresso{gap:40px}
+  .ingresso .firma-nome{font-size:20px;letter-spacing:.55em}
+  .ingresso .firma-photo.grande{font-size:64px}
+  .ingresso .firma-sotto{margin-top:14px;font-size:16px;letter-spacing:.4em}
+  .ingresso .btn-scuro.oro{min-height:66px;padding:0 54px;font-size:15px}
+  .mantovana{height:130px}
+}
+@media (min-width:1400px){
+  .ingresso .firma-nome{font-size:24px}
+  .ingresso .firma-photo.grande{font-size:80px}
+  .ingresso .firma-sotto{font-size:18px}
+}
