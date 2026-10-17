@@ -886,3 +886,6 @@ button.btn-social:hover{transform:translateY(-2px)}
 .pens-filtri{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:20px 0}
 .pens-filtri button{min-height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(217,184,102,.35);background:transparent;color:#CFC3AC;cursor:pointer;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
 .pens-filtri button[aria-pressed="true"]{border-color:#D9B866;color:#0B0807;background:#D9B866}
+.logo{padding:6px 0;border:none;background:transparent;color:inherit;cursor:pointer;text-transform:uppercase;text-align:left}
+.logo:hover em{color:#fff}
+.menu-firma{padding:6px 0;border:none;background:transparent;cursor:pointer}

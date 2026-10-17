@@ -152,7 +152,17 @@
     var k = camere.findIndex(function (c) { return c.dataset.id === id; });
     if (k >= 0) vaiA(k);
   }
-  function apri() { stato.fase = 1; scena.classList.add('aperto'); }
+  function apri() { stato.fase = 1; scena.classList.add('aperto'); clearTimeout(timerSipario); }
+  // il nome in alto a sinistra riporta al sipario chiuso, come all'inizio
+  var timerSipario = 0;
+  function attendiSipario() { clearTimeout(timerSipario); timerSipario = setTimeout(function () { if (stato.fase === 0) apri(); }, 7000); }
+  function chiudiSipario() {
+    if (typeof chiudiMenu === 'function') chiudiMenu();
+    if ($('#lettura')) $('#lettura').hidden = true;
+    esci(); stato.fase = 0; stato.camera = 0;
+    scena.classList.remove('aperto', 'dentro', 'entrando');
+    attendiSipario();
+  }
   /* ---- le quattro arti dentro l'obiettivo e nel viaggio 2D → 5D ---- */
   var ARTI = [
     { dim: '2D', chiave: 'dim_disegno', svg: '<path d="M11 37l2-8 19-19 6 6-19 19z"/><path d="M13 29l6 6M29 13l6 6M11 37l4-1"/>' },
@@ -204,6 +214,7 @@
 
   var azioni = {
     apri: apri, entra: entra, esci: esci,
+    sipario: function () { chiudiSipario(); },
     succ: function () { if (!scorriCamera()) vaiA(passo(1)); },
     'scorri-giu': function () { scorriCamera(); },
     prec: function () { vaiA(passo(-1)); },
@@ -234,7 +245,7 @@
     voci += '</div>';
     var tel = (C.telefono || '').replace(/[^+\d]/g, '');
     $('#menu').innerHTML =
-      '<div class="menu-cima"><span class="menu-firma">Ciro Pizzo <em>art</em></span>' +
+      '<div class="menu-cima"><button type="button" class="menu-firma" data-azione="sipario">Ciro Pizzo <em>art</em></button>' +
         '<button type="button" class="menu-x" data-azione="menu" aria-label="' + esc(t('menu_chiudi')) + '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>' +
       '<div class="menu-corpo"><nav class="menu-voci">' + voci + '</nav>' +
       '<aside class="menu-lato">' +
@@ -1081,6 +1092,6 @@
     scena.classList.add('aperto'); setTimeout(entra, 50);
   } else {
     // il sipario aspetta il clic; se nessuno lo apre, si apre da solo dopo 7 secondi
-    setTimeout(function () { if (stato.fase === 0) apri(); }, 7000);
+    attendiSipario();
   }
 })();
