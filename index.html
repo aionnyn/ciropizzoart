@@ -536,6 +536,43 @@
 
   <!-- il viaggio dentro l'obiettivo: 2D → 5D -->
   <div class="tunnel" id="tunnel" aria-hidden="true"></div>
+  <!-- dopo il 5D: la grotta di tufo da cui sgorga l'acqua azzurra, e si entra -->
+  <div class="soglia" id="soglia" hidden>
+    <div class="soglia-fondo" aria-hidden="true"></div>
+    <div class="soglia-quadro">
+      <img src="foto/studio/soglia.jpg" alt="" decoding="async">
+      <svg viewBox="0 0 1200 1600" aria-hidden="true">
+        <defs>
+          <radialGradient id="g-luce-grotta" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#E9FBFF"/><stop offset=".3" stop-color="#6FD8FF" stop-opacity=".95"/><stop offset=".7" stop-color="#1E7FC4" stop-opacity=".45"/><stop offset="1" stop-color="#0B3A66" stop-opacity="0"/></radialGradient>
+          <linearGradient id="g-acqua" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6FAFF" stop-opacity=".95"/><stop offset=".35" stop-color="#7FDBFF" stop-opacity=".85"/><stop offset="1" stop-color="#2E9BE0" stop-opacity=".55"/></linearGradient>
+          <pattern id="p-flusso" width="60" height="180" patternUnits="userSpaceOnUse">
+            <path d="M8,0 C14,45 2,90 8,135 S14,180 8,180 M30,0 C38,60 24,110 30,180 M50,0 C44,40 56,95 50,180" stroke="#FFFFFF" stroke-opacity=".55" stroke-width="2.4" fill="none"/>
+            <animateTransform attributeName="patternTransform" type="translate" from="0 0" to="0 180" dur=".9s" repeatCount="indefinite"/>
+          </pattern>
+          <filter id="f-acqua" x="-10%" y="-10%" width="120%" height="120%">
+            <feTurbulence type="fractalNoise" baseFrequency=".012 .05" numOctaves="2" seed="7" result="n"><animate attributeName="seed" values="1;9;3;7" dur="1.6s" repeatCount="indefinite"/></feTurbulence>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="18"/>
+          </filter>
+          <filter id="f-bagliore"><feGaussianBlur stdDeviation="26"/></filter>
+          <linearGradient id="g-sfuma-su" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/></linearGradient>
+          <clipPath id="c-nicchia"><path d="M340,958 L336,560 C340,380 470,286 640,280 C790,284 900,330 912,440 L916,958 Z"/></clipPath>
+          <mask id="m-acqua"><rect x="0" y="930" width="1200" height="670" fill="url(#g-sfuma-su)"/></mask>
+        </defs>
+        <g clip-path="url(#c-nicchia)"><ellipse class="sg-luce" cx="640" cy="700" rx="380" ry="440" fill="url(#g-luce-grotta)"/></g>
+        <ellipse class="sg-luce2" cx="610" cy="700" rx="200" ry="230" fill="#BFF1FF" filter="url(#f-bagliore)"/>
+        <text class="sg-firma" x="600" y="660" text-anchor="middle">Ciro Pizzo</text>
+        <g class="sg-acqua" mask="url(#m-acqua)" filter="url(#f-acqua)">
+          <path d="M336,948 C430,936 740,936 826,950 L814,1010 C770,1100 650,1160 610,1300 C585,1420 640,1500 760,1600 L360,1600 C450,1500 490,1420 474,1300 C456,1160 380,1090 350,1012 Z" fill="url(#g-acqua)"/>
+          <path d="M336,948 C430,936 740,936 826,950 L814,1010 C770,1100 650,1160 610,1300 C585,1420 640,1500 760,1600 L360,1600 C450,1500 490,1420 474,1300 C456,1160 380,1090 350,1012 Z" fill="url(#p-flusso)"/>
+        </g>
+        <ellipse class="sg-pozza" cx="560" cy="1590" rx="420" ry="70" fill="#8FE3FF" filter="url(#f-bagliore)"/>
+        <g class="sg-gocce" fill="#E9FBFF">
+          <circle cx="420" cy="1020" r="5"/><circle cx="700" cy="1040" r="4"/><circle cx="560" cy="1000" r="3.5"/><circle cx="480" cy="1100" r="3"/><circle cx="640" cy="1080" r="4.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="soglia-velo" aria-hidden="true"></div>
+  </div>
 
   <!-- il diaframma che chiude e riapre tra una camera e l'altra -->
   <svg class="iride" id="iride" aria-hidden="true"><path class="lame" fill-rule="evenodd"/><path class="spigoli"/></svg>

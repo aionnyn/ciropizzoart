@@ -1005,3 +1005,36 @@ button.btn-social:hover{transform:translateY(-2px)}
   .mj-cupola{margin:0 2%;padding:10px 10px 14px}
   .mj-disco span{font-size:16px}
 }
+
+/* =============================================================
+   LA SOGLIA — la grotta da cui sgorga l'acqua azzurra
+   ============================================================= */
+.soglia{position:absolute;inset:0;z-index:34;overflow:hidden;background:#05090C;opacity:0;transition:opacity .7s ease;cursor:pointer}
+.soglia.vista{opacity:1}
+.soglia.esce{opacity:0;transition:opacity .7s ease}
+.soglia-fondo{position:absolute;inset:-40px;background:url(../foto/studio/soglia.jpg) center/cover;filter:blur(30px) brightness(.45) saturate(.8);transform:scale(1.1)}
+.soglia-quadro{position:absolute;top:0;bottom:0;left:50%;height:100%;aspect-ratio:3/4;transform:translateX(-50%) scale(1.04);transform-origin:50% 40%;
+  transition:transform 1.1s cubic-bezier(.6,0,.4,1),filter 1.1s ease;box-shadow:0 0 80px 40px #05090C}
+.soglia.vista .soglia-quadro{transform:translateX(-50%) scale(1);transition:transform 3s ease-out}
+.soglia.entra .soglia-quadro{transform:translateX(-50%) scale(3.4);filter:brightness(1.6);transition:transform 1.1s cubic-bezier(.6,0,.4,1),filter 1.1s ease}
+.soglia-quadro img,.soglia-quadro svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.soglia-quadro img{object-fit:cover;filter:brightness(.62) contrast(1.08)}
+.soglia-quadro svg{mix-blend-mode:screen;overflow:visible;stroke:none}
+.sg-luce{opacity:0;transform-origin:640px 760px;animation:sgLuce 3.2s ease-in-out .3s infinite alternate}
+.soglia.vista .sg-luce{opacity:1;transition:opacity 1.4s ease .2s}
+@keyframes sgLuce{from{transform:scale(.94)}to{transform:scale(1.06)}}
+.sg-luce2{opacity:0;transition:opacity 1.2s ease .8s}
+.soglia.vista .sg-luce2{opacity:.55}
+.sg-firma{font-family:var(--serif);font-style:italic;font-size:84px;fill:#F4FDFF;opacity:0;letter-spacing:2px;filter:drop-shadow(0 0 18px #6FD8FF)}
+.soglia.vista .sg-firma{opacity:.95;transition:opacity 1.1s ease .8s}
+.sg-acqua{opacity:.82;clip-path:inset(0 0 100% 0);transition:clip-path 1.2s cubic-bezier(.3,0,.3,1) .3s}
+.soglia.vista .sg-acqua{clip-path:inset(0 0 0 0)}
+.sg-pozza{opacity:0;transition:opacity 1s ease 1.2s}
+.soglia.vista .sg-pozza{opacity:.75}
+.sg-gocce circle{opacity:0}
+.soglia.vista .sg-gocce circle{animation:sgGoccia 1.3s linear infinite}
+.sg-gocce circle:nth-child(2){animation-delay:.3s !important}.sg-gocce circle:nth-child(3){animation-delay:.6s !important}
+.sg-gocce circle:nth-child(4){animation-delay:.9s !important}.sg-gocce circle:nth-child(5){animation-delay:.45s !important}
+@keyframes sgGoccia{0%{opacity:0;transform:translateY(0)}15%{opacity:.9}100%{opacity:0;transform:translateY(520px)}}
+.soglia-velo{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,#E9FBFF,#6FD8FF 45%,#0B3A66);opacity:0;pointer-events:none;transition:opacity .9s ease .3s}
+.soglia.entra .soglia-velo{opacity:1}

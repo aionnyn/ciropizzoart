@@ -4,7 +4,7 @@
 
 Sito-esperienza di Ciro Pizzo: fotografia, pittura, ritratto, boudoir. Sacro e profano. **Bilingue italiano / inglese** (selettore IT | EN in alto a destra).
 
-Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camere una alla volta:
+Il visitatore apre un sipario, entra nell’obiettivo (2D → 5D) e arriva davanti a una nicchia di tufo da cui sgorga acqua azzurra luminosa con la scritta “Ciro Pizzo”: la luce si avvicina e si entra (tocca per saltare; la foto è `foto/studio/soglia.jpg`). Poi attraversa le camere una alla volta:
 
 | # | Pagina | Cosa succede |
 |---|--------|--------------|

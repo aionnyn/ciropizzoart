@@ -187,7 +187,21 @@
     if (stato.fase < 2 && !scena.classList.contains('entrando')) obiettivoA(72 + Math.sin(t / 1100) * 6);
     requestAnimationFrame(respira);
   })(0);
-  function entra() {
+  /* dopo il 5D: la grotta di tufo, l'acqua azzurra che sgorga e la luce in cui si entra */
+  function soglia(fatto) {
+    var s = $('#soglia'), finito = false, tm = [];
+    function fine() {
+      if (finito) return; finito = true; tm.forEach(clearTimeout);
+      s.classList.add('esce');
+      fatto();
+      setTimeout(function () { s.hidden = true; s.classList.remove('vista', 'entra', 'esce'); }, 700);
+    }
+    s.hidden = false; void s.offsetWidth; s.classList.add('vista');
+    tm.push(setTimeout(function () { s.classList.add('entra'); }, 3000));
+    tm.push(setTimeout(fine, 4100));
+    s.onclick = fine;
+  }
+  function entra(salta) {
     if (stato.fase === 2 || scena.classList.contains('entrando')) return;
     var tufo = $('#tufo'), ob = $('#obiettivo').getBoundingClientRect(), sc = scena.getBoundingClientRect();
     tufo.style.transformOrigin = (ob.left - sc.left + ob.width / 2) + 'px ' + (ob.top - sc.top + ob.height / 2) + 'px';
@@ -196,7 +210,10 @@
     anima(ridotto ? 10 : 700, function (e) { obiettivoA(da + (100 - da) * e); }, function () {
       var tun = $('#tunnel'); tun.classList.remove('vola'); void tun.offsetWidth; if (!ridotto) tun.classList.add('vola');
       stato.fase = 2; scena.classList.add('aperto', 'dentro');
-      setTimeout(function () { scena.classList.remove('entrando'); mostraCamera(stato.camera); }, ridotto ? 0 : 1500);
+      setTimeout(function () {
+        if (ridotto || salta) { scena.classList.remove('entrando'); mostraCamera(stato.camera); return; }
+        soglia(function () { scena.classList.remove('entrando'); mostraCamera(stato.camera); });
+      }, ridotto ? 0 : 1500);
     });
   }
   function esci() {
@@ -1102,7 +1119,7 @@
   var h = location.hash.replace('#', '');
   if (h && camere.some(function (c) { return c.dataset.id === h; })) {
     stato.camera = camere.findIndex(function (c) { return c.dataset.id === h; });
-    scena.classList.add('aperto'); setTimeout(entra, 50);
+    scena.classList.add('aperto'); setTimeout(function () { entra(true); }, 50);
   } else {
     // il sipario aspetta il clic; se nessuno lo apre, si apre da solo dopo 7 secondi
     attendiSipario();
