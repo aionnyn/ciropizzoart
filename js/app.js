@@ -942,14 +942,23 @@
   $('#carta-zoom').addEventListener('click', function () { this.hidden = true; });
 
   /* ================= VII · PENSIERI (il blog) ================= */
-  var pensAperto = -1;
+  var pensAperto = -1, pensFiltro = 'tutti';
   function disegnaPensieri() {
     var L = (SITO.pensieri || []).map(loc), box = $('#pens-lista');
     if (!box) return;
     box.innerHTML = '';
-    L.forEach(function (p, k) {
+    var filtri = el('div', { class: 'pens-filtri', role: 'group' });
+    ['tutti', 'maestri', 'spirito'].forEach(function (f) {
+      filtri.appendChild(el('button', { type: 'button', 'aria-pressed': pensFiltro === f ? 'true' : 'false', onclick: function () { pensFiltro = f; disegnaPensieri(); } }, esc(t('pens_' + f))));
+    });
+    box.appendChild(filtri);
+    var ordine = L.map(function (p, k) { return k; }).sort(function (x, y) { return (L[x].gruppo === 'maestri' ? 0 : 1) - (L[y].gruppo === 'maestri' ? 0 : 1) || x - y; }), nn = 0;
+    ordine.forEach(function (k) {
+      var p = L[k];
+      if (pensFiltro !== 'tutti' && p.gruppo !== pensFiltro) return;
+      nn++;
       box.appendChild(el('button', { type: 'button', class: 'pens-voce', onclick: function () { apriPensiero(k); } },
-        '<span class="pens-n">' + String(k + 1).padStart(2, '0') + '</span>' +
+        '<span class="pens-n">' + String(nn).padStart(2, '0') + '</span>' +
         '<span class="pens-corpo"><small>' + esc(p.tema || '') + '</small><strong>' + esc(p.titolo) + '</strong>' +
         '<em>' + esc(((p.testo || [])[0] || '').slice(0, 130)) + '…</em></span>' +
         '<span class="pens-leggi">' + esc(t('pens_leggi')) + ' <i aria-hidden="true">→</i></span>'));

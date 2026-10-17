@@ -193,12 +193,12 @@ window.SITO = {
      Ogni risposta assegna un punto a una divinità: A, D, E, P.
      "camera" = la camera dove porta il risultato (non tradurre). */
   /* ---------- PENSIERI: il blog di Ciro ----------
-     Ogni articolo: titolo, tema (la riga piccola sopra), minuti di lettura e testo
+     Ogni articolo: gruppo ('maestri' o 'spirito', decide il filtro), titolo, tema (la riga piccola sopra), minuti di lettura e testo
      (un paragrafo per riga dell'elenco). La versione inglese va in en: { ... }.
      Il primo dell'elenco è il più recente. ★ Bozze da rivedere con Ciro. */
   pensieri: [
     {
-      tema: 'Carl Gustav Jung · L’Ombra', minuti: 3,
+      gruppo: 'spirito', tema: 'Carl Gustav Jung · L’Ombra', minuti: 3,
       titolo: 'L’Ombra davanti all’obiettivo',
       testo: [
         'Jung chiamava Ombra la parte di noi che non vogliamo vedere: desideri, fragilità, forze che teniamo al buio perché non somigliano all’immagine che mostriamo al mondo.',
@@ -217,7 +217,7 @@ window.SITO = {
       }
     },
     {
-      tema: 'G. I. Gurdjieff · Il ricordo di sé', minuti: 2,
+      gruppo: 'spirito', tema: 'G. I. Gurdjieff · Il ricordo di sé', minuti: 2,
       titolo: 'Ricordarsi di essere qui',
       testo: [
         'Gurdjieff sosteneva che l’essere umano passa quasi tutta la vita in una specie di sonno: agisce, parla, reagisce, ma raramente si accorge di esserci. Chiamava “ricordo di sé” quei rari istanti di presenza piena.',
@@ -236,7 +236,7 @@ window.SITO = {
       }
     },
     {
-      tema: 'Il Conte di Saint-Germain · Il tempo', minuti: 2,
+      gruppo: 'spirito', tema: 'Il Conte di Saint-Germain · Il tempo', minuti: 2,
       titolo: 'L’uomo che non invecchiava',
       testo: [
         'Nel Settecento le corti d’Europa parlavano di un gentiluomo misterioso, il Conte di Saint-Germain: musicista, conoscitore di pietre preziose, alchimista. Si diceva che non invecchiasse mai, e che possedesse il segreto per fermare il tempo.',
@@ -255,7 +255,7 @@ window.SITO = {
       }
     },
     {
-      tema: 'L’alchimista · Nigredo, albedo, rubedo', minuti: 3,
+      gruppo: 'spirito', tema: 'L’alchimista · Nigredo, albedo, rubedo', minuti: 3,
       titolo: 'Dal nero all’oro',
       testo: [
         'Gli alchimisti descrivevano la Grande Opera in tre fasi: la nigredo, il nero della materia che si dissolve; l’albedo, il bianco della purificazione; la rubedo, il rosso della materia trasformata. Solo alla fine, l’oro.',
@@ -270,6 +270,120 @@ window.SITO = {
           'Jung read in it a map of the soul even before one of chemistry: every true transformation passes through darkness.',
           'Black, red and gold are the colours of this studio, and not by chance. A canvas begins white, is stained with black, catches fire with red. A photo session begins with awkwardness and ends, when it goes well, with a person who finds herself more precious than she thought.',
           'I do not turn lead into gold. I help you see the gold that was already there.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Leonardo da Vinci · Lo sfumato', minuti: 2,
+      titolo: 'Leonardo e la luce che non ha bordi',
+      testo: [
+        'Leonardo studiava la luce come uno scienziato: nei suoi quaderni annotava come l’ombra cambia sul volto a seconda della finestra, dell’ora, dell’aria. Da quegli studi nasce lo sfumato, il passaggio dalla luce all’ombra senza linee né confini.',
+        'La Gioconda non ha un contorno: il viso nasce dal buio come il fumo, ed è per questo che sembra respirare.',
+        'In studio, la luce morbida che avvolge un volto senza tagliarlo è ancora sua. Ogni volta che sposto un pannello di qualche centimetro per addolcire un’ombra sotto lo zigomo, sto facendo una piccola lezione di Leonardo.',
+        'Il ritratto non si disegna: si illumina.'
+      ],
+      en: {
+        tema: 'Leonardo da Vinci · Sfumato', titolo: 'Leonardo and the light without edges',
+        testo: [
+          'Leonardo studied light like a scientist: in his notebooks he recorded how shadow changes on a face depending on the window, the hour, the air. From those studies came sfumato, the passage from light to shadow without lines or borders.',
+          'The Mona Lisa has no outline: the face rises from the dark like smoke, and that is why she seems to breathe.',
+          'In the studio, the soft light that wraps a face without cutting it is still his. Every time I move a panel a few centimetres to soften a shadow beneath the cheekbone, I am taking a small lesson from Leonardo.',
+          'A portrait is not drawn: it is lit.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Michelangelo Buonarroti · Il marmo', minuti: 2,
+      titolo: 'Togliere il superfluo',
+      testo: [
+        'Michelangelo scrisse in un suo sonetto: «Non ha l’ottimo artista alcun concetto / c’un marmo solo in sé non circonscriva». La figura è già dentro la pietra: lo scultore deve solo togliere ciò che è di troppo.',
+        'Aveva poco più di vent’anni quando scolpì la Pietà, e meno di trenta quando il David uscì da un blocco di marmo che altri avevano rinunciato a lavorare.',
+        'Fotografare una persona è un lavoro simile. Non aggiungo niente: tolgo. La posa forzata, la tensione delle spalle, il sorriso di circostanza. Quando il superfluo cade, resta la figura che c’era già.',
+        'La bellezza non si costruisce. Si libera.'
+      ],
+      en: {
+        tema: 'Michelangelo Buonarroti · Marble', titolo: 'Taking away the superfluous',
+        testo: [
+          'Michelangelo wrote in one of his sonnets that the finest artist has no idea that a single block of marble does not already contain. The figure is already inside the stone: the sculptor only has to remove what is too much.',
+          'He was barely over twenty when he carved the Pietà, and under thirty when David emerged from a block of marble that others had given up on.',
+          'Photographing a person is similar work. I add nothing: I take away. The forced pose, the tension in the shoulders, the polite smile. When the superfluous falls away, the figure that was already there remains.',
+          'Beauty is not built. It is set free.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Caravaggio · Il chiaroscuro', minuti: 2,
+      titolo: 'Caravaggio, il primo fotografo',
+      testo: [
+        'Caravaggio dipingeva in stanze buie, con una sola fonte di luce che cadeva dall’alto. I suoi modelli erano gente di strada, e lui li trasformava in santi e apostoli senza togliere loro neanche una ruga.',
+        'Nella Vocazione di San Matteo un fascio di luce taglia la stanza e indica un uomo: è tutto lì, in quella diagonale. Il buio non è vuoto, è il palcoscenico della luce.',
+        'Molti lo chiamano il pittore più fotografico della storia, e lo capisco. Ancora oggi, quando spengo tutte le luci dello studio e ne accendo una sola, sto lavorando come lui.',
+        'Una luce sola, e la verità di un volto.'
+      ],
+      en: {
+        tema: 'Caravaggio · Chiaroscuro', titolo: 'Caravaggio, the first photographer',
+        testo: [
+          'Caravaggio painted in dark rooms, with a single source of light falling from above. His models were people from the street, and he turned them into saints and apostles without removing a single wrinkle.',
+          'In The Calling of Saint Matthew a beam of light cuts across the room and points to a man: everything is there, in that diagonal. Darkness is not empty; it is the stage for light.',
+          'Many call him the most photographic painter in history, and I understand why. Even today, when I switch off every light in the studio and turn on just one, I am working the way he did.',
+          'One light, and the truth of a face.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Tiziano · La Venere di Urbino', minuti: 2,
+      titolo: 'Tiziano e lo sguardo che non si abbassa',
+      testo: [
+        'Nel 1538 Tiziano dipinse la Venere di Urbino, oggi agli Uffizi. Una donna distesa su lenzuola bianche, in una stanza di casa, che guarda dritto chi la osserva. Non è una dea lontana: è una donna vera, e lo sa.',
+        'È uno dei grandi antenati del boudoir. Non c’è nulla di nascosto e nulla di volgare: c’è una persona a suo agio con il proprio corpo, e un pittore che la rispetta.',
+        'È questo l’equilibrio che cerco in ogni servizio boudoir. Sensualità sì, ma con la dignità di un quadro. La donna non è oggetto dello sguardo: è lei che guarda.',
+        'L’eleganza è uno sguardo che non si abbassa.'
+      ],
+      en: {
+        tema: 'Titian · The Venus of Urbino', titolo: 'Titian and the gaze that does not drop',
+        testo: [
+          'In 1538 Titian painted the Venus of Urbino, now in the Uffizi. A woman lying on white sheets, in a domestic room, looking straight at whoever is looking at her. She is not a distant goddess: she is a real woman, and she knows it.',
+          'She is one of boudoir’s great ancestors. Nothing is hidden and nothing is vulgar: there is a person at ease with her own body, and a painter who respects her.',
+          'That is the balance I look for in every boudoir session. Sensuality, yes, but with the dignity of a painting. The woman is not the object of the gaze: she is the one who looks.',
+          'Elegance is a gaze that does not drop.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Artemisia Gentileschi · La forza', minuti: 2,
+      titolo: 'Artemisia, il pennello di una donna',
+      testo: [
+        'Nel Seicento dipingere era un mestiere da uomini. Artemisia Gentileschi lo fece meglio di molti di loro, e nel 1616 fu la prima donna ammessa all’Accademia delle Arti del Disegno di Firenze.',
+        'Le sue eroine, Giuditta prima di tutte, non sono fragili né decorative: sono donne che agiscono, con le maniche rimboccate e lo sguardo deciso.',
+        'Penso spesso a lei quando una donna entra in studio un po’ intimidita. Il ritratto più bello non è quello in cui sembra più giovane o più magra: è quello in cui sembra più forte.',
+        'La forza, in un ritratto, è la forma più alta della bellezza.'
+      ],
+      en: {
+        tema: 'Artemisia Gentileschi · Strength', titolo: 'Artemisia, a woman’s brush',
+        testo: [
+          'In the seventeenth century painting was a man’s trade. Artemisia Gentileschi did it better than many of them, and in 1616 she became the first woman admitted to the Accademia delle Arti del Disegno in Florence.',
+          'Her heroines, Judith above all, are neither fragile nor decorative: they are women who act, sleeves rolled up and gaze steady.',
+          'I often think of her when a woman walks into the studio a little intimidated. The most beautiful portrait is not the one where she looks younger or thinner: it is the one where she looks stronger.',
+          'Strength, in a portrait, is the highest form of beauty.'
+        ]
+      }
+    },
+    {
+      gruppo: 'maestri', tema: 'Vincent van Gogh · Gli autoritratti', minuti: 2,
+      titolo: 'Van Gogh davanti allo specchio',
+      testo: [
+        'Van Gogh dipinse più di trenta autoritratti. Spesso non aveva i soldi per pagare un modello, e allora si metteva davanti allo specchio: il soggetto più vicino e più difficile di tutti.',
+        'Nelle lettere al fratello Theo scriveva di voler dipingere le persone con qualcosa di eterno, che i pittori antichi esprimevano con l’aureola e lui cercava nel colore.',
+        'In vita vendette quasi niente. Oggi i suoi volti sono tra i più amati del mondo, perché non sono belli: sono veri, e il colore li fa vibrare.',
+        'Un ritratto non deve piacere. Deve essere vivo.'
+      ],
+      en: {
+        tema: 'Vincent van Gogh · Self-portraits', titolo: 'Van Gogh in front of the mirror',
+        testo: [
+          'Van Gogh painted more than thirty self-portraits. He often had no money to pay a model, so he sat in front of the mirror: the closest and most difficult subject of all.',
+          'In his letters to his brother Theo he wrote of wanting to paint people with something of the eternal, which the old painters expressed with the halo and he sought in colour.',
+          'He sold almost nothing in his lifetime. Today his faces are among the most loved in the world, because they are not pretty: they are true, and colour makes them vibrate.',
+          'A portrait does not have to please. It has to be alive.'
         ]
       }
     }

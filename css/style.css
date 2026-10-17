@@ -883,3 +883,6 @@ button.btn-social:hover{transform:translateY(-2px)}
 .centro .etichetta::after,.pensieri-testa .etichetta::after{content:"";display:block;width:36px;height:1px;margin:12px auto 0;background:currentColor;opacity:.55}
 .testo{font-size:18px;line-height:1.75;letter-spacing:.01em}
 .navigazione .conta em{font-family:var(--serif)}
+.pens-filtri{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:20px 0}
+.pens-filtri button{min-height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(217,184,102,.35);background:transparent;color:#CFC3AC;cursor:pointer;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.pens-filtri button[aria-pressed="true"]{border-color:#D9B866;color:#0B0807;background:#D9B866}

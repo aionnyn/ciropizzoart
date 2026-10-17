@@ -19,7 +19,7 @@ Il visitatore apre un sipario, entra nella cavità di tufo e attraversa le camer
 | V | Poker d’autore | tavolo verde a schermo intero, 5 carte grandi con i nudi d’arte; toccando una carta si ingrandisce |
 | VI | Sacro e profano | si accende un cero e appare un ex-voto |
 | | **Il blog** | |
-| VII | Pensieri | articoli di Ciro (Jung, Gurdjieff, Saint-Germain, alchimia): si aprono a tutta pagina |
+| VII | Pensieri | articoli di Ciro: i grandi maestri (Leonardo, Michelangelo, Caravaggio, Tiziano, Artemisia Gentileschi, Van Gogh) e spirito e alchimia (Jung, Gurdjieff, Saint-Germain), con filtri: si aprono a tutta pagina |
 | | **Prenota** | |
 | VIII | Pacchetti e regali | tre pacchetti e il buono regalo |
 | IX | La prima volta | come funziona e domande frequenti |
@@ -31,7 +31,7 @@ Il tasto **Menu** apre una pagina intera con tutte le sezioni divise per gruppi,
 
 ## Pensieri (il blog)
 
-Gli articoli sono in `js/contenuti.js` → `pensieri`. Per aggiungerne uno copia un blocco `{ ... }` e cambia `tema` (la riga piccola sopra il titolo), `titolo`, `minuti` e `testo` (un paragrafo per riga). La traduzione inglese va in `en: { ... }`. Il primo dell’elenco compare per primo. ★ I quattro articoli attuali sono bozze da far rivedere a Ciro.
+Gli articoli sono in `js/contenuti.js` → `pensieri`. Per aggiungerne uno copia un blocco `{ ... }` e cambia `tema` (la riga piccola sopra il titolo), `titolo`, `minuti` e `testo` (un paragrafo per riga). La traduzione inglese va in `en: { ... }`. Il primo dell’elenco compare per primo. `gruppo` decide il filtro: `maestri` o `spirito` (i maestri compaiono per primi). ★ I dieci articoli attuali sono bozze da far rivedere a Ciro.
 
 Per cambiare l’ordine basta spostare le `<section>` in `index.html` e cambiare `data-num` (il numero romano) e `data-gruppo` (`inizio`, `arti`, `esperienze`, `pensieri`, `servizi`, `contatti`); con `data-fuori="1"` una pagina resta fuori dal percorso numerato, come lo Shop: i numeri nelle etichette e il menu si aggiornano da soli.
 
