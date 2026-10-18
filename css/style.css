@@ -1082,3 +1082,21 @@ button.btn-social:hover{transform:translateY(-2px)}
 .dito.preme{transform:translateY(10px) scaleY(.97);transition:transform .14s ease-in}
 .dito.sale{opacity:0;transform:translateY(-80px);transition:transform .8s cubic-bezier(.4,0,.6,1),opacity .6s ease .2s}
 .scatto.premuto span{transform:translateY(3px);box-shadow:0 0 0 #5A4214,0 2px 4px rgba(0,0,0,.3)}
+
+/* galleria: le opere intere, mai tagliate */
+.camera.galleria .parete{flex:0 0 auto;padding-top:22px;padding-bottom:26px}
+.camera.galleria .quadro img{width:auto;height:min(52vh,460px);max-width:76vw;object-fit:contain}
+.camera.galleria .prossima-box,.camera.galleria .firma-gigante{padding:0 20px}
+
+/* il nome in alto: protagonista */
+.logo{font-size:13px;letter-spacing:.42em;line-height:1.05}
+.logo em{font-size:32px;letter-spacing:.01em}
+@media (min-width:900px){.logo{font-size:15px}.logo em{font-size:40px}}
+@media (max-width:420px){.logo{font-size:11px;letter-spacing:.3em}.logo em{font-size:30px;margin-top:-2px}}
+
+/* la firma gigante in fondo a ogni pagina */
+.firma-gigante{display:block;width:100%;margin:10px auto 70px;padding:0;border:none;background:transparent;color:inherit;cursor:pointer;text-align:center;
+  font-family:var(--serif);font-weight:400;font-size:clamp(58px,15vw,210px);line-height:.92;letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease}
+.firma-gigante em{display:block;font-style:italic;color:var(--accento);font-size:1.12em;line-height:.85}
+.firma-gigante:hover{opacity:1}
+@media (min-width:700px){.firma-gigante em{display:inline;font-size:1em}}

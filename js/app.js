@@ -1051,13 +1051,15 @@
   }
   // in fondo a ogni pagina: "Continua → prossima pagina" e "Tutte le pagine"
   camere.forEach(function (c, k) {
-    if (c.dataset.fuori) return;
     var dove = c.querySelector(':scope > .contenuto') || (getComputedStyle(c).flexDirection === 'column' ? c : null);
     if (!dove) return;
+    // la firma gigante chiude ogni pagina
+    var firma = el('button', { type: 'button', class: 'firma-gigante', 'data-azione': 'sipario', 'aria-label': 'Ciro Pizzo art' }, 'Ciro Pizzo <em>art</em>');
+    if (c.dataset.fuori) { dove.appendChild(firma); return; }
     var box = el('div', { class: 'prossima-box' });
     box.appendChild(el('button', { type: 'button', class: 'prossima', onclick: function () { vaiA(passo(1)); } }, ''));
     box.appendChild(el('button', { type: 'button', class: 'tutte', onclick: function () { apriMenu(); } }, ''));
-    dove.appendChild(box);
+    dove.appendChild(box); dove.appendChild(firma);
   });
   function disegnaProssime() {
     $$('.camera').forEach(function (c) {
