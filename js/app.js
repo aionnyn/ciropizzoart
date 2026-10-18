@@ -126,6 +126,7 @@
     var c = camere[stato.camera];
     if (c.dataset.id === 'galleria') setTimeout(flusso, 60);
     if (c.dataset.id === 'studio') setTimeout(mjMoneta, 900);
+    if (c.dataset.id === 'oro') ditoAutomatico(); else fermaDito();
     if (stato.fase === 2) setTimeout(mostraSuggerimento, 1800);
     if (c.dataset.id === 'verde') setTimeout(function () { scrittaFatta = false; $('#rivela-scritta').setAttribute('width', 0); preparaTela(); }, 700);
     scena.dataset.camera = c.dataset.id;
@@ -430,7 +431,20 @@
     pol.classList.remove('esce', 'grande'); void pol.offsetWidth; pol.classList.add('cade');
   }
   $('#polaroid-chiudi').addEventListener('click', chiudiFoto);
-  $('#scatto').addEventListener('click', scatta);
+  $('#scatto').addEventListener('click', function () { fermaDito(); scatta(); });
+  // entrando nella pagina un dito preme da solo lo scatto; si può sempre scattare anche a mano
+  var timerDito = [];
+  function fermaDito() { timerDito.forEach(clearTimeout); timerDito = []; $('#dito').classList.remove('scende', 'preme', 'sale'); }
+  function ditoAutomatico() {
+    fermaDito();
+    if (!$('#polaroid').hidden || ridotto) return;
+    var d = $('#dito');
+    timerDito.push(setTimeout(function () { d.classList.add('scende'); }, 900));
+    timerDito.push(setTimeout(function () { d.classList.add('preme'); $('#scatto').classList.add('premuto'); }, 1700));
+    timerDito.push(setTimeout(function () { $('#scatto').classList.remove('premuto'); scatta(); }, 1880));
+    timerDito.push(setTimeout(function () { d.classList.remove('preme'); d.classList.add('sale'); }, 2050));
+    timerDito.push(setTimeout(function () { d.classList.remove('scende', 'sale'); }, 2900));
+  }
   function disegnaPolaroid() { if (scatti) mostraFotoPolaroid(false); }
 
   /* ================= III · PITTURA: il pennello scrive in vernice, poi si dipinge ================= */

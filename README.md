@@ -11,7 +11,7 @@ Il visitatore apre un sipario, entra nell’obiettivo (2D → 5D) e arriva davan
 | · | Benvenuto | presentazione |
 | ∞ | Lo Studio | un mega juke-box: la moneta entra da sola, si tocca un titolo o si digita 101–106 e sullo schermo compare quella parte dello studio |
 | | **Le arti di Ciro** | |
-| I | Fotografia e ritratto | si preme lo scatto: flash, esce una polaroid |
+| I | Fotografia e ritratto | entrando, un dito dalle unghie rosse preme lo scatto da solo: flash, esce una polaroid; poi si può scattare anche a mano |
 | II | Boudoir · Sfumature di Pizzo | la mano dalle unghie rosse tira su la calza |
 | III | Pittura | un pennello scorre sulla tela liscia e scrive “Pittura e arte” in vernice; poi si sceglie il colore dalla tavolozza e si dipinge con il dito |
 | IV | Galleria | i lavori in cornici dorate |

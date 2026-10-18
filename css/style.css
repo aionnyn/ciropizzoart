@@ -1073,3 +1073,12 @@ button.btn-social:hover{transform:translateY(-2px)}
   background:rgba(11,8,7,.85);color:#F3EBDA;font-size:11px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;box-shadow:0 10px 30px rgba(0,0,0,.4);animation:menuGiu .4s ease}
 .suggerimento span{color:#D9B866;font-size:16px;letter-spacing:0;animation:suggMano 1.4s ease-in-out infinite}
 @keyframes suggMano{50%{transform:translateX(-8px)}}
+
+/* il dito che preme lo scatto da solo */
+.dito{position:absolute;right:25px;bottom:calc(100% + 4px);z-index:5;width:30px;pointer-events:none;opacity:0;transform:translateY(-70px);transform-origin:50% 100%;
+  filter:drop-shadow(4px 8px 6px rgba(0,0,0,.35));transition:transform .7s cubic-bezier(.3,0,.2,1),opacity .4s ease}
+.dito svg{display:block;width:100%;height:auto}
+.dito.scende{opacity:1;transform:translateY(0)}
+.dito.preme{transform:translateY(10px) scaleY(.97);transition:transform .14s ease-in}
+.dito.sale{opacity:0;transform:translateY(-80px);transition:transform .8s cubic-bezier(.4,0,.6,1),opacity .6s ease .2s}
+.scatto.premuto span{transform:translateY(3px);box-shadow:0 0 0 #5A4214,0 2px 4px rgba(0,0,0,.3)}
