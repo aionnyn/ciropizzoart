@@ -18,7 +18,11 @@ window.SITO = {
 
   /* ---------- CONTATTI (camera finale "La Grotta") ---------- */
   contatti: {
-    indirizzo: 'Via Enrico De Marinis 14, Cava de’ Tirreni (SA)',   // diventa un link a Google Maps
+    indirizzo: 'Via Enrico De Marinis 14, Cava de’ Tirreni (SA)',
+    cap: '84013',
+    sito: 'ciropizzo.art',
+    orari: 'Su appuntamento',
+    en: { orari: 'By appointment' },   // diventa un link a Google Maps
     telefono: '+39 348 033 6791',
     email: 'info@ciropizzo.art',            // usata anche dal pulsante "Prenota"
     instagram: 'ciropizzo.art',                       // ★ solo il nome del profilo, senza @ (es. 'ciropizzo.photographer')

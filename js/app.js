@@ -870,31 +870,50 @@
       navigator.clipboard.writeText(v).then(function () { ok.textContent = t('copiato'); }, aMano);
     } catch (e) { aMano(); }
   });
+  // il biglietto da visita: tutto chiaro, in un colpo d'occhio
   function disegnaContatti() {
-    var C = SITO.contatti || {};
+    var C = loc(SITO.contatti || {});
     var wa = String(C.whatsapp || '').replace(/\D/g, ''), ig = String(C.instagram || '').replace(/^@/, '').trim();
-    var riga = '<div class="contatti-riga">' +
-      (C.indirizzo ? '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(C.indirizzo.replace(/’/g, "'")) + '" target="_blank" rel="noopener">' + esc(C.indirizzo) + '</a>' : '') +
-      (C.telefono ? '<a href="tel:' + esc(String(C.telefono).replace(/\s/g, '')) + '">' + esc(C.telefono) + '</a>' : '') +
-      (C.email ? '<a href="mailto:' + esc(C.email) + '?subject=' + encodeURIComponent(t('mail_oggetto')) + '">' + esc(C.email) + '</a>' : '') +
-      '</div>';
-    var bWa = wa.length >= 8
-      ? '<a class="btn-social wa" aria-label="WhatsApp" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(t('wa_testo')) + '" target="_blank" rel="noopener">' + ICONA_WA + '<span>' + esc(t('wa_btn')) + '</span></a>'
-      : '<span class="btn-social wa vuoto" title="' + esc(t('manca')) + '">' + ICONA_WA + '<span>' + esc(t('wa_btn')) + '</span><small>' + esc(t('manca')) + '</small></span>';
-    var bIg = ig
-      ? '<a class="btn-social ig" aria-label="Instagram @' + esc(ig) + '" href="https://instagram.com/' + encodeURIComponent(ig) + '" target="_blank" rel="noopener">' + ICONA_IG + '<span>@' + esc(ig) + '</span></a>'
-      : '<span class="btn-social ig vuoto" title="' + esc(t('manca')) + '">' + ICONA_IG + '<span>' + esc(t('ig_btn')) + '</span><small>' + esc(t('manca')) + '</small></span>';
     var tel = String(C.telefono || '').replace(/[^\d+]/g, '');
-    // dentro un'anteprima (iframe) i link tel: e mailto: sono bloccati: si apre un pannello da copiare
-    var bTel = tel.length >= 8 ? (inCornice
-      ? '<button type="button" class="btn-social tel" data-azione="contatto-tel">' + ICONA_TEL + '<span>' + esc(t('tel_btn')) + '</span></button>'
-      : '<a class="btn-social tel" href="tel:' + tel + '">' + ICONA_TEL + '<span>' + esc(t('tel_btn')) + '</span></a>') : '';
-    var bMail = C.email ? (inCornice
-      ? '<button type="button" class="btn-social mail" data-azione="contatto-mail">' + ICONA_MAIL + '<span>' + esc(t('mail_btn')) + '</span></button>'
-      : '<a class="btn-social mail" href="mailto:' + esc(C.email) + '?subject=' + encodeURIComponent(t('mail_oggetto')) + '">' + ICONA_MAIL + '<span>' + esc(t('mail_btn')) + '</span></a>') : '';
-    $('#contatti').innerHTML = '<div class="social">' + bWa + bIg + bTel + bMail + '</div>' + riga;
+    var mappa = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(String(C.indirizzo || '').replace(/’/g, "'"));
+    var mail = 'mailto:' + (C.email || '') + '?subject=' + encodeURIComponent(t('mail_oggetto'));
+    function riga(et, val, href, azione) {
+      if (!val) return '';
+      var v = azione ? '<button type="button" data-azione="' + azione + '">' + esc(val) + '</button>'
+        : href ? '<a href="' + esc(href) + '"' + (/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(val) + '</a>' : '<span>' + esc(val) + '</span>';
+      return '<div class="bv-riga"><dt>' + esc(t(et)) + '</dt><dd>' + v + '</dd></div>';
+    }
+    var ind = String(C.indirizzo || '').split(', ');
+    var indTesto = ind[0] + (ind[1] ? '\n' + (C.cap ? C.cap + ' ' : '') + ind.slice(1).join(', ') : '');
+    var carta = '<article class="biglietto">' +
+      '<header class="bv-testa"><span class="bv-logo">Ciro Pizzo <em>art</em></span><span class="bv-mestiere">' + esc(t('bv_mestiere')) + '</span></header>' +
+      '<span class="bv-filetto" aria-hidden="true"></span>' +
+      '<dl class="bv-dati">' +
+        (C.indirizzo ? '<div class="bv-riga"><dt>' + esc(t('bv_studio')) + '</dt><dd><a href="' + esc(mappa) + '" target="_blank" rel="noopener" class="bv-ind">' + esc(indTesto) + '</a></dd></div>' : '') +
+        riga('bv_telefono', C.telefono, inCornice ? '' : 'tel:' + tel, inCornice ? 'contatto-tel' : '') +
+        riga('bv_email', C.email, inCornice ? '' : mail, inCornice ? 'contatto-mail' : '') +
+        riga('bv_instagram', ig ? '@' + ig : '', ig ? 'https://instagram.com/' + encodeURIComponent(ig) : '') +
+        riga('bv_web', C.sito, C.sito ? 'https://' + C.sito : '') +
+        riga('bv_quando', C.orari, '') +
+      '</dl></article>';
+    var azioniBv = '<div class="bv-azioni">' +
+      (wa.length >= 8 ? '<a class="bv-btn principale" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(t('wa_testo')) + '" target="_blank" rel="noopener">' + ICONA_WA + '<span>' + esc(t('bv_scrivi')) + '</span></a>' : '') +
+      (tel.length >= 8 ? (inCornice ? '<button type="button" class="bv-btn" data-azione="contatto-tel">' : '<a class="bv-btn" href="tel:' + tel + '">') + ICONA_TEL + '<span>' + esc(t('tel_btn')) + '</span>' + (inCornice ? '</button>' : '</a>') : '') +
+      (C.email ? (inCornice ? '<button type="button" class="bv-btn" data-azione="contatto-mail">' : '<a class="bv-btn" href="' + esc(mail) + '">') + ICONA_MAIL + '<span>' + esc(t('bv_email')) + '</span>' + (inCornice ? '</button>' : '</a>') : '') +
+      (C.indirizzo ? '<a class="bv-btn" href="' + esc(mappa) + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg><span>' + esc(t('bv_mappa')) + '</span></a>' : '') +
+      '<button type="button" class="bv-btn" id="bv-salva"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/><path d="M19 4v5M16.5 6.5h5"/></svg><span>' + esc(t('bv_salva')) + '</span></button>' +
+      '</div>';
+    $('#contatti').innerHTML = carta + azioniBv;
+    $('#bv-salva').onclick = function () {
+      var vc = ['BEGIN:VCARD', 'VERSION:3.0', 'N:Pizzo;Ciro;;;', 'FN:Ciro Pizzo', 'ORG:Ciro Pizzo Art', 'TITLE:' + t('bv_mestiere'),
+        tel ? 'TEL;TYPE=CELL,VOICE:' + tel : '', C.email ? 'EMAIL;TYPE=INTERNET:' + C.email : '',
+        C.indirizzo ? 'ADR;TYPE=WORK:;;' + ind[0] + ';' + (ind[1] || '').replace(/\s*\(.*\)/, '') + ';SA;' + (C.cap || '') + ';Italia' : '',
+        C.sito ? 'URL:https://' + C.sito : '', ig ? 'X-SOCIALPROFILE;type=instagram:https://instagram.com/' + ig : '', 'END:VCARD'].filter(Boolean).join('\r\n');
+      var url = URL.createObjectURL(new Blob([vc], { type: 'text/vcard' }));
+      var l = el('a', { href: url, download: 'Ciro-Pizzo-Art.vcf' }); document.body.appendChild(l); l.click();
+      setTimeout(function () { URL.revokeObjectURL(url); l.remove(); }, 1500);
+    };
   }
-
 
   /* ================= VENDITA: pacchetti, buono, prima volta, collaborazioni ================= */
   function disegnaVendita() {

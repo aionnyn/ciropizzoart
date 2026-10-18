@@ -24,7 +24,7 @@ Il visitatore apre un sipario, entra nell’obiettivo (2D → 5D) e arriva davan
 | VIII | Pacchetti e regali | tre pacchetti e il buono regalo |
 | IX | La prima volta | come funziona e domande frequenti |
 | | **Contatti** | |
-| X | Contatti (la Grotta) | mare, cielo e roccia; contatti e collaborazioni |
+| X | Contatti (la Grotta) | il biglietto da visita: studio, telefono e WhatsApp, email, Instagram, sito, “su appuntamento”; tasti WhatsApp, Chiama, Email, Indicazioni e Salva il contatto (scarica la scheda per la rubrica); poi le collaborazioni |
 | — | **Shop** (pagina a parte, senza numero) | si apre dal carrello in alto o dal Menu: calendari, libro, stampe, dipinti, buoni |
 
 **Navigare senza frecce:** nella pagina d’ingresso c’è la mappa con una tessera per ogni pagina (si tocca e si va); in fondo a ogni pagina c’è “Continua → pagina successiva” e “Tutte le pagine”; sul telefono si scorre di lato con il dito; toccando il nome della pagina in basso si apre il Menu.
@@ -79,7 +79,7 @@ Da GitHub, senza programmi: apri la cartella `foto/galleria` → **Add file → 
 
 ## Contatti
 
-In `js/contenuti.js`, nella sezione `contatti`, compila indirizzo, telefono, email e Instagram. Se inserisci `whatsapp` (es. `393331234567`), il pulsante **Prenota** apre WhatsApp; altrimenti apre una mail.
+In `js/contenuti.js`, nella sezione `contatti`, compila indirizzo, cap, telefono, email, Instagram, sito e orari: il biglietto da visita della pagina Contatti si aggiorna da solo. Se inserisci `whatsapp` (es. `393331234567`), il pulsante **Prenota** apre WhatsApp; altrimenti apre una mail.
 
 ## Cambiare i testi (italiano e inglese)
 
