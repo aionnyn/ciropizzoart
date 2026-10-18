@@ -1120,7 +1120,7 @@ button.btn-social:hover{transform:translateY(-2px)}
 /* boudoir: pizzo nero in rilievo sotto "Sfumature di Pizzo" */
 .sfumature::after{display:none}
 .pizzo-rilievo{display:block;width:min(360px,86vw);height:auto;margin:-2px auto 0}
-.pizzo-rilievo,.pizzo-rilievo *{stroke:none}
+
 .taschino svg circle[fill="none"]{stroke:#C9A24B}
 /* la firma in fondo: identica al nome in alto a sinistra, su una riga sola */
 .firma-gigante{font-family:var(--sans);font-weight:300;text-transform:uppercase;white-space:nowrap;letter-spacing:.42em;line-height:1;
@@ -1208,4 +1208,14 @@ button.btn-social:hover{transform:translateY(-2px)}
 .pizzo-fine{display:flex;justify-content:center;height:clamp(46px,5.5vw,78px)}
 .pizzo-fine svg{flex:0 0 auto;width:auto;height:100%;aspect-ratio:1920/78}
 .pizzo-ricamato{width:min(560px,94vw)}
-.pizzo-ricamato text{stroke:#C9A24B}
+
+
+/* passaggio al Boudoir: telo di velluto */
+.velluto-passa{position:absolute;inset:0;z-index:27;overflow:hidden;pointer-events:none}
+.velluto-telo{position:absolute;inset:-4% -8%;transform:translateX(-112%);will-change:transform;
+  background:
+    radial-gradient(ellipse at 30% 20%,rgba(255,170,170,.18),transparent 45%),
+    repeating-linear-gradient(90deg,#4A0812 0,#8E1527 4%,#C42A40 6.5%,#8E1527 9%,#5A0B16 12%,#7A1222 15%,#B32237 17.5%,#6A0F1C 20%);
+  box-shadow:inset 0 0 120px rgba(0,0,0,.55),0 0 80px rgba(0,0,0,.6)}
+.velluto-telo i{position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,210,210,.22) 45%,transparent 60%);background-size:220% 100%;animation:vellutoLuce 1.7s ease-in-out}
+@keyframes vellutoLuce{from{background-position:120% 0}to{background-position:-60% 0}}

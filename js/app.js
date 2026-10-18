@@ -109,9 +109,26 @@
     });
   }
 
+  // verso il Boudoir: un telo di velluto rosso entra ondeggiando, copre e scivola via
+  function conVelluto(cambia) {
+    if (ridotto || inTransizione) { cambia(); return; }
+    inTransizione = true;
+    var v = $('#velluto-passa'), telo = v.firstElementChild; v.hidden = false;
+    var dur = 1700;
+    var an = telo.animate([
+      { transform: 'translateX(-112%) skewX(14deg) scaleY(1.08)', borderRadius: '0 60% 60% 0 / 0 50% 50% 0' },
+      { transform: 'translateX(-4%) skewX(-5deg) scaleY(1.02)', borderRadius: '0 18% 18% 0 / 0 50% 50% 0', offset: .38 },
+      { transform: 'translateX(0) skewX(0deg) scaleY(1)', borderRadius: '0', offset: .5 },
+      { transform: 'translateX(4%) skewX(5deg) scaleY(1.02)', borderRadius: '18% 0 0 18% / 50% 0 0 50%', offset: .62 },
+      { transform: 'translateX(112%) skewX(-14deg) scaleY(1.08)', borderRadius: '60% 0 0 60% / 50% 0 0 50%' }
+    ], { duration: dur, easing: 'cubic-bezier(.55,.05,.35,1)' });
+    setTimeout(cambia, dur * .5);
+    an.onfinish = function () { v.hidden = true; inTransizione = false; };
+  }
   function vaiA(i) {
     if (stato.fase === 2 && camere[stato.camera].classList.contains('attiva') && ((i + camere.length) % camere.length) !== stato.camera) {
-      conIride(function () { mostraCamera(i); });
+      var dest = camere[(i + camere.length) % camere.length];
+      (dest.dataset.id === 'boudoir' ? conVelluto : conIride)(function () { mostraCamera(i); });
     } else mostraCamera(i);
   }
   function mostraCamera(i) {
@@ -127,6 +144,7 @@
     if (c.dataset.id === 'galleria') setTimeout(flusso, 60);
     if (c.dataset.id === 'studio') setTimeout(mjMoneta, 900);
     if (c.dataset.id === 'oro') ditoAutomatico(); else fermaDito();
+    if (c.dataset.id === 'boudoir') window.dispatchEvent(new Event('cp-boudoir'));
     if (stato.fase === 2) setTimeout(mostraSuggerimento, 1800);
     if (c.dataset.id === 'verde') setTimeout(function () { scrittaFatta = false; $('#rivela-scritta').setAttribute('width', 0); preparaTela(); }, 700);
     scena.dataset.camera = c.dataset.id;
@@ -345,19 +363,31 @@
     calza.setAttribute('aria-valuenow', Math.round(calzaF * 100));
     disegnaCalza();
   }
-  // nel boudoir, appena si scorre giù, la mano tira su la calza da sola
+  // nel boudoir: scendendo, la gamba viene portata al centro dello schermo e la mano tira su la calza
   (function () {
-    var cam = $('[data-id="boudoir"]'), partita = false;
+    var cam = $('[data-id="boudoir"]'), partita = false, centrata = false;
     function tira() {
       if (partita || calzaF >= .98) return; partita = true;
       var da = calzaF;
-      anima(ridotto ? 10 : 1800, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
+      anima(ridotto ? 10 : 2000, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
     }
-    cam.addEventListener('scroll', function () { if (this.scrollTop > 12) tira(); }, { passive: true });
-    cam.addEventListener('wheel', function (e) { if (e.deltaY > 0) tira(); }, { passive: true });
+    function centra() {
+      if (centrata) return; centrata = true;
+      var rC = cam.getBoundingClientRect(), rG = calza.getBoundingClientRect();
+      var y = cam.scrollTop + (rG.top - rC.top) - (cam.clientHeight - rG.height) / 2;
+      if (y > cam.scrollTop + 8) cam.scrollTo({ top: y, behavior: ridotto ? 'auto' : 'smooth' });
+      setTimeout(tira, ridotto ? 0 : 450);
+    }
+    cam.addEventListener('wheel', function (e) { if (e.deltaY > 0) centra(); }, { passive: true });
     var y0 = null;
     cam.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
-    cam.addEventListener('touchmove', function (e) { if (y0 != null && y0 - e.touches[0].clientY > 25) { y0 = null; tira(); } }, { passive: true });
+    cam.addEventListener('touchmove', function (e) { if (y0 != null && y0 - e.touches[0].clientY > 20) { y0 = null; centra(); } }, { passive: true });
+    cam.addEventListener('scroll', function () { if (this.scrollTop > 30) centra(); }, { passive: true });
+    // se la gamba è già tutta sullo schermo, la calza parte da sola quando la si guarda
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (v) {
+      if (v[0].isIntersecting && v[0].intersectionRatio > .85 && cam.classList.contains('attiva')) setTimeout(tira, 1200);
+    }, { root: cam, threshold: [.85] }).observe(calza);
+    window.addEventListener('cp-boudoir', function () { centrata = false; });
   })();
   function disegnaCalza() {
     if (!calza) return;

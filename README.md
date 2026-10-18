@@ -12,7 +12,7 @@ Il visitatore apre un sipario, entra nell’obiettivo (2D → 5D) e arriva davan
 | ∞ | Lo Studio | “Il tempo si è fermato alle …” con l’ora esatta; il coperchio dell’orologio da taschino si stacca, diventa 100 lire e vola nel mega juke-box; si tocca un titolo o si digita 101–106 e sullo schermo compare quella parte dello studio |
 | | **Le arti di Ciro** | |
 | I | Fotografia e ritratto | entrando, un dito dalle unghie rosse preme lo scatto da solo: flash, esce una polaroid; poi si può scattare anche a mano |
-| II | Boudoir · Sfumature di Pizzo | pizzo nero in rilievo sotto il titolo; appena si scorre giù la mano dalle unghie rosse tira su la calza da sola |
+| II | Boudoir · Sfumature di Pizzo | si arriva con un telo di velluto rosso che scivola sullo schermo; pizzo nero con medaglione ricamato “Ciro Pizzo art”; scendendo la gamba si porta al centro e appena si scorre giù la mano dalle unghie rosse tira su la calza da sola |
 | III | Pittura | un pennello scorre sulla tela liscia e scrive “Pittura e arte” in vernice; poi si sceglie il colore dalla tavolozza e si dipinge con il dito |
 | IV | Galleria | i lavori in cornici dorate |
 | | **Esperienze** | |
