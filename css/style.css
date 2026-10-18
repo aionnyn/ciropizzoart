@@ -1207,3 +1207,5 @@ button.btn-social:hover{transform:translateY(-2px)}
 .pizzo-fine,.prossima-box,.firma-gigante{flex-shrink:0}
 .pizzo-fine{display:flex;justify-content:center;height:clamp(46px,5.5vw,78px)}
 .pizzo-fine svg{flex:0 0 auto;width:auto;height:100%;aspect-ratio:1920/78}
+.pizzo-ricamato{width:min(560px,94vw)}
+.pizzo-ricamato text{stroke:#C9A24B}

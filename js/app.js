@@ -1104,6 +1104,7 @@
     // la firma gigante chiude ogni pagina
     var firma = el('button', { type: 'button', class: 'firma-gigante', 'data-azione': 'sipario', 'aria-label': 'Ciro Pizzo art' }, 'Ciro Pizzo <em>art</em>');
     var bordo = el('div', { class: 'pizzo-fine', 'aria-hidden': 'true' }, '<svg viewBox="0 0 1920 78">' + [0,1,2,3,4,5,6,7,8,9,10,11].map(function (k) { return '<use href="#pizzo-unita" x="' + k * 160 + '" width="160" height="78"/>'; }).join('') + '</svg>');
+    if (c.dataset.id !== 'boudoir') bordo = document.createComment('pizzo solo nel boudoir');
     if (c.dataset.fuori) { dove.appendChild(bordo); dove.appendChild(firma); return; }
     var box = el('div', { class: 'prossima-box' });
     box.appendChild(el('button', { type: 'button', class: 'prossima', onclick: function () { vaiA(passo(1)); } }, ''));
