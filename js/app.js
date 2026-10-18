@@ -344,6 +344,20 @@
     calza.setAttribute('aria-valuenow', Math.round(calzaF * 100));
     disegnaCalza();
   }
+  // nel boudoir, appena si scorre giù, la mano tira su la calza da sola
+  (function () {
+    var cam = $('[data-id="boudoir"]'), partita = false;
+    function tira() {
+      if (partita || calzaF >= .98) return; partita = true;
+      var da = calzaF;
+      anima(ridotto ? 10 : 1800, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
+    }
+    cam.addEventListener('scroll', function () { if (this.scrollTop > 12) tira(); }, { passive: true });
+    cam.addEventListener('wheel', function (e) { if (e.deltaY > 0) tira(); }, { passive: true });
+    var y0 = null;
+    cam.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
+    cam.addEventListener('touchmove', function (e) { if (y0 != null && y0 - e.touches[0].clientY > 25) { y0 = null; tira(); } }, { passive: true });
+  })();
   function disegnaCalza() {
     if (!calza) return;
     var su = calzaF > .9, h = $('#calza-hint');
@@ -563,19 +577,52 @@
     $('#mj-cifre').classList.toggle('accese', !!accese);
   }
   function mjMsg(k) { mj.msg = k; $('#mj-msg').textContent = k ? t(k, { da: 101, a: 100 + MJ.length }) : ''; }
+  // dove il tempo si ferma: l'orologio da taschino si ferma all'ora esatta,
+  // il coperchio si stacca, diventa 100 lire e vola nella fessura del juke-box
+  var oraFerma = '', monetaVolo = null;
+  function fermaTempo() {
+    var d = new Date(), hh = d.getHours(), mm = d.getMinutes();
+    oraFerma = ('0' + hh).slice(-2) + ':' + ('0' + mm).slice(-2);
+    $('#taschino-ore').setAttribute('transform', 'rotate(' + ((hh % 12) * 30 + mm / 2) + ' 30 42)');
+    $('#taschino-min').setAttribute('transform', 'rotate(' + (mm * 6) + ' 30 42)');
+    disegnaTempo();
+  }
+  function disegnaTempo() { if (oraFerma) $('#tempo-scritta').textContent = t('tempo_fermo', { ora: oraFerma }); }
+  function fineMoneta() {
+    if (monetaVolo) { monetaVolo.remove(); monetaVolo = null; }
+    $('#mj-fessura').classList.add('accesa');
+  }
   function mjMoneta() {
+    fermaTempo();
     if (mj.moneta) return;
     mj.moneta = true;
-    var m = $('#mj-moneta'); m.classList.add('cade');
-    mjDopo(ridotto ? 10 : 950, function () {
-      $('#mj-fessura').classList.add('accesa'); mjMsg('mj_inserita');
-      mjDopo(700, function () { if (mj.suona < 0) mjSuona(0); });
+    var cop = $('#taschino-coperchio');
+    cop.classList.remove('apre', 'via'); void cop.offsetWidth; cop.classList.add('apre');
+    mjDopo(ridotto ? 10 : 800, function () {
+      var rS = scena.getBoundingClientRect(), rC = cop.getBoundingClientRect(), rF = $('#mj-fessura').getBoundingClientRect();
+      var m = el('span', { class: 'moneta-volante', 'aria-hidden': 'true' }, '<b>100</b><small>LIRE</small>');
+      var dim = 40, x0 = rC.left - rS.left + rC.width / 2 - dim / 2, y0 = rC.top - rS.top + rC.height / 2 - dim / 2;
+      var x1 = rF.left - rS.left + rF.width / 2 - dim / 2, y1 = rF.top - rS.top + rF.height / 2 - dim / 2;
+      m.style.left = x0 + 'px'; m.style.top = y0 + 'px'; scena.appendChild(m); monetaVolo = m;
+      cop.classList.add('via');
+      var dx = x1 - x0, dy = y1 - y0, alto = Math.min(-60, dy / 2 - 120);
+      var vol = m.animate([
+        { transform: 'translate(0,0) scale(.9) rotateY(0deg)' },
+        { transform: 'translate(' + dx * .5 + 'px,' + alto + 'px) scale(1.25) rotateY(540deg)', offset: .55 },
+        { transform: 'translate(' + dx + 'px,' + (dy - 26) + 'px) scale(1) rotateY(900deg)', offset: .85 },
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.9,.25) rotateY(990deg)', opacity: 0 }
+      ], { duration: ridotto ? 10 : 1400, easing: 'cubic-bezier(.45,0,.4,1)', fill: 'forwards' });
+      vol.onfinish = function () {
+        fineMoneta(); mjMsg('mj_inserita');
+        mjDopo(600, function () { if (mj.suona < 0) mjSuona(0); });
+      };
     });
   }
   function mjSuona(k) {
     var s = loc(MJ[k]); if (!s) return;
     mjPulisci(); mj.codice = ''; mj.suona = k; var tok = mj.tok = (mj.tok || 0) + 1;
-    if (!mj.moneta) { mj.moneta = true; $('#mj-moneta').classList.add('cade'); $('#mj-fessura').classList.add('accesa'); }
+    if (!mj.moneta) { mj.moneta = true; $('#taschino-coperchio').classList.add('via'); }
+    fineMoneta();
     mjCifre(String(101 + k), true); mjMsg('mj_suona');
     $$('.mj-disco').forEach(function (d) { d.classList.toggle('attivo', +d.dataset.k === k); });
     var schermo = $('#mj-schermo'), vin = $('#mj-vinile');
@@ -615,7 +662,7 @@
   function disegnaMj() {
     $$('.mj-disco').forEach(function (d) { var s = loc(MJ[+d.dataset.k]); d.querySelector('span').textContent = s.titolo; d.setAttribute('aria-label', (101 + +d.dataset.k) + ' · ' + s.titolo); });
     if (mj.suona >= 0) { var s = loc(MJ[mj.suona]); $('#mj-titolo').textContent = s.titolo; $('#mj-testo').textContent = s.testo; }
-    mjMsg(mj.msg || 'mj_scegli');
+    mjMsg(mj.msg || 'mj_scegli'); disegnaTempo();
   }
   mjCifre('', false);
   function chiudiFoglio() { $('#foglio').hidden = true; }
