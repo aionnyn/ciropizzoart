@@ -126,6 +126,7 @@
     var c = camere[stato.camera];
     if (c.dataset.id === 'galleria') setTimeout(flusso, 60);
     if (c.dataset.id === 'studio') setTimeout(mjMoneta, 900);
+    if (stato.fase === 2) setTimeout(mostraSuggerimento, 1800);
     if (c.dataset.id === 'verde') setTimeout(function () { scrittaFatta = false; $('#rivela-scritta').setAttribute('width', 0); preparaTela(); }, 700);
     scena.dataset.camera = c.dataset.id;
     setTimeout(aggiornaScorri, 1500);
@@ -1021,6 +1022,63 @@
   function chiudiPensiero() { pensAperto = -1; $('#lettura').hidden = true; }
   azioni['chiudi-pensiero'] = chiudiPensiero;
 
+  /* ================= NAVIGARE SENZA FRECCE: mappa, "continua", gesti ================= */
+  // la mappa della pagina d'ingresso: una tessera per ogni pagina
+  function disegnaMappa() {
+    var m = $('#mappa'); if (!m) return;
+    m.innerHTML = '';
+    camere.forEach(function (c, k) {
+      if (c.dataset.id === 'benvenuto') return;
+      var tess = el('button', { type: 'button', class: 'tessera', 'data-gruppo': c.dataset.gruppo, onclick: function () { vaiA(k); } },
+        '<b>' + esc(c.dataset.num || '€') + '</b><span>' + esc(t(c.dataset.nome)) + '</span><small>' + esc(t('gruppo_' + c.dataset.gruppo)) + '</small>');
+      tess.style.setProperty('--tc', c.dataset.sfondo);
+      m.appendChild(tess);
+    });
+  }
+  // in fondo a ogni pagina: "Continua → prossima pagina" e "Tutte le pagine"
+  camere.forEach(function (c, k) {
+    if (c.dataset.fuori) return;
+    var dove = c.querySelector(':scope > .contenuto') || (getComputedStyle(c).flexDirection === 'column' ? c : null);
+    if (!dove) return;
+    var box = el('div', { class: 'prossima-box' });
+    box.appendChild(el('button', { type: 'button', class: 'prossima', onclick: function () { vaiA(passo(1)); } }, ''));
+    box.appendChild(el('button', { type: 'button', class: 'tutte', onclick: function () { apriMenu(); } }, ''));
+    dove.appendChild(box);
+  });
+  function disegnaProssime() {
+    $$('.camera').forEach(function (c) {
+      var b = c.querySelector('.prossima'); if (!b) return;
+      var k = camere.indexOf(c), p = percorso.indexOf(k), nx = camere[percorso[(p + 1) % percorso.length]];
+      b.innerHTML = '<small>' + esc(t('prossima')) + '</small><span>' + esc((nx.dataset.num && nx.dataset.num !== '·' ? nx.dataset.num + ' · ' : '') + t(nx.dataset.nome)) + '</span><i aria-hidden="true">→</i>';
+      c.querySelector('.tutte').textContent = t('tutte_pagine');
+    });
+  }
+  // sul telefono: scorrere di lato con il dito cambia pagina
+  (function () {
+    var x0 = null, y0 = 0, t0 = 0, NO = 'canvas,#calza,.parete,.mj-tastiera,.mj-titoli,.tavolo,#polaroid,.lightbox,.menu-tendina,.lettura,.carta-zoom,.foglio,input,textarea,[data-noswipe]';
+    scena.addEventListener('touchstart', function (e) {
+      x0 = null;
+      if (stato.fase !== 2 || e.touches.length !== 1 || e.target.closest(NO)) return;
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now();
+    }, { passive: true });
+    scena.addEventListener('touchend', function (e) {
+      if (x0 == null) return;
+      var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = null;
+      if (Math.abs(dx) > 70 && Math.abs(dy) < Math.abs(dx) * .6 && Date.now() - t0 < 700 && !inTransizione) {
+        vaiA(passo(dx < 0 ? 1 : -1)); nascondiSuggerimento();
+      }
+    }, { passive: true });
+  })();
+  // il suggerimento compare una volta sola, la prima volta che si entra dal telefono
+  var suggVisto = false;
+  try { suggVisto = localStorage.getItem('cp-swipe') === '1'; } catch (e) {}
+  function mostraSuggerimento() {
+    if (suggVisto || !('ontouchstart' in window)) return;
+    suggVisto = true; try { localStorage.setItem('cp-swipe', '1'); } catch (e) {}
+    var s = $('#suggerimento'); s.hidden = false; setTimeout(nascondiSuggerimento, 4200);
+  }
+  function nascondiSuggerimento() { var s = $('#suggerimento'); if (s) s.hidden = true; }
+
   /* ================= APPLICA LA LINGUA ================= */
   function impostaLingua(l) {
     if (l !== 'it' && l !== 'en') return;
@@ -1045,7 +1103,7 @@
     $$('[data-t]').forEach(function (n) { n.textContent = t(n.dataset.t); });
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.dataset.tAria)); });
     $$('[data-lingua]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lingua === lingua ? 'true' : 'false'); });
-    numeraEtichette(); aggiornaNav();
+    numeraEtichette(); aggiornaNav(); disegnaMappa(); disegnaProssime();
     disegnaCalza(); disegnaPolaroid(); disegnaPennello(); disegnaPoker();
     disegnaMj();
     disegnaExvoto();

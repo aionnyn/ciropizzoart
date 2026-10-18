@@ -27,6 +27,8 @@ Il visitatore apre un sipario, entra nell’obiettivo (2D → 5D) e arriva davan
 | X | Contatti (la Grotta) | mare, cielo e roccia; contatti e collaborazioni |
 | — | **Shop** (pagina a parte, senza numero) | si apre dal carrello in alto o dal Menu: calendari, libro, stampe, dipinti, buoni |
 
+**Navigare senza frecce:** nella pagina d’ingresso c’è la mappa con una tessera per ogni pagina (si tocca e si va); in fondo a ogni pagina c’è “Continua → pagina successiva” e “Tutte le pagine”; sul telefono si scorre di lato con il dito; toccando il nome della pagina in basso si apre il Menu.
+
 Il tasto **Menu** apre una pagina intera con tutte le sezioni divise per gruppi, lo Shop, il tasto "Prenota una sessione", indirizzo, telefono, email, Instagram e la lingua.
 
 ## Pensieri (il blog)

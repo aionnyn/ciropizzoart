@@ -58,6 +58,12 @@
       <span class="etichetta comp r1" data-t="nome_benvenuto"></span>
       <h2 class="titolo comp r2">Ciro Pizzo <em class="marchio-em">Art</em></h2>
       <p class="testo comp r3" data-t="benv_testo"></p>
+      <!-- la mappa: si va subito dove si vuole, senza frecce -->
+      <div class="mappa comp r3">
+        <p class="mappa-tit" data-t="mappa_tit"></p>
+        <div class="mappa-griglia" id="mappa"></div>
+        <p class="mappa-aiuto" data-t="mappa_aiuto"></p>
+      </div>
     </div>
   </section>
 
@@ -614,11 +620,12 @@
   </header>
   <div class="menu-tendina" id="menu" hidden role="dialog" aria-modal="true"></div>
   <article class="lettura" id="lettura" hidden aria-live="polite"></article>
+  <div class="suggerimento" id="suggerimento" hidden aria-live="polite"><span>⇠ ⇢</span><b data-t="swipe_aiuto"></b></div>
   <button type="button" class="scorri-giu" id="scorri-giu" data-azione="scorri-giu" hidden><span data-t="scorri"></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
   <nav class="navigazione" id="navigazione">
     <button type="button" class="tondo" data-azione="prec" data-t-aria="prec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="punti" id="punti"></div>
-    <span class="conta" id="conta"><em id="conta-nome"></em><small id="conta-num"></small></span>
+    <span class="conta" id="conta" data-azione="menu" role="button" tabindex="0"><em id="conta-nome"></em><small id="conta-num"></small></span>
     <button type="button" class="tondo" data-azione="succ" data-t-aria="succ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </nav>
 

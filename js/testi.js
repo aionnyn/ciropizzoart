@@ -33,6 +33,11 @@ window.TESTI = {
 
     /* · benvenuto */
     nome_benvenuto: 'Sei entrato',
+    mappa_tit: 'Scegli da dove cominciare',
+    mappa_aiuto: 'Oppure scorri di lato con il dito, o usa il Menu in alto, quando vuoi.',
+    swipe_aiuto: 'Scorri di lato per cambiare pagina',
+    prossima: 'Continua',
+    tutte_pagine: 'Tutte le pagine',
     benv_testo: 'Ritratto d’autore, boudoir, pittura e fine art. Nello studio scavato nel tufo di Cava de’ Tirreni, Ciro Pizzo lavora la luce e il colore come si lavora un metallo prezioso: lentamente, su misura, una persona alla volta. Ogni opera nasce da un incontro, e resta.',
 
 
@@ -298,6 +303,11 @@ window.TESTI = {
     lingua: 'Language',
 
     nome_benvenuto: 'You’re in',
+    mappa_tit: 'Choose where to begin',
+    mappa_aiuto: 'Or swipe sideways with your finger, or use the Menu at the top, whenever you like.',
+    swipe_aiuto: 'Swipe sideways to change page',
+    prossima: 'Continue',
+    tutte_pagine: 'All pages',
     benv_testo: 'Fine-art portraiture, boudoir, painting. In a studio carved into the tufa rock of Cava de’ Tirreni, Ciro Pizzo works light and colour the way one works a precious metal: slowly, made to measure, one person at a time. Every work is born from an encounter, and it remains.',
 
     nome_studio: 'The Studio',
