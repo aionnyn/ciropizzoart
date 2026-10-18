@@ -1127,3 +1127,83 @@ button.btn-social:hover{transform:translateY(-2px)}
   font-size:clamp(16px,6.2vw,60px);display:flex;align-items:baseline;justify-content:center;gap:.25em}
 .firma-gigante em,.firma-gigante em{display:inline;font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:.01em;font-size:2.45em;line-height:.8;color:var(--oro-chiaro)}
 @media (min-width:700px){.firma-gigante em{display:inline;font-size:2.45em}}
+
+/* =============================================================
+   IL PIZZO — Chantilly nero (rete, rose, foglie, smerlo con ciglia)
+   ============================================================= */
+.pizzo-defs{position:absolute;width:0;height:0;overflow:hidden}
+.pizzo-banda{display:block;width:min(480px,92vw);height:auto;margin:2px auto 0;color:#0A0507;stroke:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.45)) drop-shadow(0 0 .5px rgba(240,213,140,.6))}
+.pizzo-banda *{stroke-linejoin:round}
+.pizzo-fine{width:calc(100% + 40px);margin:26px -20px 6px;height:58px;overflow:hidden;color:#0A0507;opacity:.9}
+.pizzo-fine svg{display:block;width:100%;height:100%;stroke:none}
+.camera:not(.chiara) .pizzo-fine{color:#000;opacity:.75}
+
+/* =============================================================
+   PAGINE CHIARE — avorio, inchiostro nero, rosso e oro scuro:
+   la fotografia è protagonista
+   ============================================================= */
+.scena.chiaro::after{background:radial-gradient(ellipse at 50% 45%,transparent 60%,rgba(90,70,50,.10) 100%)}
+.scena.chiaro .bokeh{opacity:0}
+.bokeh{transition:opacity 1s ease}
+.scena.chiaro .logo em{color:#9C7A2E}
+.scena.chiaro .navigazione{background:rgba(255,253,248,.72);box-shadow:0 10px 30px rgba(60,40,20,.12),inset 0 0 0 1px rgba(22,17,15,.08)}
+.scena.chiaro .firma-gigante em{color:#9C7A2E}
+.scena.chiaro .tenda{opacity:.0}
+.tenda{transition:transform 2.2s cubic-bezier(.7,0,.2,1),opacity 1s ease}
+.camera.chiara{--oro-scuro:#9C7A2E;--tenue-scuro:#5E544B}
+.camera.chiara .testo,.camera.chiara .sottotitolo{color:#2A221D}
+.camera.chiara .etichetta{color:#8E1527}
+.camera.chiara .archi i{border-color:rgba(156,122,46,.28) !important}
+/* benvenuto: tessere bianche */
+.camera.chiara .tessera{color:#16110F;background:#FFFFFF;border:1px solid #E6DDCF;box-shadow:0 1px 0 rgba(0,0,0,.02),0 12px 30px -18px rgba(60,40,20,.25)}
+.camera.chiara .tessera::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--tc)}
+.camera.chiara .tessera b,.camera.chiara .tessera::after{color:#9C7A2E}
+.camera.chiara .tessera small{color:#7A6E62;opacity:1}
+.camera.chiara .tessera[data-gruppo="shop"]{background:#16110F;color:#F5F1EA;border-color:#16110F}
+.camera.chiara .tessera[data-gruppo="shop"] b{color:#E3C377}
+.camera.chiara .mappa-tit{color:#8E1527}
+/* "continua" e firma */
+.camera.chiara .prossima{background:#FFFFFF;border-color:#E6DDCF;box-shadow:0 12px 30px -20px rgba(60,40,20,.3)}
+.camera.chiara .prossima i{color:#8E1527}
+/* fotografia (ex oro): la macchina resta scura sul fondo avorio */
+.camera.chiara .firma-ritratto{color:#3A2E25}
+.camera.chiara .firma-ritratto em{color:#9C7A2E}
+/* galleria */
+.camera.chiara .gal-testa .sottotitolo{color:#5E544B}
+/* pensieri */
+.camera.chiara .pens-sotto{color:#5E544B}
+.camera.chiara .filetto{background:linear-gradient(90deg,transparent,#9C7A2E,transparent)}
+.camera.chiara .pens-lista,.camera.chiara .pens-voce{border-color:#E2D8C8}
+.camera.chiara .pens-voce:hover{background:linear-gradient(90deg,transparent,rgba(156,122,46,.08),transparent)}
+.camera.chiara .pens-n{color:#C4AE82}
+.camera.chiara .pens-corpo small{color:#9C7A2E}
+.camera.chiara .pens-corpo strong{color:#16110F}
+.camera.chiara .pens-corpo em{color:#6A5F55}
+.camera.chiara .pens-leggi{color:#8E1527}
+.camera.chiara .pens-filtri button{border-color:#D8CCB8;color:#3A302A}
+.camera.chiara .pens-filtri button[aria-pressed="true"]{background:#16110F;border-color:#16110F;color:#F5F1EA}
+/* pacchetti, passi, domande, prodotti: schede bianche */
+.camera.chiara .pacchetto,.camera.chiara .passi li,.camera.chiara .domanda,.camera.chiara .prodotto{background:#FFFFFF;box-shadow:0 0 0 1px #E6DDCF,0 18px 40px -26px rgba(60,40,20,.35)}
+.camera.chiara .pacchetto h3,.camera.chiara .passi h3,.camera.chiara .prodotto h3{color:#16110F}
+.camera.chiara .pacchetto-prezzo{color:#8E1527}
+.camera.chiara .pacchetto-sotto,.camera.chiara .passi p,.camera.chiara .domanda p,.camera.chiara .prodotto p{color:#5E544B}
+.camera.chiara .pacchetto li::before{background:#9C7A2E}
+.camera.chiara .passi b{background:#16110F;color:#F5F1EA}
+.camera.chiara .domanda summary{color:#16110F}
+.camera.chiara .domanda summary::after{color:#8E1527}
+.camera.chiara .prodotto-prezzo{color:#16110F}
+.camera.chiara .prodotto-azioni .btn-linea,.camera.chiara .carrello .btn-linea{color:#16110F}
+.camera.chiara .quantita button{color:#16110F}
+.camera.chiara .carrello-totale b{color:#8E1527}
+.camera.chiara .carrello-vuoto,.camera.chiara .carrello-totale span,.camera.chiara .carrello-totale small{color:#5E544B}
+.camera.chiara .btn-oro{color:#16110F;border-color:#9C7A2E}
+.camera.chiara .sotto-titolo{color:#8E1527}
+.camera.chiara .motto,.camera.chiara .frase-pittura{color:#8E1527}
+.camera.chiara .in-arrivo{color:#9C7A2E}
+.camera.chiara a:not([class]){color:#8E1527}
+.pizzo-defs{color:#0A0507}
+.camera[data-id="studio"] .pizzo-fine,.camera[data-id="sacro"] .pizzo-fine,.camera[data-id="grotta"] .pizzo-fine{display:none}
+.camera:not(.chiara) .pizzo-fine{opacity:.9}
+.pizzo-fine,.prossima-box,.firma-gigante{flex-shrink:0}
+.pizzo-fine{display:flex;justify-content:center;height:clamp(46px,5.5vw,78px)}
+.pizzo-fine svg{flex:0 0 auto;width:auto;height:100%;aspect-ratio:1920/78}

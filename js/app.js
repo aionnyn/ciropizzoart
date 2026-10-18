@@ -132,6 +132,7 @@
     scena.dataset.camera = c.dataset.id;
     setTimeout(aggiornaScorri, 1500);
     scena.style.setProperty('--sfondo', c.dataset.sfondo);
+    scena.classList.toggle('chiaro', c.classList.contains('chiara'));
     scena.style.setProperty('--inchiostro', c.dataset.inchiostro);
     aggiornaNav();
     chiudiFoglio(); chiudiQuadro(); $('#carta-zoom').hidden = true; if ($('#lettura')) $('#lettura').hidden = true;
@@ -1102,11 +1103,12 @@
     if (!dove) return;
     // la firma gigante chiude ogni pagina
     var firma = el('button', { type: 'button', class: 'firma-gigante', 'data-azione': 'sipario', 'aria-label': 'Ciro Pizzo art' }, 'Ciro Pizzo <em>art</em>');
-    if (c.dataset.fuori) { dove.appendChild(firma); return; }
+    var bordo = el('div', { class: 'pizzo-fine', 'aria-hidden': 'true' }, '<svg viewBox="0 0 1920 78">' + [0,1,2,3,4,5,6,7,8,9,10,11].map(function (k) { return '<use href="#pizzo-unita" x="' + k * 160 + '" width="160" height="78"/>'; }).join('') + '</svg>');
+    if (c.dataset.fuori) { dove.appendChild(bordo); dove.appendChild(firma); return; }
     var box = el('div', { class: 'prossima-box' });
     box.appendChild(el('button', { type: 'button', class: 'prossima', onclick: function () { vaiA(passo(1)); } }, ''));
     box.appendChild(el('button', { type: 'button', class: 'tutte', onclick: function () { apriMenu(); } }, ''));
-    dove.appendChild(box); dove.appendChild(firma);
+    dove.appendChild(box); dove.appendChild(bordo); dove.appendChild(firma);
   });
   function disegnaProssime() {
     $$('.camera').forEach(function (c) {
