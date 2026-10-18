@@ -20,8 +20,8 @@ window.SITO = {
   contatti: {
     indirizzo: 'Via Enrico De Marinis 14, Cava de’ Tirreni (SA)',   // diventa un link a Google Maps
     telefono: '+39 348 033 6791',
-    email: 'ciro_pizzo@libero.it',            // usata anche dal pulsante "Prenota"
-    instagram: 'ciropizzo_photos',                       // ★ solo il nome del profilo, senza @ (es. 'ciropizzo.photographer')
+    email: 'info@ciropizzo.art',            // usata anche dal pulsante "Prenota"
+    instagram: 'ciropizzo.art',                       // ★ solo il nome del profilo, senza @ (es. 'ciropizzo.photographer')
     whatsapp: '393480336791'                         // ★ numero con prefisso, senza + e spazi (es. '393331234567')
   },
 
