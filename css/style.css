@@ -1122,3 +1122,8 @@ button.btn-social:hover{transform:translateY(-2px)}
 .pizzo-rilievo{display:block;width:min(360px,86vw);height:auto;margin:-2px auto 0}
 .pizzo-rilievo,.pizzo-rilievo *{stroke:none}
 .taschino svg circle[fill="none"]{stroke:#C9A24B}
+/* la firma in fondo: identica al nome in alto a sinistra, su una riga sola */
+.firma-gigante{font-family:var(--sans);font-weight:300;text-transform:uppercase;white-space:nowrap;letter-spacing:.42em;line-height:1;
+  font-size:clamp(16px,6.2vw,60px);display:flex;align-items:baseline;justify-content:center;gap:.25em}
+.firma-gigante em,.firma-gigante em{display:inline;font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:.01em;font-size:2.45em;line-height:.8;color:var(--oro-chiaro)}
+@media (min-width:700px){.firma-gigante em{display:inline;font-size:2.45em}}
