@@ -37,8 +37,6 @@ Gli articoli sono in `js/contenuti.js` → `pensieri`. Per aggiungerne uno copia
 
 Per cambiare l’ordine basta spostare le `<section>` in `index.html` e cambiare `data-num` (il numero romano) e `data-gruppo` (`inizio`, `arti`, `esperienze`, `pensieri`, `servizi`, `contatti`); con `data-fuori="1"` una pagina resta fuori dal percorso numerato, come lo Shop: i numeri nelle etichette e il menu si aggiornano da soli.
 
-**Stile:** le pagine dove contano le fotografie e le informazioni (ingresso, Fotografia, Galleria, Pensieri, Pacchetti, La prima volta, Shop) hanno fondo avorio e schede bianche, come i siti dei grandi fotografi di moda; le stanze-esperienza (Studio, Boudoir, Pittura, Poker, Sacro, Grotta) restano nei loro colori. Il motivo che lega tutto è il pizzo Chantilly nero (rete, rose, foglie, smerlo con le ciglia), solo nella pagina Boudoir: sotto il titolo, con al centro un medaglione ricamato “Ciro Pizzo art” in corsivo, e in fondo alla pagina. Per rendere chiara o scura una pagina: aggiungi o togli `chiara` nella `class` della sua `<section>`.
-
 È un sito statico (HTML + CSS + JavaScript): niente da installare e niente database.
 
 ---
