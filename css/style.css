@@ -1253,3 +1253,8 @@ button.btn-social:hover{transform:translateY(-2px)}
 
 .btn-5d{letter-spacing:.3em}
 .btn-5d::after{content:" ⟶";letter-spacing:0}
+
+/* gambe più piccole e calza più fluida */
+.calza-scena{width:min(66vw,290px)}
+.calza-scena svg{filter:none;will-change:contents}
+@media (min-width:900px){.calza-scena{width:300px}}

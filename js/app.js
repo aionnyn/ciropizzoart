@@ -379,14 +379,14 @@
     function tira() {
       if (partita || calzaF >= .98) return; partita = true;
       var da = calzaF;
-      anima(ridotto ? 10 : 2000, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
+      anima(ridotto ? 10 : 1100, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
     }
     function centra() {
       if (centrata) return; centrata = true;
       var rC = cam.getBoundingClientRect(), rG = calza.getBoundingClientRect();
       var y = cam.scrollTop + (rG.top - rC.top) - (cam.clientHeight - rG.height) / 2;
       if (y > cam.scrollTop + 8) cam.scrollTo({ top: y, behavior: ridotto ? 'auto' : 'smooth' });
-      setTimeout(tira, ridotto ? 0 : 450);
+      setTimeout(tira, ridotto ? 0 : 250);
     }
     cam.addEventListener('wheel', function (e) { if (e.deltaY > 0) centra(); }, { passive: true });
     var y0 = null;
@@ -395,12 +395,15 @@
     cam.addEventListener('scroll', function () { if (this.scrollTop > 30) centra(); }, { passive: true });
     // se la gamba è già tutta sullo schermo, la calza parte da sola quando la si guarda
     if ('IntersectionObserver' in window) new IntersectionObserver(function (v) {
-      if (v[0].isIntersecting && v[0].intersectionRatio > .85 && cam.classList.contains('attiva')) setTimeout(tira, 1200);
+      if (v[0].isIntersecting && v[0].intersectionRatio > .85 && cam.classList.contains('attiva')) setTimeout(tira, 600);
     }, { root: cam, threshold: [.85] }).observe(calza);
     window.addEventListener('cp-boudoir', function () { centrata = false; });
   })();
-  function disegnaCalza() {
+  var calzaStato = null;
+  function disegnaCalza(forza) {
     if (!calza) return;
+    var st = (calzaF > .9 ? 2 : calzaF < .05 ? 0 : 1) + lingua;
+    if (st === calzaStato && forza !== true) return; calzaStato = st;
     var su = calzaF > .9, h = $('#calza-hint');
     h.textContent = t(su ? 'calza_hint_ok' : 'calza_hint');
     h.classList.toggle('lampeggia', calzaF < .05);
@@ -409,7 +412,7 @@
   }
   function calzaVerso(f, dur) {
     var da = calzaF;
-    anima(ridotto ? 10 : (dur || 1800), function (e) { calzaA(da + (f - da) * e); });
+    anima(ridotto ? 10 : (dur || 1000), function (e) { calzaA(da + (f - da) * e); });
   }
   (function () {
     var tirando = false, svg = $('svg', calza);
@@ -1229,7 +1232,7 @@
     $$('[data-t-aria]').forEach(function (n) { n.setAttribute('aria-label', t(n.dataset.tAria)); });
     $$('[data-lingua]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lingua === lingua ? 'true' : 'false'); });
     numeraEtichette(); aggiornaNav(); disegnaMappa(); disegnaProssime();
-    disegnaCalza(); disegnaPolaroid(); disegnaPennello(); disegnaPoker();
+    disegnaCalza(true); disegnaPolaroid(); disegnaPennello(); disegnaPoker();
     disegnaMj();
     disegnaExvoto();
     disegnaFiltri(); disegnaGalleria(); if (quadroAperto >= 0) mostraQuadro(quadroAperto);
