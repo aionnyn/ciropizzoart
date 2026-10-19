@@ -64,7 +64,7 @@ window.TESTI = {
     cap_mistero: 'Sipari che si aprono su altre stanze, una grotta naturale nella roccia viva con la sua piccola Madonna. Lo studio non si mostra tutto insieme: si scopre.',
     cap_arte_t: 'Arte',
     cap_arte: 'Cornici vuote che aspettano un volto, portali intagliati, la parete di tufo come fondale. Qui la fotografia dialoga con la pittura e con il teatro.',
-    studio_cta: 'Vieni a vederlo',
+    studio_cta: 'Esplora nella 5D',
 
     /* I · boudoir */
     nome_boudoir: 'Boudoir',
@@ -343,7 +343,7 @@ window.TESTI = {
     cap_mistero: 'Curtains that open onto other rooms, a natural grotto in the living rock with its small Madonna. The studio never shows itself all at once: you discover it.',
     cap_arte_t: 'Art',
     cap_arte: 'Empty frames waiting for a face, carved portals, the tufa wall as a backdrop. Here photography talks with painting and with theatre.',
-    studio_cta: 'Come and see it',
+    studio_cta: 'Explore in 5D',
 
     nome_boudoir: 'Boudoir',
     boud_etichetta: 'The Velvet Room',

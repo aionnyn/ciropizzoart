@@ -254,6 +254,16 @@
   var azioni = {
     apri: apri, entra: entra, esci: esci,
     sipario: function () { chiudiSipario(); },
+    // dallo Studio: di nuovo il viaggio 2D → 5D, la grotta d'acqua azzurra, e si entra nelle arti
+    esplora5d: function () {
+      if (inTransizione) return;
+      var dopo = passo(1), tun = $('#tunnel');
+      inTransizione = true;
+      tun.classList.remove('vola'); void tun.offsetWidth; if (!ridotto) tun.classList.add('vola');
+      setTimeout(function () {
+        soglia(function () { inTransizione = false; mostraCamera(dopo); });
+      }, ridotto ? 0 : 1400);
+    },
     succ: function () { if (!scorriCamera()) vaiA(passo(1)); },
     'scorri-giu': function () { scorriCamera(); },
     prec: function () { vaiA(passo(-1)); },

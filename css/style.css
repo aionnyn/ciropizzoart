@@ -1251,3 +1251,5 @@ button.btn-social:hover{transform:translateY(-2px)}
 .bv-btn:hover{border-color:#E3C377;color:#fff}
 .bv-btn.principale{grid-column:1 / -1;background:#1F7A4D;border-color:#1F7A4D;color:#fff;font-size:12px}
 
+.btn-5d{letter-spacing:.3em}
+.btn-5d::after{content:" ⟶";letter-spacing:0}
