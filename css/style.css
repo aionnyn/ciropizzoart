@@ -1273,8 +1273,8 @@ button.btn-social:hover{transform:translateY(-2px)}
 .schizzo figcaption span{font-family:var(--serif);font-style:italic;font-size:24px;color:#F0D58C}
 .schizzo figcaption small{font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.75}
 @media (prefers-reduced-motion:reduce){.schizzo-foglio img{-webkit-mask-image:none;mask-image:none}}
-.calza-scena{aspect-ratio:900/996;width:min(76vw,330px)}
+.calza-scena{aspect-ratio:1086/1368;width:min(72vw,310px)}
 
 /* boudoir: la scena resta ferma mentre si scorre e la calza sale */
-.calza-pista{position:relative;width:100%;height:calc(min(76vw,330px) * 996 / 900 + 300px);display:flex;justify-content:center}
+.calza-pista{position:relative;width:100%;height:calc(min(72vw,310px) * 1368 / 1086 + 300px);display:flex;justify-content:center}
 .calza-pista .calza-scena{position:sticky;top:96px;align-self:flex-start;cursor:grab;touch-action:pan-y}

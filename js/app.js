@@ -364,8 +364,8 @@
   }
   function calzaA(f) {
     calzaF = Math.max(0, Math.min(1, f));
-    calze(traccia1, balza1, LT1, 1, 60, .82, 26); // la gamba dietro ha sempre la calza
-    var l = calze(traccia, pizzo, LT, calzaF, 60, .97, 22);
+    calze(traccia1, balza1, LT1, 1, 70, .8, 34); // la gamba dietro ha sempre la calza
+    var l = calze(traccia, pizzo, LT, calzaF, 70, .8, 28);
     calza.setAttribute('aria-valuenow', Math.round(calzaF * 100));
     disegnaCalza();
   }
