@@ -366,38 +366,34 @@
     calzaF = Math.max(0, Math.min(1, f));
     calze(traccia1, balza1, LT1, 1, 60, .82, 26); // la gamba dietro ha sempre la calza
     var l = calze(traccia, pizzo, LT, calzaF, 60, .97, 22);
-    var p = traccia.getPointAtLength(l), q = traccia.getPointAtLength(Math.min(LT, l + 2));
-    var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
-    mano.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ',' + p.y.toFixed(1) + ') rotate(' + (ang + 90).toFixed(1) + ') translate(0,-70)');
-    mano.setAttribute('opacity', calzaF > .015 ? 1 : 0);
     calza.setAttribute('aria-valuenow', Math.round(calzaF * 100));
     disegnaCalza();
   }
-  // nel boudoir: scendendo, la gamba viene portata al centro dello schermo e la mano tira su la calza
+  // nel boudoir: la gamba resta ferma sullo schermo e la calza segue lo scorrimento
+  // (giù = si tira su, su = si sfila); il movimento è morbido, senza scatti
+  var calzaMeta = 0, calzaGira = false;
+  function calzaVerso(f) { calzaMeta = Math.max(0, Math.min(1, f)); if (!calzaGira) { calzaGira = true; requestAnimationFrame(calzaPasso); } }
+  function calzaPasso() {
+    var d = calzaMeta - calzaF;
+    if (Math.abs(d) < .002) { calzaA(calzaMeta); calzaGira = false; return; }
+    calzaA(calzaF + d * (ridotto ? 1 : .16)); requestAnimationFrame(calzaPasso);
+  }
   (function () {
-    var cam = $('[data-id="boudoir"]'), partita = false, centrata = false;
-    function tira() {
-      if (partita || calzaF >= .98) return; partita = true;
-      var da = calzaF;
-      anima(ridotto ? 10 : 1100, function (e) { calzaA(da + (1 - da) * e); }, function () { partita = false; });
+    var cam = $('[data-id="boudoir"]'), pista = $('#calza-pista');
+    function progresso() {
+      var rC = cam.getBoundingClientRect(), rP = pista.getBoundingClientRect(), corsa = rP.height - calza.offsetHeight;
+      var top = parseFloat(getComputedStyle(calza).top) || 0;
+      return corsa > 0 ? (rC.top + top - rP.top) / corsa : 0;
     }
-    function centra() {
-      if (centrata) return; centrata = true;
-      var rC = cam.getBoundingClientRect(), rG = calza.getBoundingClientRect();
-      var y = cam.scrollTop + (rG.top - rC.top) - (cam.clientHeight - rG.height) / 2;
-      if (y > cam.scrollTop + 8) cam.scrollTo({ top: y, behavior: ridotto ? 'auto' : 'smooth' });
-      setTimeout(tira, ridotto ? 0 : 250);
-    }
-    cam.addEventListener('wheel', function (e) { if (e.deltaY > 0) centra(); }, { passive: true });
-    var y0 = null;
-    cam.addEventListener('touchstart', function (e) { y0 = e.touches[0].clientY; }, { passive: true });
-    cam.addEventListener('touchmove', function (e) { if (y0 != null && y0 - e.touches[0].clientY > 20) { y0 = null; centra(); } }, { passive: true });
-    cam.addEventListener('scroll', function () { if (this.scrollTop > 30) centra(); }, { passive: true });
-    // se la gamba è già tutta sullo schermo, la calza parte da sola quando la si guarda
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (v) {
-      if (v[0].isIntersecting && v[0].intersectionRatio > .85 && cam.classList.contains('attiva')) setTimeout(tira, 600);
-    }, { root: cam, threshold: [.85] }).observe(calza);
-    window.addEventListener('cp-boudoir', function () { centrata = false; });
+    cam.addEventListener('scroll', function () { calzaVerso(progresso()); }, { passive: true });
+    window.addEventListener('resize', function () { calzaVerso(progresso()); });
+    // il pulsante porta la pagina al punto giusto: la calza segue
+    window.cpCalzaScorri = function (su) {
+      var rC = cam.getBoundingClientRect(), rP = pista.getBoundingClientRect(), corsa = rP.height - calza.offsetHeight;
+      var top = parseFloat(getComputedStyle(calza).top) || 0;
+      var y = cam.scrollTop + (rP.top - rC.top) - top + (su ? corsa : 0);
+      cam.scrollTo({ top: Math.max(0, y), behavior: ridotto ? 'auto' : 'smooth' });
+    };
   })();
   // lo schizzo si disegna quando entra nello schermo
   (function () {
@@ -416,28 +412,17 @@
     $('#calza-btn').textContent = t(su ? 'calza_giu' : 'calza_btn');
     $('#calza-testo').classList.toggle('aperto', su);
   }
-  function calzaVerso(f, dur) {
-    var da = calzaF;
-    anima(ridotto ? 10 : (dur || 1000), function (e) { calzaA(da + (f - da) * e); });
-  }
   (function () {
-    var tirando = false, svg = $('svg', calza);
-    function daPuntatore(e) {
-      var pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
-      var m = traccia.getScreenCTM(); if (!m) return;
-      var p = pt.matrixTransform(m.inverse()), best = campioni[0], bd = 1e9;
-      campioni.forEach(function (c) { var d = (c.x - p.x) * (c.x - p.x) + (c.y - p.y) * (c.y - p.y); if (d < bd) { bd = d; best = c; } });
-      calzaA((best.f * LT - 60) / (LT * .97 - 60));
-    }
-    calza.addEventListener('pointerdown', function (e) { tirando = true; calza.setPointerCapture(e.pointerId); daPuntatore(e); });
-    calza.addEventListener('pointermove', function (e) { if (tirando) daPuntatore(e); });
+    var tirando = false, y0 = 0, f0 = 0;
+    calza.addEventListener('pointerdown', function (e) { tirando = true; y0 = e.clientY; f0 = calzaMeta; calza.setPointerCapture(e.pointerId); });
+    calza.addEventListener('pointermove', function (e) { if (tirando) calzaVerso(f0 + (y0 - e.clientY) / (calza.offsetHeight * .6)); });
     calza.addEventListener('pointerup', function () { tirando = false; });
     calza.addEventListener('pointercancel', function () { tirando = false; });
     calza.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { calzaA(calzaF + .1); e.preventDefault(); }
-      if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { calzaA(calzaF - .1); e.preventDefault(); }
+      if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { calzaVerso(calzaMeta + .1); e.preventDefault(); }
+      if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { calzaVerso(calzaMeta - .1); e.preventDefault(); }
     });
-    $('#calza-btn').addEventListener('click', function () { calzaVerso(calzaF > .9 ? 0 : 1); });
+    $('#calza-btn').addEventListener('click', function () { var su = calzaMeta < .5; window.cpCalzaScorri(su); calzaVerso(su ? 1 : 0); });
   })();
 
   calzaA(0);
