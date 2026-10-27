@@ -364,11 +364,11 @@
   }
   function calzaA(f) {
     calzaF = Math.max(0, Math.min(1, f));
-    calze(traccia1, balza1, LT1, 1, 60, .9, 13); // la gamba dietro ha sempre la calza
-    var l = calze(traccia, pizzo, LT, calzaF, 34, .64, 9);
+    calze(traccia1, balza1, LT1, 1, 60, .82, 26); // la gamba dietro ha sempre la calza
+    var l = calze(traccia, pizzo, LT, calzaF, 60, .97, 22);
     var p = traccia.getPointAtLength(l), q = traccia.getPointAtLength(Math.min(LT, l + 2));
     var ang = Math.atan2(q.y - p.y, q.x - p.x) * 180 / Math.PI;
-    mano.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ',' + p.y.toFixed(1) + ') rotate(' + (ang + 90).toFixed(1) + ') translate(0,-30)');
+    mano.setAttribute('transform', 'translate(' + p.x.toFixed(1) + ',' + p.y.toFixed(1) + ') rotate(' + (ang + 90).toFixed(1) + ') translate(0,-70)');
     mano.setAttribute('opacity', calzaF > .015 ? 1 : 0);
     calza.setAttribute('aria-valuenow', Math.round(calzaF * 100));
     disegnaCalza();
@@ -427,7 +427,7 @@
       var m = traccia.getScreenCTM(); if (!m) return;
       var p = pt.matrixTransform(m.inverse()), best = campioni[0], bd = 1e9;
       campioni.forEach(function (c) { var d = (c.x - p.x) * (c.x - p.x) + (c.y - p.y) * (c.y - p.y); if (d < bd) { bd = d; best = c; } });
-      calzaA((best.f * LT - 34) / (LT * .64 - 34));
+      calzaA((best.f * LT - 60) / (LT * .97 - 60));
     }
     calza.addEventListener('pointerdown', function (e) { tirando = true; calza.setPointerCapture(e.pointerId); daPuntatore(e); });
     calza.addEventListener('pointermove', function (e) { if (tirando) daPuntatore(e); });

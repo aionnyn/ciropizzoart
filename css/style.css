@@ -1273,3 +1273,4 @@ button.btn-social:hover{transform:translateY(-2px)}
 .schizzo figcaption span{font-family:var(--serif);font-style:italic;font-size:24px;color:#F0D58C}
 .schizzo figcaption small{font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.75}
 @media (prefers-reduced-motion:reduce){.schizzo-foglio img{-webkit-mask-image:none;mask-image:none}}
+.calza-scena{aspect-ratio:900/996;width:min(76vw,330px)}
