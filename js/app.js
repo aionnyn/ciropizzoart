@@ -399,6 +399,12 @@
     }, { root: cam, threshold: [.85] }).observe(calza);
     window.addEventListener('cp-boudoir', function () { centrata = false; });
   })();
+  // lo schizzo si disegna quando entra nello schermo
+  (function () {
+    var s = $('#schizzo'); if (!s) return;
+    if (!('IntersectionObserver' in window)) { s.classList.add('disegnato'); return; }
+    new IntersectionObserver(function (v) { v.forEach(function (x) { if (x.isIntersecting) s.classList.add('disegnato'); }); }, { root: $('[data-id="boudoir"]'), threshold: .35 }).observe(s);
+  })();
   var calzaStato = null;
   function disegnaCalza(forza) {
     if (!calza) return;
